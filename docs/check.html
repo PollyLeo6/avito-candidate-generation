@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 
 <html lang="en">
-<head>
-<base href="../notebooks/"><meta charset="utf-8"/>
+<head><meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Notebook</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>check</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <style type="text/css">
     pre { line-height: 125%; }
 td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
@@ -7809,12 +7808,12 @@ a.anchor-link {
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=fb3390d1">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=fb3390d1">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [1]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
@@ -7844,18 +7843,6 @@ a.anchor-link {
 </div>
 </div>
 </div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[1]:</div>
-<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
-<pre>CompletedProcess(args=['D:\\Codex_artifacts\\Avito_test\\quality_verification\\environment\\Scripts\\python.exe', '-m', 'unittest', 'discover', '-s', 'tests', '-v'], returncode=0)</pre>
-</div>
-</div>
-</div>
-</div>
 </div>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=e87954f1">
 <div class="jp-Cell-inputWrapper" tabindex="0">
@@ -7867,58 +7854,17 @@ a.anchor-link {
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=fdcb3659">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=fdcb3659">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [2]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">run_stage</span><span class="p">(</span><span class="s2">"prepare"</span><span class="p">,</span> <span class="n">config_path</span><span class="p">)</span>
 <span class="n">run_stage</span><span class="p">(</span><span class="s2">"restore"</span><span class="p">,</span> <span class="n">config_path</span><span class="p">)</span>
 </pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>Начат этап: prepare
-</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>resource module not available on Windows
-Источник обработан: benchmark_items.parquet осталось items: 326683
-Источник обработан: train.parquet осталось items: 0
-{'corpus_items': 515895, 'corpus_rule': 'all unique items; benchmark features take precedence on duplicates', 'strict_group': 'sorted unique Snowball tokens; punctuation/case/word order ignored', 'groups_disjoint': True, 'holdout_previously_seen_groups': 0, 'query_selection_uses_labels': False, 'corpus_selection_uses_labels': False, 'query_counts': {'train': 8000, 'dev': 2000, 'holdout': 2000}, 'all_group_counts': [{'fold': 'dev', 'len': 11217}, {'fold': 'holdout', 'len': 6349}, {'fold': 'train', 'len': 50737}], 'sources': {'train.parquet': 'e150ab7a5c98769f643b95ee3a02dc0f664b647facd69a7d280ec6d48ca554a7', 'benchmark_queries.parquet': 'e49de4fb76f03979a4af96034817767d39ae5de9f94e254fed028243188dda06', 'benchmark_items.parquet': '193b3a3961464620cbf8d8797152b7f90cae1826ca749fb7817a210984a09899'}, 'split_hashes': {'dev_queries.parquet': 'b94c60a86416012ed359d2245698cda036b61377a9f36207d69b1147e87b9cf1', 'holdout_queries.parquet': '670bd3408683e3e2de83a31242226a479f993313d1e550c462e5d7859ef6e656', 'train_queries.parquet': '5d38da52d3ab88af7f5378ff9497a27714d5d1d0e3851d9d91b5ca3260be339d'}, 'limitations': ['observed positives only', 'semantic paraphrases can cross groups', '515895-item local corpus is larger than benchmark; scores are not comparable to v1']}
-{'training_groups': 50737, 'unique_pairs': 291192, 'dev_groups_used': 0, 'holdout_groups_used': 0, 'exclude_current_query_group_during_training': True}
-
-</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>Начат этап: restore
-</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>resource module not available on Windows
-Модель и контрольные суммы проверены
-
-</pre>
 </div>
 </div>
 </div>
@@ -7934,52 +7880,16 @@ a.anchor-link {
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=2db69b5b">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=2db69b5b">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [3]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">run_stage</span><span class="p">(</span><span class="s2">"benchmark_indices"</span><span class="p">,</span> <span class="n">config_path</span><span class="p">)</span>
 </pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>Начат этап: benchmark_indices
-</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>Начат этап: benchmark_index_title
-resource module not available on Windows
-Tokenized title stemming True vocab 26204 tokens 869708 seconds 10.1
-INDEX DONE {"field": "title", "stemming": true, "documents": 189212, "vocabulary": 26205, "tokens": 869708, "nnz": 851848, "seconds": 14.486721515655518, "k1": 1.5, "b": 0.75, "method": "lucene", "corpus_manifest_sha256": "b124e81efa4cfa951bfe8390f371098ea9808621105e016d26bffcddc9fb3822", "corpus_sha256": "193b3a3961464620cbf8d8797152b7f90cae1826ca749fb7817a210984a09899", "normalization": "NFKC lower ё→е; Unicode alphanumeric tokens; no stopword removal"}
-
-Начат этап: benchmark_index_params
-resource module not available on Windows
-Tokenized params stemming True vocab 78736 tokens 27714318 seconds 57.7
-INDEX DONE {"field": "params", "stemming": true, "documents": 189212, "vocabulary": 78737, "tokens": 27714318, "nnz": 11675448, "seconds": 78.07732963562012, "k1": 1.5, "b": 0.75, "method": "lucene", "corpus_manifest_sha256": "b124e81efa4cfa951bfe8390f371098ea9808621105e016d26bffcddc9fb3822", "corpus_sha256": "193b3a3961464620cbf8d8797152b7f90cae1826ca749fb7817a210984a09899", "normalization": "NFKC lower ё→е; Unicode alphanumeric tokens; no stopword removal"}
-
-Начат этап: benchmark_index_description
-resource module not available on Windows
-Tokenized description stemming True vocab 375961 tokens 34746547 seconds 138.4
-INDEX DONE {"field": "description", "stemming": true, "documents": 189212, "vocabulary": 375962, "tokens": 34746547, "nnz": 20899938, "seconds": 159.64674305915833, "k1": 1.5, "b": 0.75, "method": "lucene", "corpus_manifest_sha256": "b124e81efa4cfa951bfe8390f371098ea9808621105e016d26bffcddc9fb3822", "corpus_sha256": "193b3a3961464620cbf8d8797152b7f90cae1826ca749fb7817a210984a09899", "normalization": "NFKC lower ё→е; Unicode alphanumeric tokens; no stopword removal"}
-
-Этап завершён: benchmark_indices 258.69 с
-
-</pre>
 </div>
 </div>
 </div>
@@ -7995,56 +7905,16 @@ INDEX DONE {"field": "description", "stemming": true, "documents": 189212, "voca
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=ce1d199c">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=ce1d199c">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [4]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">run_stage</span><span class="p">(</span><span class="s2">"benchmark_features"</span><span class="p">,</span> <span class="n">config_path</span><span class="p">)</span>
 </pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>Начат этап: benchmark_features
-</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>resource module not available on Windows
-benchmark 200 13.9
-benchmark 400 27.0
-benchmark 600 40.1
-benchmark 800 52.9
-benchmark 1000 65.8
-benchmark 1200 79.0
-benchmark 1400 92.0
-benchmark 1600 105.1
-benchmark 1800 118.2
-benchmark 2000 131.0
-benchmark 2200 143.9
-benchmark 2400 156.9
-{
-  "fold": "benchmark",
-  "queries": 2452,
-  "seconds": 160.47172570001567,
-  "pool_recall": null,
-  "average_pool_size": 1265.5513866231647
-}
-
-</pre>
 </div>
 </div>
 </div>
@@ -8060,45 +7930,16 @@ benchmark 2400 156.9
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=7ea18ed0">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=7ea18ed0">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [5]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">run_stage</span><span class="p">(</span><span class="s2">"predict"</span><span class="p">,</span> <span class="n">config_path</span><span class="p">)</span>
 </pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>Начат этап: predict
-</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>resource module not available on Windows
-{
-  "valid": true,
-  "rows": 2452,
-  "min_items": 50,
-  "max_items": 50,
-  "sha256": "f4c3bbfda1f83fdf1ebe84b01da6afe7e0436ba6f1016bb4557c22cab3556feb",
-  "model_sha256": "3107ea0b82c189e86e1ee524e6fd65d9b8cb1430aa2a269054c7d0060628ccee"
-}
-
-</pre>
 </div>
 </div>
 </div>
@@ -8114,12 +7955,12 @@ benchmark 2400 156.9
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=f47ad3b8">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=f47ad3b8">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [6]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">avito_retrieval.submission</span><span class="w"> </span><span class="kn">import</span> <span class="n">validate_answer</span>
@@ -8135,32 +7976,6 @@ benchmark 2400 156.9
 <span class="p">(</span><span class="n">work</span> <span class="o">/</span> <span class="s2">"check_report.json"</span><span class="p">)</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">report</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">),</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">)</span>
 <span class="n">report</span>
 </pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>resource module not available on Windows
-</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[6]:</div>
-<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
-<pre>{'valid': True,
- 'rows': 2452,
- 'min_items': 50,
- 'max_items': 50,
- 'sha256': 'f4c3bbfda1f83fdf1ebe84b01da6afe7e0436ba6f1016bb4557c22cab3556feb',
- 'status': 'passed',
- 'answer_identical': True,
- 'seconds': 501.32}</pre>
 </div>
 </div>
 </div>

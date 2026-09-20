@@ -81,7 +81,7 @@ def predict(config):
     answer = summary.join(answer, on='query_number').select(pl.col('context_id').alias('query_id'), 'answer').sort('query_id')
     path = work / 'answer.csv'
     temporary = path.with_suffix('.partial.csv')
-    answer.write_csv(temporary)
+    answer.write_csv(temporary, line_terminator="\r\n")
     report = validate_answer(temporary, config['data_dir'] / 'benchmark_queries.parquet',
                               config['data_dir'] / 'benchmark_items.parquet')
     temporary.replace(path)

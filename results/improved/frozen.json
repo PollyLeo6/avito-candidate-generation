@@ -16,7 +16,7 @@
     "src/avito_improved/artifacts.py": "ead8885ee341142a3d0046e80f52ea29fd13f36b1a6ed71a77b8526c21c5ff96",
     "src/avito_improved/audit.py": "6da7ca8636db8105a4f948463a0ba8450d953db330eac49d69f4b667c818da67",
     "src/avito_improved/dataset.py": "932e2f4b60224fc0b0e009041fc005d25ae7d255b570c7ef3fef27d798d20df5",
-    "src/avito_improved/evaluation.py": "f095a0a23205e450a9fa40c6a39ed89c977c7a3090539fa217c3e2be4a184b4a",
+    "src/avito_improved/evaluation.py": "7e715ef8cbf2a5abd8cde93bdc195d841ed6524d70018dd97dfba0a4f83a5e7e",
     "src/avito_improved/geo.py": "70bb0ff17a3029821d00bed50fb813a1688810c3c6c5ce76e6b15326fddbdf75",
     "src/avito_improved/history.py": "198b25608a659b6322caa4690f1f0b75e72d73004b574673cbae5d756a29a016",
     "src/avito_improved/model.py": "4d895e94d804ecc31c5e1d8239525e03dc5c5ddf62d2678772bfd9307263196f",
@@ -50,5 +50,11 @@
     "input/benchmark_items.parquet": "193b3a3961464620cbf8d8797152b7f90cae1826ca749fb7817a210984a09899"
   },
   "selection_uses": "dev only",
-  "fresh_holdout_queries": 1000
+  "fresh_holdout_queries": 1000,
+  "serialization_update": {
+    "source": "src/avito_improved/evaluation.py",
+    "previous_source_sha256": "f095a0a23205e450a9fa40c6a39ed89c977c7a3090539fa217c3e2be4a184b4a",
+    "change": "CSV line terminator LF -> CRLF; predictions and model unchanged",
+    "report": "results/improved/submitted_file_check.json"
+  }
 }
