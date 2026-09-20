@@ -25,7 +25,7 @@ def export(config):
     saved.mkdir(parents=True, exist_ok=True)
     names = ['ranker.cbm', 'selected.json', 'feature_names.json', 'selection_curve.json',
              'fresh_metrics.json', 'fresh_per_query.parquet', 'frozen.json', 'fresh_reservation.json',
-             'train_candidates.json', 'dev_candidates.json', 'fresh_candidates.json',
+             'train_candidates.json', 'dev_candidates.json', 'dev_expanded_candidates.json', 'fresh_candidates.json',
              'benchmark_candidates.json', 'submission_check.json', 'leakage_audit.json', 'answer.csv']
     for name in names:
         shutil.copyfile(work / name, saved / name)

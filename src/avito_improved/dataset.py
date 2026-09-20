@@ -16,15 +16,19 @@ def create_dataset(config, fold):
     base = config['work_dir']
     work = config.get('quality_dir', base / 'quality')
     work.mkdir(parents=True, exist_ok=True)
+    nearby = fold == 'dev_expanded'
+    source_fold = 'dev' if nearby else fold
+    if fold in ['fresh', 'benchmark'] and (work / 'selected.json').exists():
+        nearby = json.loads((work / 'selected.json').read_text('utf-8')).get('nearby_candidates', False)
     kind = 'benchmark' if fold == 'benchmark' else 'validation'
-    search = ExtendedSearch(base / kind, base / (kind + '_indices'), work / 'history')
+    search = ExtendedSearch(base / kind, base / (kind + '_indices'), work / 'history', nearby=nearby)
     if fold == 'benchmark':
         queries = pl.read_parquet(config['data_dir'] / 'benchmark_queries.parquet').rename({'query_id': 'context_id'}).sort('context_id')
         qrels = {}
     else:
         directory = work / 'reserved' if fold == 'fresh' else base / 'validation'
-        queries = pl.read_parquet(directory / f'{fold}_queries.parquet')
-        gold = pl.read_parquet(directory / f'{fold}_qrels.parquet')
+        queries = pl.read_parquet(directory / f'{source_fold}_queries.parquet')
+        gold = pl.read_parquet(directory / f'{source_fold}_qrels.parquet')
         qrels = dict(gold.group_by('context_id').agg(pl.col('item_id')).iter_rows())
     by_id = {value: i for i, value in enumerate(search.base.manifest['item_id'])}
     old_model = CatBoostRanker().load_model(str(config['project_dir'] / 'results/ranker.cbm'))
