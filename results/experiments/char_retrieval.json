@@ -1,0 +1,86 @@
+{
+  "split": "dev",
+  "queries": 2000,
+  "corpus_items": 515895,
+  "field": "item_title_raw",
+  "analyzer": "char_wb",
+  "ngram_range": [
+    3,
+    5
+  ],
+  "top_k": 300,
+  "min_df": 2,
+  "sublinear_tf": true,
+  "original_pool_recall": 0.9303333333333332,
+  "extended_pool_recall": 0.9345833333333332,
+  "char_pool_recall": 0.37054999999999993,
+  "recovered_queries": 9,
+  "recovered_items": 9,
+  "examples": [
+    {
+      "query_number": 40,
+      "query": "копка колец",
+      "item_id": "abf48ef9ac6bdc26",
+      "title": "Ручная копка колодцев",
+      "char_rank": 279
+    },
+    {
+      "query_number": 65,
+      "query": "шумоизаляция потолка",
+      "item_id": "b0d25f429bd18bd1",
+      "title": "Шумоизоляция стен,потолков,пола",
+      "char_rank": 221
+    },
+    {
+      "query_number": 68,
+      "query": "ремонт газонокосилки хускварна",
+      "item_id": "1f02d07762bd4aa6",
+      "title": "Ремонт газонокосилок мотоблоков",
+      "char_rank": 51
+    },
+    {
+      "query_number": 195,
+      "query": "такарные услуги",
+      "item_id": "c6122a90acb8b91e",
+      "title": "Токарные фрезерные работы",
+      "char_rank": 274
+    },
+    {
+      "query_number": 469,
+      "query": "репетиторы по игре на пианино",
+      "item_id": "e22fd73a76a4087c",
+      "title": "Обучение игре на Фортепиано. Репетиторство",
+      "char_rank": 147
+    },
+    {
+      "query_number": 615,
+      "query": "шугаринк",
+      "item_id": "17cc9e48f5905362",
+      "title": "Шугаринг",
+      "char_rank": 14
+    },
+    {
+      "query_number": 692,
+      "query": "баллон углекислотный",
+      "item_id": "f582992b9441a62d",
+      "title": "Аргон жидкий и газообразный, Жидкий кислород, угле",
+      "char_rank": 120
+    },
+    {
+      "query_number": 1352,
+      "query": "аренда бытовки с доставкой без залога",
+      "item_id": "8da1294de418bf1a",
+      "title": "Аренда бытовок от собственника без залога",
+      "char_rank": 151
+    },
+    {
+      "query_number": 1594,
+      "query": "курсы медсестер",
+      "item_id": "63faa68284c2f3a7",
+      "title": "Курсы Медицинский регистратор Младшая медсестра",
+      "char_rank": 90
+    }
+  ],
+  "seconds": 97.86,
+  "note": "Candidate coverage only; final Recall@50 was not measured."
+}

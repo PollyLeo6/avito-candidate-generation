@@ -1,0 +1,145 @@
+{
+  "construction": "Только fold=train. Один голос на уникальную тройку strict_group, search_location_id, item_location_id.",
+  "train_rows": 321221,
+  "train_unique_votes": 218883,
+  "unknown_center_queries": 347,
+  "unknown_center_queries_with_train_location_history": 346,
+  "known_center_recall_at_50": 0.8559689453518855,
+  "unknown_center_recall_at_50": 0.4365994236311239,
+  "overall_recall_at_50": 0.7832083333333334,
+  "examples": [
+    {
+      "search_location_id": 107620,
+      "target_item_location_id": 639040,
+      "target_rank": 7,
+      "target_votes": 156,
+      "total_votes": 6725,
+      "top_locations": [
+        {
+          "search_location_id": 107620,
+          "item_location_id": 637640,
+          "votes": 3656
+        },
+        {
+          "search_location_id": 107620,
+          "item_location_id": 638790,
+          "votes": 202
+        },
+        {
+          "search_location_id": 107620,
+          "item_location_id": 639740,
+          "votes": 183
+        },
+        {
+          "search_location_id": 107620,
+          "item_location_id": 637770,
+          "votes": 175
+        },
+        {
+          "search_location_id": 107620,
+          "item_location_id": 638570,
+          "votes": 175
+        },
+        {
+          "search_location_id": 107620,
+          "item_location_id": 638920,
+          "votes": 172
+        },
+        {
+          "search_location_id": 107620,
+          "item_location_id": 639040,
+          "votes": 156
+        },
+        {
+          "search_location_id": 107620,
+          "item_location_id": 639180,
+          "votes": 156
+        },
+        {
+          "search_location_id": 107620,
+          "item_location_id": 638150,
+          "votes": 134
+        },
+        {
+          "search_location_id": 107620,
+          "item_location_id": 637950,
+          "votes": 92
+        }
+      ]
+    },
+    {
+      "search_location_id": 622470,
+      "target_item_location_id": 622500,
+      "target_rank": 1,
+      "target_votes": 58,
+      "total_votes": 75,
+      "top_locations": [
+        {
+          "search_location_id": 622470,
+          "item_location_id": 622500,
+          "votes": 58
+        },
+        {
+          "search_location_id": 622470,
+          "item_location_id": 622490,
+          "votes": 9
+        },
+        {
+          "search_location_id": 622470,
+          "item_location_id": 622590,
+          "votes": 7
+        },
+        {
+          "search_location_id": 622470,
+          "item_location_id": 622640,
+          "votes": 1
+        }
+      ]
+    },
+    {
+      "search_location_id": 637642,
+      "target_item_location_id": 637640,
+      "target_rank": 2,
+      "target_votes": 3,
+      "total_votes": 15,
+      "top_locations": [
+        {
+          "search_location_id": 637642,
+          "item_location_id": 639640,
+          "votes": 5
+        },
+        {
+          "search_location_id": 637642,
+          "item_location_id": 637640,
+          "votes": 3
+        },
+        {
+          "search_location_id": 637642,
+          "item_location_id": 638490,
+          "votes": 2
+        },
+        {
+          "search_location_id": 637642,
+          "item_location_id": 639880,
+          "votes": 2
+        },
+        {
+          "search_location_id": 637642,
+          "item_location_id": 638260,
+          "votes": 1
+        },
+        {
+          "search_location_id": 637642,
+          "item_location_id": 638570,
+          "votes": 1
+        },
+        {
+          "search_location_id": 637642,
+          "item_location_id": 638660,
+          "votes": 1
+        }
+      ]
+    }
+  ],
+  "note": "Это диагностика dev и частот, новый алгоритм не обучался и не оценивался."
+}
