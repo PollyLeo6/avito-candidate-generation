@@ -1,0 +1,17 @@
+{
+  "status": "passed",
+  "python": "3.12.10",
+  "platform": "win32",
+  "fresh_environment": true,
+  "installation": "pip install -r requirements/notebook.txt",
+  "quick_notebook_cells": 6,
+  "full_notebook_view_cells": 13,
+  "tests_passed": 27,
+  "benchmark_queries": 2452,
+  "benchmark_items": 189212,
+  "quick_seconds": 501.32,
+  "started_without_work": true,
+  "answer_identical": true,
+  "answer_sha256": "f4c3bbfda1f83fdf1ebe84b01da6afe7e0436ba6f1016bb4557c22cab3556feb",
+  "full_training_repeated_in_fresh_environment": false
+}

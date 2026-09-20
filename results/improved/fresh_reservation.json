@@ -1,0 +1,8 @@
+{
+  "queries": 1000,
+  "previously_evaluated_groups": 0,
+  "history_training_overlap": 0,
+  "ranker_training_overlap": 0,
+  "selection_uses_labels": false,
+  "queries_sha256": "eb0d3acc6a45edaffc0915e2c0d9160407636b054311bc56193876a8a9cc1d49"
+}

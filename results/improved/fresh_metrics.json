@@ -1,0 +1,14 @@
+{
+  "queries": 1000,
+  "original_recall_50": 0.7358333333333333,
+  "bm25_rrf_recall_50": 0.2788333333333334,
+  "improved_recall_50": 0.7848333333333334,
+  "delta": 0.049,
+  "delta_ci95": [
+    0.030833333333333334,
+    0.06700416666666664
+  ],
+  "pool_recall": 0.935,
+  "model_sha256": "3107ea0b82c189e86e1ee524e6fd65d9b8cb1430aa2a269054c7d0060628ccee",
+  "selected_before_fresh_evaluation": true
+}

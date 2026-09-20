@@ -7797,36 +7797,19 @@ a.anchor-link {
 <!-- End of mermaid configuration --></head>
 <body class="jp-Notebook" data-jp-theme-light="true" data-jp-theme-name="JupyterLab Light">
 <main>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=f7111e25">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=23581229">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h1 id="%D0%9F%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0-%D1%80%D0%B5%D1%88%D0%B5%D0%BD%D0%B8%D1%8F-%D0%B1%D0%B5%D0%B7-%D0%BF%D0%BE%D0%B2%D1%82%D0%BE%D1%80%D0%BD%D0%BE%D0%B3%D0%BE-%D0%BE%D0%B1%D1%83%D1%87%D0%B5%D0%BD%D0%B8%D1%8F">Проверка решения без повторного обучения<a class="anchor-link" href="#%D0%9F%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0-%D1%80%D0%B5%D1%88%D0%B5%D0%BD%D0%B8%D1%8F-%D0%B1%D0%B5%D0%B7-%D0%BF%D0%BE%D0%B2%D1%82%D0%BE%D1%80%D0%BD%D0%BE%D0%B3%D0%BE-%D0%BE%D0%B1%D1%83%D1%87%D0%B5%D0%BD%D0%B8%D1%8F">¶</a></h1><p>Этот notebook заново строит поиск по всем объявлениям benchmark, рассчитывает
-признаки и получает предсказания для всех запросов с сохранённой моделью.
-Готовые индексы, признаки и ответы в расчёте не используются.</p>
-<p>Нужны только <code>data/benchmark_items.parquet</code> и <code>data/benchmark_queries.parquet</code>.
-Запустите все ячейки сверху вниз. Рабочие файлы попадут в <code>work/check/</code>.
-Параметры поиска остаются такими же, как в полном эксперименте.</p>
-<p>Обучение и измерение Recall доступны отдельно в <code>solution.ipynb</code>.
-Здесь проверяется воспроизведение предсказаний, а не повторное обучение модели.</p>
+<h1 id="%D0%91%D1%8B%D1%81%D1%82%D1%80%D0%B0%D1%8F-%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0-%D1%80%D0%B5%D1%88%D0%B5%D0%BD%D0%B8%D1%8F">Быстрая проверка решения<a class="anchor-link" href="#%D0%91%D1%8B%D1%81%D1%82%D1%80%D0%B0%D1%8F-%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0-%D1%80%D0%B5%D1%88%D0%B5%D0%BD%D0%B8%D1%8F">¶</a></h1><p>Для запуска нужны три исходных Parquet в <code>data/</code> и ядро <strong>Avito ranking</strong>.
+Выберите <strong>Run → Run All Cells</strong>. Обучение здесь не повторяется.</p>
+<p>Ноутбук заново строит обучающую историю и поисковые индексы, пересчитывает все 2 452 запроса и сравнивает ответ с приложенным CSV. Установка окружения описана в <a href="../README.md">README</a>.</p>
 </div>
 </div>
 </div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=7cc2921f">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="1.-%D0%9D%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B8-%D0%B8-%D0%BC%D0%BE%D0%B4%D0%B5%D0%BB%D1%8C">1. Настройки и модель<a class="anchor-link" href="#1.-%D0%9D%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B8-%D0%B8-%D0%BC%D0%BE%D0%B4%D0%B5%D0%BB%D1%8C">¶</a></h2><p>Проверяем сохранённую модель и код. <code>configs/check.toml</code> задаёт отдельные рабочие папки;
-алгоритмические параметры должны совпадать с <code>configs/ranking.toml</code>.</p>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=5f7db025">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=fb3390d1">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7835,33 +7818,27 @@ a.anchor-link {
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">shutil</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">subprocess</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">avito_ranker.config</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_config</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">avito_ranker.freeze</span><span class="w"> </span><span class="kn">import</span> <span class="n">check_frozen</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">avito_ranker.workflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">run_stage</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">avito_retrieval.common</span><span class="w"> </span><span class="kn">import</span> <span class="n">file_hash</span><span class="p">,</span> <span class="n">save_json</span>
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">"POLARS_MAX_THREADS"</span><span class="p">:</span> <span class="s2">"2"</span><span class="p">,</span> <span class="s2">"OPENBLAS_NUM_THREADS"</span><span class="p">:</span> <span class="s2">"2"</span><span class="p">,</span> <span class="s2">"OMP_NUM_THREADS"</span><span class="p">:</span> <span class="s2">"2"</span><span class="p">})</span>
 
-<span class="n">started</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
-<span class="n">project_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">avito_ranker.config</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_config</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">avito_improved.run</span><span class="w"> </span><span class="kn">import</span> <span class="n">run_stage</span>
+
+<span class="n">project_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span>
 <span class="k">if</span> <span class="n">project_dir</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">"notebooks"</span><span class="p">:</span>
     <span class="n">project_dir</span> <span class="o">=</span> <span class="n">project_dir</span><span class="o">.</span><span class="n">parent</span>
-<span class="n">source</span> <span class="o">=</span> <span class="n">load_config</span><span class="p">(</span><span class="n">project_dir</span> <span class="o">/</span> <span class="s2">"configs/ranking.toml"</span><span class="p">)</span>
-<span class="n">config_path</span> <span class="o">=</span> <span class="n">project_dir</span> <span class="o">/</span> <span class="s2">"configs/check.toml"</span>
+<span class="n">config_path</span> <span class="o">=</span> <span class="n">project_dir</span> <span class="o">/</span> <span class="s2">"configs/improved.toml"</span>
 <span class="n">config</span> <span class="o">=</span> <span class="n">load_config</span><span class="p">(</span><span class="n">config_path</span><span class="p">)</span>
-<span class="n">path_settings</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"config_path"</span><span class="p">,</span> <span class="s2">"project_dir"</span><span class="p">,</span> <span class="s2">"data_dir"</span><span class="p">,</span> <span class="s2">"work_dir"</span><span class="p">,</span> <span class="s2">"results_dir"</span><span class="p">}</span>
-<span class="k">if</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="n">value</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">source</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">path_settings</span><span class="p">}</span> <span class="o">!=</span> <span class="p">{</span>
-    <span class="n">key</span><span class="p">:</span> <span class="n">value</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">config</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">path_settings</span>
-<span class="p">}:</span>
-    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Параметры check.toml должны совпадать с ranking.toml"</span><span class="p">)</span>
-<span class="k">if</span> <span class="n">config</span><span class="p">[</span><span class="s2">"work_dir"</span><span class="p">]</span> <span class="o">==</span> <span class="n">source</span><span class="p">[</span><span class="s2">"work_dir"</span><span class="p">]</span> <span class="ow">or</span> <span class="n">config</span><span class="p">[</span><span class="s2">"results_dir"</span><span class="p">]</span> <span class="o">==</span> <span class="n">source</span><span class="p">[</span><span class="s2">"results_dir"</span><span class="p">]:</span>
-    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Для проверки нужны отдельные рабочие папки"</span><span class="p">)</span>
-<span class="n">check_frozen</span><span class="p">(</span><span class="n">source</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Код, модель и параметры проверены"</span><span class="p">)</span>
+<span class="n">work</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s2">"work_dir"</span><span class="p">]</span> <span class="o">/</span> <span class="s2">"quality"</span>
+<span class="n">saved</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s2">"results_dir"</span><span class="p">]</span>
+<span class="n">started</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+<span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="n">sys</span><span class="o">.</span><span class="n">executable</span><span class="p">,</span> <span class="s2">"-m"</span><span class="p">,</span> <span class="s2">"unittest"</span><span class="p">,</span> <span class="s2">"discover"</span><span class="p">,</span> <span class="s2">"-s"</span><span class="p">,</span> <span class="s2">"tests"</span><span class="p">,</span> <span class="s2">"-v"</span><span class="p">],</span>
+               <span class="n">cwd</span><span class="o">=</span><span class="n">project_dir</span><span class="p">,</span> <span class="n">check</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -7871,34 +7848,26 @@ a.anchor-link {
 <div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>resource module not available on Windows
-</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>Код, модель и параметры проверены
-</pre>
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[1]:</div>
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
+<pre>CompletedProcess(args=['D:\\Codex_artifacts\\Avito_test\\quality_verification\\environment\\Scripts\\python.exe', '-m', 'unittest', 'discover', '-s', 'tests', '-v'], returncode=0)</pre>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=d2b4c4e5">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=e87954f1">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="2.-%D0%A2%D0%B5%D1%81%D1%82%D1%8B">2. Тесты<a class="anchor-link" href="#2.-%D0%A2%D0%B5%D1%81%D1%82%D1%8B">¶</a></h2><p>Проверки метрики, разбиения, кандидатов и формата CSV не требуют обучения.</p>
+<h2 id="1.-%D0%9F%D0%BE%D0%B4%D0%B3%D0%BE%D1%82%D0%BE%D0%B2%D0%BA%D0%B0">1. Подготовка<a class="anchor-link" href="#1.-%D0%9F%D0%BE%D0%B4%D0%B3%D0%BE%D1%82%D0%BE%D0%B2%D0%BA%D0%B0">¶</a></h2><p>История содержит только обучающие группы. Она связывает похожие запросы с выбранными объявлениями и подкатегориями услуг. Исходные данные проверяются до расчёта.</p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=ef354b87">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=fdcb3659">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7906,11 +7875,8 @@ a.anchor-link {
 <div class="jp-InputPrompt jp-InputArea-prompt">In [2]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
-    <span class="p">[</span><span class="n">sys</span><span class="o">.</span><span class="n">executable</span><span class="p">,</span> <span class="s2">"-m"</span><span class="p">,</span> <span class="s2">"unittest"</span><span class="p">,</span> <span class="s2">"discover"</span><span class="p">,</span> <span class="s2">"-s"</span><span class="p">,</span> <span class="s2">"tests"</span><span class="p">,</span> <span class="s2">"-v"</span><span class="p">],</span>
-    <span class="n">check</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cwd</span><span class="o">=</span><span class="n">source</span><span class="p">[</span><span class="s2">"project_dir"</span><span class="p">],</span>
-<span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Тесты пройдены"</span><span class="p">)</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">run_stage</span><span class="p">(</span><span class="s2">"prepare"</span><span class="p">,</span> <span class="n">config_path</span><span class="p">)</span>
+<span class="n">run_stage</span><span class="p">(</span><span class="s2">"restore"</span><span class="p">,</span> <span class="n">config_path</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -7923,85 +7889,57 @@ a.anchor-link {
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>Тесты пройдены
+<pre>Начат этап: prepare
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>resource module not available on Windows
+Источник обработан: benchmark_items.parquet осталось items: 326683
+Источник обработан: train.parquet осталось items: 0
+{'corpus_items': 515895, 'corpus_rule': 'all unique items; benchmark features take precedence on duplicates', 'strict_group': 'sorted unique Snowball tokens; punctuation/case/word order ignored', 'groups_disjoint': True, 'holdout_previously_seen_groups': 0, 'query_selection_uses_labels': False, 'corpus_selection_uses_labels': False, 'query_counts': {'train': 8000, 'dev': 2000, 'holdout': 2000}, 'all_group_counts': [{'fold': 'dev', 'len': 11217}, {'fold': 'holdout', 'len': 6349}, {'fold': 'train', 'len': 50737}], 'sources': {'train.parquet': 'e150ab7a5c98769f643b95ee3a02dc0f664b647facd69a7d280ec6d48ca554a7', 'benchmark_queries.parquet': 'e49de4fb76f03979a4af96034817767d39ae5de9f94e254fed028243188dda06', 'benchmark_items.parquet': '193b3a3961464620cbf8d8797152b7f90cae1826ca749fb7817a210984a09899'}, 'split_hashes': {'dev_queries.parquet': 'b94c60a86416012ed359d2245698cda036b61377a9f36207d69b1147e87b9cf1', 'holdout_queries.parquet': '670bd3408683e3e2de83a31242226a479f993313d1e550c462e5d7859ef6e656', 'train_queries.parquet': '5d38da52d3ab88af7f5378ff9497a27714d5d1d0e3851d9d91b5ca3260be339d'}, 'limitations': ['observed positives only', 'semantic paraphrases can cross groups', '515895-item local corpus is larger than benchmark; scores are not comparable to v1']}
+{'training_groups': 50737, 'unique_pairs': 291192, 'dev_groups_used': 0, 'holdout_groups_used': 0, 'exclude_current_query_group_during_training': True}
+
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>Начат этап: restore
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>resource module not available on Windows
+Модель и контрольные суммы проверены
+
 </pre>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=bd377fc1">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=92bf3b09">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="3.-%D0%9A%D0%BE%D1%80%D0%BF%D1%83%D1%81-benchmark">3. Корпус benchmark<a class="anchor-link" href="#3.-%D0%9A%D0%BE%D1%80%D0%BF%D1%83%D1%81-benchmark">¶</a></h2><p>Сохраняем объявления в порядке исходных <code>item_id</code>. Используем тот же порядок
-и те же поля, что в полном расчёте. <code>train.parquet</code> для этого запуска не нужен.</p>
+<h2 id="2.-%D0%9F%D0%BE%D0%B8%D1%81%D0%BA%D0%BE%D0%B2%D1%8B%D0%B5-%D0%B8%D0%BD%D0%B4%D0%B5%D0%BA%D1%81%D1%8B">2. Поисковые индексы<a class="anchor-link" href="#2.-%D0%9F%D0%BE%D0%B8%D1%81%D0%BA%D0%BE%D0%B2%D1%8B%D0%B5-%D0%B8%D0%BD%D0%B4%D0%B5%D0%BA%D1%81%D1%8B">¶</a></h2><p>Строятся BM25-индексы заголовков, описаний и параметров. Итоговый поиск использует только объявления из benchmark.</p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=00585691">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=2db69b5b">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In [3]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">polars</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pl</span>
-
-<span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"benchmark_items.parquet"</span><span class="p">,</span> <span class="s2">"benchmark_queries.parquet"</span><span class="p">]:</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s2">"data_dir"</span><span class="p">]</span> <span class="o">/</span> <span class="n">name</span><span class="p">)</span><span class="o">.</span><span class="n">is_file</span><span class="p">():</span>
-        <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Поместите </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> в </span><span class="si">{</span><span class="n">config</span><span class="p">[</span><span class="s1">'data_dir'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-
-<span class="n">corpus</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s2">"work_dir"</span><span class="p">]</span> <span class="o">/</span> <span class="s2">"benchmark"</span>
-<span class="n">corpus</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">config</span><span class="p">[</span><span class="s2">"results_dir"</span><span class="p">]</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">item_columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"item_id"</span><span class="p">,</span> <span class="s2">"item_location_id"</span><span class="p">,</span> <span class="s2">"item_category_id"</span><span class="p">,</span> <span class="s2">"item_microcat_id"</span><span class="p">]</span>
-<span class="n">items</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s2">"data_dir"</span><span class="p">]</span> <span class="o">/</span> <span class="s2">"benchmark_items.parquet"</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">item_columns</span><span class="p">)</span>
-<span class="n">items</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="s2">"item_id"</span><span class="p">)</span><span class="o">.</span><span class="n">with_row_index</span><span class="p">(</span><span class="s2">"doc_id"</span><span class="p">)</span><span class="o">.</span><span class="n">write_parquet</span><span class="p">(</span><span class="n">corpus</span> <span class="o">/</span> <span class="s2">"corpus_manifest.parquet"</span><span class="p">)</span>
-<span class="n">shutil</span><span class="o">.</span><span class="n">copyfile</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s2">"data_dir"</span><span class="p">]</span> <span class="o">/</span> <span class="s2">"benchmark_items.parquet"</span><span class="p">,</span> <span class="n">corpus</span> <span class="o">/</span> <span class="s2">"corpus.parquet"</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"ranker.cbm"</span><span class="p">,</span> <span class="s2">"selected.json"</span><span class="p">]:</span>
-    <span class="n">shutil</span><span class="o">.</span><span class="n">copyfile</span><span class="p">(</span><span class="n">source</span><span class="p">[</span><span class="s2">"results_dir"</span><span class="p">]</span> <span class="o">/</span> <span class="n">name</span><span class="p">,</span> <span class="n">config</span><span class="p">[</span><span class="s2">"results_dir"</span><span class="p">]</span> <span class="o">/</span> <span class="n">name</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Объявлений в корпусе: </span><span class="si">{</span><span class="n">items</span><span class="o">.</span><span class="n">height</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>Объявлений в корпусе: 189,212
-</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=6e9c81cc">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="4.-%D0%9F%D0%BE%D0%B8%D1%81%D0%BA%D0%BE%D0%B2%D1%8B%D0%B5-%D0%B8%D0%BD%D0%B4%D0%B5%D0%BA%D1%81%D1%8B">4. Поисковые индексы<a class="anchor-link" href="#4.-%D0%9F%D0%BE%D0%B8%D1%81%D0%BA%D0%BE%D0%B2%D1%8B%D0%B5-%D0%B8%D0%BD%D0%B4%D0%B5%D0%BA%D1%81%D1%8B">¶</a></h2><p><code>run_stage</code> вызывает код этапа из <code>avito_ranker</code>. Три BM25-индекса строятся
-заново по заголовкам, описаниям и параметрам. Логи сохраняются в <code>work/check/results/logs/</code>.
-Этапы выполняются последовательно в отдельных процессах, чтобы освобождать память.</p>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=8a4d473a">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [4]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">run_stage</span><span class="p">(</span><span class="s2">"benchmark_indices"</span><span class="p">,</span> <span class="n">config_path</span><span class="p">)</span>
@@ -8017,81 +7955,52 @@ a.anchor-link {
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>Начат этап: benchmark_indices
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
 <pre>Начат этап: benchmark_index_title
-</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>resource module not available on Windows
-Tokenized title stemming True vocab 26204 tokens 869708 seconds 4.9
-INDEX DONE {"field": "title", "stemming": true, "documents": 189212, "vocabulary": 26205, "tokens": 869708, "nnz": 851848, "seconds": 9.574296236038208, "k1": 1.5, "b": 0.75, "method": "lucene", "corpus_manifest_sha256": "b124e81efa4cfa951bfe8390f371098ea9808621105e016d26bffcddc9fb3822", "corpus_sha256": "193b3a3961464620cbf8d8797152b7f90cae1826ca749fb7817a210984a09899", "normalization": "NFKC lower ё→е; Unicode alphanumeric tokens; no stopword removal"}
+resource module not available on Windows
+Tokenized title stemming True vocab 26204 tokens 869708 seconds 10.1
+INDEX DONE {"field": "title", "stemming": true, "documents": 189212, "vocabulary": 26205, "tokens": 869708, "nnz": 851848, "seconds": 14.486721515655518, "k1": 1.5, "b": 0.75, "method": "lucene", "corpus_manifest_sha256": "b124e81efa4cfa951bfe8390f371098ea9808621105e016d26bffcddc9fb3822", "corpus_sha256": "193b3a3961464620cbf8d8797152b7f90cae1826ca749fb7817a210984a09899", "normalization": "NFKC lower ё→е; Unicode alphanumeric tokens; no stopword removal"}
+
+Начат этап: benchmark_index_params
+resource module not available on Windows
+Tokenized params stemming True vocab 78736 tokens 27714318 seconds 57.7
+INDEX DONE {"field": "params", "stemming": true, "documents": 189212, "vocabulary": 78737, "tokens": 27714318, "nnz": 11675448, "seconds": 78.07732963562012, "k1": 1.5, "b": 0.75, "method": "lucene", "corpus_manifest_sha256": "b124e81efa4cfa951bfe8390f371098ea9808621105e016d26bffcddc9fb3822", "corpus_sha256": "193b3a3961464620cbf8d8797152b7f90cae1826ca749fb7817a210984a09899", "normalization": "NFKC lower ё→е; Unicode alphanumeric tokens; no stopword removal"}
+
+Начат этап: benchmark_index_description
+resource module not available on Windows
+Tokenized description stemming True vocab 375961 tokens 34746547 seconds 138.4
+INDEX DONE {"field": "description", "stemming": true, "documents": 189212, "vocabulary": 375962, "tokens": 34746547, "nnz": 20899938, "seconds": 159.64674305915833, "k1": 1.5, "b": 0.75, "method": "lucene", "corpus_manifest_sha256": "b124e81efa4cfa951bfe8390f371098ea9808621105e016d26bffcddc9fb3822", "corpus_sha256": "193b3a3961464620cbf8d8797152b7f90cae1826ca749fb7817a210984a09899", "normalization": "NFKC lower ё→е; Unicode alphanumeric tokens; no stopword removal"}
+
+Этап завершён: benchmark_indices 258.69 с
 
 </pre>
 </div>
 </div>
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>Начат этап: benchmark_index_params
-</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>resource module not available on Windows
-Tokenized params stemming True vocab 78736 tokens 27714318 seconds 63.3
-INDEX DONE {"field": "params", "stemming": true, "documents": 189212, "vocabulary": 78737, "tokens": 27714318, "nnz": 11675448, "seconds": 77.89963984489441, "k1": 1.5, "b": 0.75, "method": "lucene", "corpus_manifest_sha256": "b124e81efa4cfa951bfe8390f371098ea9808621105e016d26bffcddc9fb3822", "corpus_sha256": "193b3a3961464620cbf8d8797152b7f90cae1826ca749fb7817a210984a09899", "normalization": "NFKC lower ё→е; Unicode alphanumeric tokens; no stopword removal"}
-
-</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>Начат этап: benchmark_index_description
-</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>resource module not available on Windows
-Tokenized description stemming True vocab 375961 tokens 34746547 seconds 105.4
-INDEX DONE {"field": "description", "stemming": true, "documents": 189212, "vocabulary": 375962, "tokens": 34746547, "nnz": 20899938, "seconds": 127.16986799240112, "k1": 1.5, "b": 0.75, "method": "lucene", "corpus_manifest_sha256": "b124e81efa4cfa951bfe8390f371098ea9808621105e016d26bffcddc9fb3822", "corpus_sha256": "193b3a3961464620cbf8d8797152b7f90cae1826ca749fb7817a210984a09899", "normalization": "NFKC lower ё→е; Unicode alphanumeric tokens; no stopword removal"}
-
-</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>Этап завершён: benchmark_indices 220.46 с
-</pre>
 </div>
 </div>
 </div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=af8a8992">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=e7e07dc5">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="5.-%D0%9A%D0%B0%D0%BD%D0%B4%D0%B8%D0%B4%D0%B0%D1%82%D1%8B-%D0%B8-%D0%BF%D1%80%D0%B8%D0%B7%D0%BD%D0%B0%D0%BA%D0%B8">5. Кандидаты и признаки<a class="anchor-link" href="#5.-%D0%9A%D0%B0%D0%BD%D0%B4%D0%B8%D0%B4%D0%B0%D1%82%D1%8B-%D0%B8-%D0%BF%D1%80%D0%B8%D0%B7%D0%BD%D0%B0%D0%BA%D0%B8">¶</a></h2><p>Для каждого запроса выполняем тот же поиск и рассчитываем те же 31 признак,
-которые использовались при подготовке отправленного ответа.</p>
+<h2 id="3.-%D0%9A%D0%B0%D0%BD%D0%B4%D0%B8%D0%B4%D0%B0%D1%82%D1%8B-%D0%B8-%D0%BF%D1%80%D0%B8%D0%B7%D0%BD%D0%B0%D0%BA%D0%B8">3. Кандидаты и признаки<a class="anchor-link" href="#3.-%D0%9A%D0%B0%D0%BD%D0%B4%D0%B8%D0%B4%D0%B0%D1%82%D1%8B-%D0%B8-%D0%BF%D1%80%D0%B8%D0%B7%D0%BD%D0%B0%D0%BA%D0%B8">¶</a></h2><p>К текстовому поиску добавляются кандидаты по фильтрам и похожим запросам из train. Модель учитывает текст, локацию, расстояние, фильтры и свойства объявления.</p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=b9c5f8b8">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=ce1d199c">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [5]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [4]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">run_stage</span><span class="p">(</span><span class="s2">"benchmark_features"</span><span class="p">,</span> <span class="n">config_path</span><span class="p">)</span>
@@ -8115,50 +8024,48 @@ INDEX DONE {"field": "description", "stemming": true, "documents": 189212, "voca
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
 <pre>resource module not available on Windows
-benchmark: 200/2452, 6 s
-benchmark: 400/2452, 15 s
-benchmark: 600/2452, 21 s
-benchmark: 800/2452, 28 s
-benchmark: 1000/2452, 33 s
-benchmark: 1200/2452, 39 s
-benchmark: 1400/2452, 44 s
-benchmark: 1600/2452, 49 s
-benchmark: 1800/2452, 54 s
-benchmark: 2000/2452, 59 s
-benchmark: 2200/2452, 64 s
-benchmark: 2400/2452, 69 s
-{"fold": "benchmark", "queries": 2452, "rows": 2092376, "features": ["title_score", "title_relative", "title_rr", "title_local_rr", "description_score", "description_relative", "description_rr", "description_local_rr", "params_score", "params_relative", "params_rr", "params_local_rr", "filter_score", "filter_relative", "rrf", "same_location", "same_category", "delivery", "query_words", "filter_words", "title_length", "title_coverage", "title_jaccard", "params_length", "params_coverage", "filter_coverage", "item_price", "item_rating", "item_rating_reviews_count", "item_is_phone_hidden", "item_is_message_forbidden"], "seconds": 70.71209819999058, "feature_file_sha256": "70b30b243258c4d7bd220d2c8214a8d8a8a3f1d0ff8ebf33a874870849b6d13d"}
+benchmark 200 13.9
+benchmark 400 27.0
+benchmark 600 40.1
+benchmark 800 52.9
+benchmark 1000 65.8
+benchmark 1200 79.0
+benchmark 1400 92.0
+benchmark 1600 105.1
+benchmark 1800 118.2
+benchmark 2000 131.0
+benchmark 2200 143.9
+benchmark 2400 156.9
+{
+  "fold": "benchmark",
+  "queries": 2452,
+  "seconds": 160.47172570001567,
+  "pool_recall": null,
+  "average_pool_size": 1265.5513866231647
+}
 
 </pre>
 </div>
 </div>
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>Этап завершён: benchmark_features 76.82 с
-</pre>
 </div>
 </div>
 </div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=bba5e3cd">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=bf3fa0bd">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="6.-%D0%9F%D1%80%D0%B5%D0%B4%D1%81%D0%BA%D0%B0%D0%B7%D0%B0%D0%BD%D0%B8%D1%8F">6. Предсказания<a class="anchor-link" href="#6.-%D0%9F%D1%80%D0%B5%D0%B4%D1%81%D0%BA%D0%B0%D0%B7%D0%B0%D0%BD%D0%B8%D1%8F">¶</a></h2><p>Загружаем сохранённый CatBoost, выбираем 50 объявлений на запрос и проверяем
-CSV по исходным запросам и корпусу. Новый ответ находится в <code>work/check/results/answer.csv</code>.</p>
+<h2 id="4.-%D0%9E%D1%82%D0%B2%D0%B5%D1%82">4. Ответ<a class="anchor-link" href="#4.-%D0%9E%D1%82%D0%B2%D0%B5%D1%82">¶</a></h2><p>Сохранённая модель выбирает до 50 объявлений для каждого запроса. Проверяются исходные идентификаторы и формат файла.</p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=af3ccc5a">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=7ea18ed0">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [6]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [5]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">run_stage</span><span class="p">(</span><span class="s2">"predict"</span><span class="p">,</span> <span class="n">config_path</span><span class="p">)</span>
@@ -8182,64 +8089,51 @@ CSV по исходным запросам и корпусу. Новый отв�
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
 <pre>resource module not available on Windows
-{'valid': True, 'rows': 2452, 'min_items': 50, 'max_items': 50, 'sha256': 'f4ffbb7029d6ad1bb53f97b88bceb76a0a7d2fe51d681a4d905a4c6d23e48cc5', 'model_sha256': 'bdec464db6daa2cd293ad3a630563d91e03482587a6521a6e65aca8852e18035'}
+{
+  "valid": true,
+  "rows": 2452,
+  "min_items": 50,
+  "max_items": 50,
+  "sha256": "f4c3bbfda1f83fdf1ebe84b01da6afe7e0436ba6f1016bb4557c22cab3556feb",
+  "model_sha256": "3107ea0b82c189e86e1ee524e6fd65d9b8cb1430aa2a269054c7d0060628ccee"
+}
 
 </pre>
 </div>
 </div>
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>Этап завершён: predict 3.43 с
-</pre>
 </div>
 </div>
 </div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=65dc1f4c">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=88cab518">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="7.-%D0%A1%D1%80%D0%B0%D0%B2%D0%BD%D0%B5%D0%BD%D0%B8%D0%B5-%D1%81-%D0%BF%D1%80%D0%B8%D0%BB%D0%BE%D0%B6%D0%B5%D0%BD%D0%BD%D1%8B%D0%BC-%D0%BE%D1%82%D0%B2%D0%B5%D1%82%D0%BE%D0%BC">7. Сравнение с приложенным ответом<a class="anchor-link" href="#7.-%D0%A1%D1%80%D0%B0%D0%B2%D0%BD%D0%B5%D0%BD%D0%B8%D0%B5-%D1%81-%D0%BF%D1%80%D0%B8%D0%BB%D0%BE%D0%B6%D0%B5%D0%BD%D0%BD%D1%8B%D0%BC-%D0%BE%D1%82%D0%B2%D0%B5%D1%82%D0%BE%D0%BC">¶</a></h2><p>Только после получения новых предсказаний сравниваем CSV с ответом в корне
-репозитория. Одинаковые SHA-256 означают побайтовое совпадение файлов.
-Если ответы отличаются, ячейка завершится с ошибкой.</p>
+<h2 id="5.-%D0%A1%D1%80%D0%B0%D0%B2%D0%BD%D0%B5%D0%BD%D0%B8%D0%B5-%D1%81-%D0%B3%D0%BE%D1%82%D0%BE%D0%B2%D1%8B%D0%BC-%D1%84%D0%B0%D0%B9%D0%BB%D0%BE%D0%BC">5. Сравнение с готовым файлом<a class="anchor-link" href="#5.-%D0%A1%D1%80%D0%B0%D0%B2%D0%BD%D0%B5%D0%BD%D0%B8%D0%B5-%D1%81-%D0%B3%D0%BE%D1%82%D0%BE%D0%B2%D1%8B%D0%BC-%D1%84%D0%B0%D0%B9%D0%BB%D0%BE%D0%BC">¶</a></h2><p>Успешная проверка заканчивается <code>status: passed</code> и <code>answer_identical: true</code>.</p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=a3417bf5">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=f47ad3b8">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [7]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [6]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">answer_path</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s2">"results_dir"</span><span class="p">]</span> <span class="o">/</span> <span class="s2">"answer.csv"</span>
-<span class="n">reference_path</span> <span class="o">=</span> <span class="n">source</span><span class="p">[</span><span class="s2">"project_dir"</span><span class="p">]</span> <span class="o">/</span> <span class="s2">"answer.csv"</span>
-<span class="n">answer_hash</span> <span class="o">=</span> <span class="n">file_hash</span><span class="p">(</span><span class="n">answer_path</span><span class="p">)</span>
-<span class="n">reference_hash</span> <span class="o">=</span> <span class="n">file_hash</span><span class="p">(</span><span class="n">reference_path</span><span class="p">)</span>
-<span class="k">if</span> <span class="n">answer_hash</span> <span class="o">!=</span> <span class="n">reference_hash</span><span class="p">:</span>
-    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Новый answer.csv отличается от приложенного ответа"</span><span class="p">)</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">avito_retrieval.submission</span><span class="w"> </span><span class="kn">import</span> <span class="n">validate_answer</span>
 
-<span class="n">submission</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">((</span><span class="n">config</span><span class="p">[</span><span class="s2">"results_dir"</span><span class="p">]</span> <span class="o">/</span> <span class="s2">"submission_check.json"</span><span class="p">)</span><span class="o">.</span><span class="n">read_text</span><span class="p">(</span><span class="s2">"utf-8"</span><span class="p">))</span>
-<span class="n">report</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"passed"</span><span class="p">,</span>
-    <span class="s2">"seconds"</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span> <span class="o">-</span> <span class="n">started</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
-    <span class="s2">"queries"</span><span class="p">:</span> <span class="n">submission</span><span class="p">[</span><span class="s2">"rows"</span><span class="p">],</span>
-    <span class="s2">"items"</span><span class="p">:</span> <span class="n">items</span><span class="o">.</span><span class="n">height</span><span class="p">,</span>
-    <span class="s2">"model_retrained"</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
-    <span class="s2">"indices_and_features_rebuilt"</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
-    <span class="s2">"answer_identical"</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
-    <span class="s2">"answer_sha256"</span><span class="p">:</span> <span class="n">answer_hash</span><span class="p">,</span>
-    <span class="s2">"model_sha256"</span><span class="p">:</span> <span class="n">file_hash</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s2">"results_dir"</span><span class="p">]</span> <span class="o">/</span> <span class="s2">"ranker.cbm"</span><span class="p">),</span>
-    <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span><span class="n">name</span><span class="p">:</span> <span class="n">file_hash</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s2">"data_dir"</span><span class="p">]</span> <span class="o">/</span> <span class="n">name</span><span class="p">)</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span>
-               <span class="p">[</span><span class="s2">"benchmark_items.parquet"</span><span class="p">,</span> <span class="s2">"benchmark_queries.parquet"</span><span class="p">]},</span>
-<span class="p">}</span>
-<span class="n">save_json</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s2">"results_dir"</span><span class="p">]</span> <span class="o">/</span> <span class="s2">"check_report.json"</span><span class="p">,</span> <span class="n">report</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">report</span><span class="p">,</span> <span class="n">ensure_ascii</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+<span class="n">computed</span> <span class="o">=</span> <span class="n">work</span> <span class="o">/</span> <span class="s2">"answer.csv"</span>
+<span class="n">reference</span> <span class="o">=</span> <span class="n">project_dir</span> <span class="o">/</span> <span class="s2">"answer.csv"</span>
+<span class="n">report</span> <span class="o">=</span> <span class="n">validate_answer</span><span class="p">(</span><span class="n">computed</span><span class="p">,</span> <span class="n">config</span><span class="p">[</span><span class="s2">"data_dir"</span><span class="p">]</span> <span class="o">/</span> <span class="s2">"benchmark_queries.parquet"</span><span class="p">,</span>
+                         <span class="n">config</span><span class="p">[</span><span class="s2">"data_dir"</span><span class="p">]</span> <span class="o">/</span> <span class="s2">"benchmark_items.parquet"</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">computed</span><span class="o">.</span><span class="n">read_bytes</span><span class="p">()</span> <span class="o">!=</span> <span class="n">reference</span><span class="o">.</span><span class="n">read_bytes</span><span class="p">():</span>
+    <span class="k">raise</span> <span class="ne">AssertionError</span><span class="p">(</span><span class="s2">"Новый answer.csv отличается от приложенного"</span><span class="p">)</span>
+<span class="n">report</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">"status"</span><span class="p">:</span> <span class="s2">"passed"</span><span class="p">,</span> <span class="s2">"answer_identical"</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+               <span class="s2">"seconds"</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span> <span class="o">-</span> <span class="n">started</span><span class="p">,</span> <span class="mi">2</span><span class="p">)})</span>
+<span class="p">(</span><span class="n">work</span> <span class="o">/</span> <span class="s2">"check_report.json"</span><span class="p">)</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">report</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">),</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">)</span>
+<span class="n">report</span>
 </pre></div>
 </div>
 </div>
@@ -8252,22 +8146,21 @@ CSV по исходным запросам и корпусу. Новый отв�
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>{
-  "status": "passed",
-  "seconds": 304.34,
-  "queries": 2452,
-  "items": 189212,
-  "model_retrained": false,
-  "indices_and_features_rebuilt": true,
-  "answer_identical": true,
-  "answer_sha256": "f4ffbb7029d6ad1bb53f97b88bceb76a0a7d2fe51d681a4d905a4c6d23e48cc5",
-  "model_sha256": "bdec464db6daa2cd293ad3a630563d91e03482587a6521a6e65aca8852e18035",
-  "inputs": {
-    "benchmark_items.parquet": "193b3a3961464620cbf8d8797152b7f90cae1826ca749fb7817a210984a09899",
-    "benchmark_queries.parquet": "e49de4fb76f03979a4af96034817767d39ae5de9f94e254fed028243188dda06"
-  }
-}
+<pre>resource module not available on Windows
 </pre>
+</div>
+</div>
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[6]:</div>
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
+<pre>{'valid': True,
+ 'rows': 2452,
+ 'min_items': 50,
+ 'max_items': 50,
+ 'sha256': 'f4c3bbfda1f83fdf1ebe84b01da6afe7e0436ba6f1016bb4557c22cab3556feb',
+ 'status': 'passed',
+ 'answer_identical': True,
+ 'seconds': 501.32}</pre>
 </div>
 </div>
 </div>

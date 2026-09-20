@@ -1,0 +1,7 @@
+{
+  "fold": "fresh",
+  "queries": 1000,
+  "seconds": 159.8153605000116,
+  "pool_recall": 0.935,
+  "average_pool_size": 1607.74
+}

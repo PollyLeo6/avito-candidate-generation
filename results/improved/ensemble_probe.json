@@ -1,0 +1,122 @@
+[
+  {
+    "softmax_weight": 0,
+    "new_head": 30,
+    "recall_50": 0.7821583333333333
+  },
+  {
+    "softmax_weight": 0,
+    "new_head": 40,
+    "recall_50": 0.7832083333333333
+  },
+  {
+    "softmax_weight": 0,
+    "new_head": 45,
+    "recall_50": 0.7814583333333333
+  },
+  {
+    "softmax_weight": 0,
+    "new_head": 50,
+    "recall_50": 0.7785416666666666
+  },
+  {
+    "softmax_weight": 0.1,
+    "new_head": 30,
+    "recall_50": 0.7824083333333333
+  },
+  {
+    "softmax_weight": 0.1,
+    "new_head": 40,
+    "recall_50": 0.7824583333333333
+  },
+  {
+    "softmax_weight": 0.1,
+    "new_head": 45,
+    "recall_50": 0.7824583333333333
+  },
+  {
+    "softmax_weight": 0.1,
+    "new_head": 50,
+    "recall_50": 0.7785416666666666
+  },
+  {
+    "softmax_weight": 0.25,
+    "new_head": 30,
+    "recall_50": 0.7826583333333333
+  },
+  {
+    "softmax_weight": 0.25,
+    "new_head": 40,
+    "recall_50": 0.7807083333333332
+  },
+  {
+    "softmax_weight": 0.25,
+    "new_head": 45,
+    "recall_50": 0.7814583333333333
+  },
+  {
+    "softmax_weight": 0.25,
+    "new_head": 50,
+    "recall_50": 0.7780416666666666
+  },
+  {
+    "softmax_weight": 0.5,
+    "new_head": 30,
+    "recall_50": 0.7816583333333333
+  },
+  {
+    "softmax_weight": 0.5,
+    "new_head": 40,
+    "recall_50": 0.7789083333333333
+  },
+  {
+    "softmax_weight": 0.5,
+    "new_head": 45,
+    "recall_50": 0.7792083333333333
+  },
+  {
+    "softmax_weight": 0.5,
+    "new_head": 50,
+    "recall_50": 0.7747916666666667
+  },
+  {
+    "softmax_weight": 0.75,
+    "new_head": 30,
+    "recall_50": 0.7829083333333333
+  },
+  {
+    "softmax_weight": 0.75,
+    "new_head": 40,
+    "recall_50": 0.7784083333333333
+  },
+  {
+    "softmax_weight": 0.75,
+    "new_head": 45,
+    "recall_50": 0.7782083333333333
+  },
+  {
+    "softmax_weight": 0.75,
+    "new_head": 50,
+    "recall_50": 0.7737916666666667
+  },
+  {
+    "softmax_weight": 1,
+    "new_head": 30,
+    "recall_50": 0.7811583333333333
+  },
+  {
+    "softmax_weight": 1,
+    "new_head": 40,
+    "recall_50": 0.7769083333333333
+  },
+  {
+    "softmax_weight": 1,
+    "new_head": 45,
+    "recall_50": 0.7757083333333332
+  },
+  {
+    "softmax_weight": 1,
+    "new_head": 50,
+    "recall_50": 0.7680416666666666
+  }
+]

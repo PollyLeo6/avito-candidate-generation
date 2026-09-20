@@ -1,0 +1,7 @@
+{
+  "training_groups": 50737,
+  "unique_pairs": 291192,
+  "dev_groups_used": 0,
+  "holdout_groups_used": 0,
+  "exclude_current_query_group_during_training": true
+}

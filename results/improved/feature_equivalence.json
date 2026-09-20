@@ -1,0 +1,17 @@
+{
+  "train": {
+    "queries_checked": 20,
+    "rows_checked": 2576,
+    "all_features_identical": true
+  },
+  "dev": {
+    "queries_checked": 20,
+    "rows_checked": 28786,
+    "all_features_identical": true
+  },
+  "dev_expanded": {
+    "queries_checked": 20,
+    "rows_checked": 33152,
+    "all_features_identical": true
+  }
+}

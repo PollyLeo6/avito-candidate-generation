@@ -1,0 +1,10 @@
+{
+  "rows": 1185743,
+  "queries": 7385,
+  "incorrect_labels": 0,
+  "history_dev_overlap": 0,
+  "history_fresh_overlap": 0,
+  "training_history_is_train_only": true,
+  "no_ids_or_labels_in_features": true,
+  "own_training_group_excluded_by_retrieval": true
+}

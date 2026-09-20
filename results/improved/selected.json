@@ -1,0 +1,60 @@
+{
+  "method": "pairlogit",
+  "trees": 80,
+  "recall_50": 0.7832083333333333,
+  "ranker_recall_50": 0.7772916666666666,
+  "nearby_candidates": true,
+  "new_head": 40,
+  "blend_options": [
+    {
+      "nearby_candidates": false,
+      "new_head": 0,
+      "recall_50": 0.7410333333333333
+    },
+    {
+      "nearby_candidates": false,
+      "new_head": 30,
+      "recall_50": 0.7809083333333333
+    },
+    {
+      "nearby_candidates": false,
+      "new_head": 40,
+      "recall_50": 0.7809583333333333
+    },
+    {
+      "nearby_candidates": false,
+      "new_head": 45,
+      "recall_50": 0.7792083333333333
+    },
+    {
+      "nearby_candidates": false,
+      "new_head": 50,
+      "recall_50": 0.7772916666666666
+    },
+    {
+      "nearby_candidates": true,
+      "new_head": 0,
+      "recall_50": 0.7410333333333333
+    },
+    {
+      "nearby_candidates": true,
+      "new_head": 30,
+      "recall_50": 0.7821583333333333
+    },
+    {
+      "nearby_candidates": true,
+      "new_head": 40,
+      "recall_50": 0.7832083333333333
+    },
+    {
+      "nearby_candidates": true,
+      "new_head": 45,
+      "recall_50": 0.7814583333333333
+    },
+    {
+      "nearby_candidates": true,
+      "new_head": 50,
+      "recall_50": 0.7785416666666666
+    }
+  ]
+}

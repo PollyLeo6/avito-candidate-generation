@@ -1,0 +1,7 @@
+{
+  "fold": "train",
+  "queries": 8000,
+  "seconds": 1067.902002500021,
+  "pool_recall": 0.9205125000000001,
+  "average_pool_size": 1408.767375
+}
