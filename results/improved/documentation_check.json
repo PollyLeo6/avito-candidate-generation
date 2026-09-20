@@ -1,0 +1,219 @@
+{
+  "status": "passed",
+  "previous_commit": "0a327fe53393ba51db603593053455393bd09c0c",
+  "python_files_checked": 41,
+  "changed_python_files": 40,
+  "documented_definitions_and_modules": 168,
+  "missing_docstrings": 0,
+  "notebook_code_cells_checked": 19,
+  "computational_ast_unchanged": true,
+  "model_and_parameters_unchanged": true,
+  "answer_sha256": "88cf3ad8249ff7a3baf14759655df3d74eab0863193db6c55930d4a525c5fb64",
+  "files": [
+    {
+      "file": "experiments/char_retrieval.py",
+      "before_sha256": "f8dbc40658ebcfeeda8a290fcf2f3d2b7a7c41e3000e7f210c2120de21d14cec",
+      "after_sha256": "8d2ee8903ec3be435236be25c7e40f27449254956df20a896db13eb03369f1af"
+    },
+    {
+      "file": "src/avito_improved/artifacts.py",
+      "before_sha256": "ead8885ee341142a3d0046e80f52ea29fd13f36b1a6ed71a77b8526c21c5ff96",
+      "after_sha256": "13d853842b45a3c57b6e7f1e5e2bcf5a43d2d1b64da6955ba5f2d79d78142922"
+    },
+    {
+      "file": "src/avito_improved/audit.py",
+      "before_sha256": "6da7ca8636db8105a4f948463a0ba8450d953db330eac49d69f4b667c818da67",
+      "after_sha256": "d88115db499cdf15bfb19dc885d3829b116f813a9174a90f06886877fac89197"
+    },
+    {
+      "file": "src/avito_improved/dataset.py",
+      "before_sha256": "932e2f4b60224fc0b0e009041fc005d25ae7d255b570c7ef3fef27d798d20df5",
+      "after_sha256": "edbb72b3505e5c1ce8c9e15b08d790f894867bd93ad80164f10cda7883e782b1"
+    },
+    {
+      "file": "src/avito_improved/evaluation.py",
+      "before_sha256": "7e715ef8cbf2a5abd8cde93bdc195d841ed6524d70018dd97dfba0a4f83a5e7e",
+      "after_sha256": "2e9ab1b44bc1828e407b3290bf335594d638e1ed56d56a302a29a0193b69d56d"
+    },
+    {
+      "file": "src/avito_improved/geo.py",
+      "before_sha256": "70bb0ff17a3029821d00bed50fb813a1688810c3c6c5ce76e6b15326fddbdf75",
+      "after_sha256": "fb7cbf590ffa27f189fe0fc9f4ce71c467bb489e923ef0bd065861ec1699c716"
+    },
+    {
+      "file": "src/avito_improved/history.py",
+      "before_sha256": "198b25608a659b6322caa4690f1f0b75e72d73004b574673cbae5d756a29a016",
+      "after_sha256": "0b2a0bdc09a1f7c3822ab8348ea9fbd9efddea85abf9f0c50c4a16039e563911"
+    },
+    {
+      "file": "src/avito_improved/model.py",
+      "before_sha256": "4d895e94d804ecc31c5e1d8239525e03dc5c5ddf62d2678772bfd9307263196f",
+      "after_sha256": "9c6e02a3eb81c40f2de5e654d55eea849b0d2b8d4ac71482839a36e57ac34ea0"
+    },
+    {
+      "file": "src/avito_improved/protocol.py",
+      "before_sha256": "6fec8ad6da272b58077b2f648b64b51ebe846e4c08dcb37dcf1f68b361051c7c",
+      "after_sha256": "6834931a88a53694d92cc665266176d1b20444f0f80a3bdbe5352191e3a1b3e1"
+    },
+    {
+      "file": "src/avito_improved/retrieval.py",
+      "before_sha256": "1948e0b40fdd5fd9c55bb460ed2eabeac5ae7356149feada2099db247eb4d208",
+      "after_sha256": "bf0cd30d434d45e6e63ecfb91b91449716fe915702c087fc51862031d0d4ba2b"
+    },
+    {
+      "file": "src/avito_improved/run.py",
+      "before_sha256": "057275fef7d685a210bcb836b150f06cb0cf283d5731850aee7c4007746da0ca",
+      "after_sha256": "52bb51b596591a5f37a442062949edd53b27df60a4d0cba52361eb579e02c20b"
+    },
+    {
+      "file": "src/avito_improved/selection.py",
+      "before_sha256": "7c06e7f45797d2b73f649f0305bb25f5f29ddde5708942ea966aca451b98c5df",
+      "after_sha256": "31760e23a22afc1c4b6cc60e9ab5cc7592cc4afbb1b9229d5eff6945824bf80d"
+    },
+    {
+      "file": "src/avito_ranker/__init__.py",
+      "before_sha256": "a8a3c48ab8dd96e3c3d91bafe57a08f9d44392fc31363122fb63dabe5f05b746",
+      "after_sha256": "b9c076b1e96518122314a68a39235d8af7d6e08789aeee8291c8b934dea198bc"
+    },
+    {
+      "file": "src/avito_ranker/candidates.py",
+      "before_sha256": "2c50ba641b97ed84a835884810fc80f453f1c2adcc79d07b9115a9659d966973",
+      "after_sha256": "2746e43767198e61cd060eec0902a97d4af6e5072fb25875a5f8ce68bde49bb7"
+    },
+    {
+      "file": "src/avito_ranker/config.py",
+      "before_sha256": "30817889290f72705cbdbf3a3b0ad8f59de5b6df378dbdbef450994ef42b894b",
+      "after_sha256": "58060be9481b24a79bf88cab2f4a25b237841601b05bcd388840aa993f8e3990"
+    },
+    {
+      "file": "src/avito_ranker/dataset.py",
+      "before_sha256": "8327cc8403a1a98c33d4cd85081346c949dd65994770e5fd8ce6123b3e15e43d",
+      "after_sha256": "c7a16fc656365235f5f6a020555072c93e6262a6a6f0e9dd26ef83058238b8c7"
+    },
+    {
+      "file": "src/avito_ranker/features.py",
+      "before_sha256": "167ec855fef35197ae41dcf0b860c476811044add573ec0a382f69964e04d06d",
+      "after_sha256": "0d05accaee533204d9e930561c630f26ac3853d14f8ef1bfc96a0e45ca6a9aba"
+    },
+    {
+      "file": "src/avito_ranker/freeze.py",
+      "before_sha256": "3a39ce04180cd77dd6e349c249d339b27e749c6fb5e1fcf74db6307209335534",
+      "after_sha256": "fd0edab1460b30c98b1207e4e5f18f51ecc1404b116e92a8d51a25987abf5ecf"
+    },
+    {
+      "file": "src/avito_ranker/model.py",
+      "before_sha256": "d165551bab6bbb27f866e8ac3326601465b5b0a8ddc149eda1ec8306fba29cde",
+      "after_sha256": "9bbaff4dcdb5629e3bbc6fccfd1b67ab1660328d4d845bfa7cd8640e98476ad3"
+    },
+    {
+      "file": "src/avito_ranker/predict.py",
+      "before_sha256": "f09e39a2612d9942e3658b3fd8630527dd589179423c33ea458d86b153cde842",
+      "after_sha256": "6abe56065b4b6d0ce9b7bf3d51e8e619a75ff2b419e93c4ab49974084f18aaed"
+    },
+    {
+      "file": "src/avito_ranker/prepare.py",
+      "before_sha256": "334f27447af2135305895429d7d535aa22f926c2ad1b51a3930660d7223f0a83",
+      "after_sha256": "4d1e40c302d3ee633344ea82b0708eb82926f37cc015a2d977577307805ae359"
+    },
+    {
+      "file": "src/avito_ranker/stage.py",
+      "before_sha256": "6a1d938a555686fe4eb1c1baeba1c4508fb2cdd1696332888083b81b560dfb3c",
+      "after_sha256": "50cc5456018f7dfa4e238ade44f3a16b2dc037b1adf29ce9bdb794345cc6c434"
+    },
+    {
+      "file": "src/avito_ranker/verify.py",
+      "before_sha256": "27367bfb003a49eab0454f891fa7b2c2976258c22f155ea2990adcbb092aab99",
+      "after_sha256": "1c631bbbd663ce783501f7c36977b4a9771575357720d45d08f5b8e5f7b0ee62"
+    },
+    {
+      "file": "src/avito_ranker/workflow.py",
+      "before_sha256": "a823cae8de8d84240c8848c8d9f9e6bfa45142143ab67c0916e810df47390acf",
+      "after_sha256": "bd665febf4146e075d230fd56982921262a7a515d2627efffa5b80d42458f32e"
+    },
+    {
+      "file": "src/avito_retrieval/__init__.py",
+      "before_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "after_sha256": "9dc0142f41640acd4dd14b520db2b634d76e4fde2a2572e7d3353ac3495700fd"
+    },
+    {
+      "file": "src/avito_retrieval/build_index.py",
+      "before_sha256": "293ed29d2d729bd67aa3ae61794dcb8fb61cca5542c713638939ef863aee2a6d",
+      "after_sha256": "297c1c83bbd7d7da9c403702907d18898a9234dbd574dbcf9339837b9f1df000"
+    },
+    {
+      "file": "src/avito_retrieval/common.py",
+      "before_sha256": "f4c78c3ea0b7eb8282f1e12b56f2670fd568a9dcc821e9e5a4f421cef5ff5b4f",
+      "after_sha256": "03624657964502a9cac6dda7dc988ee1d9a9ecc36de98874eb641d4c0b6ea4ba"
+    },
+    {
+      "file": "src/avito_retrieval/corpus.py",
+      "before_sha256": "153c7e280c7f13d39a1109d2595000cdb02bcf9ee07cdfcab2b88294c14ffd34",
+      "after_sha256": "f40260513535bcd872e40191a325e82302b41b07ae6584cf18fef7d2059ced17"
+    },
+    {
+      "file": "src/avito_retrieval/data_check.py",
+      "before_sha256": "4e58fd6777ec3d277d9eb06a4516260f213e907d16f4e4ea5192d3d0cd536a65",
+      "after_sha256": "98a487ab51928c710b1c230f43e46a270163fbe0583ab48ac81a219e00391290"
+    },
+    {
+      "file": "src/avito_retrieval/retrieval.py",
+      "before_sha256": "6a896eac2d666cfbf8e3ed28cb899ab0b8f1cc324def46d770d1d5a3ca6731ee",
+      "after_sha256": "83d030482956558b57e504abac829c97b6a65c0017612bdde6750e9f0c79808b"
+    },
+    {
+      "file": "src/avito_retrieval/split.py",
+      "before_sha256": "de21569b91a79230d177af0c4202d73c8d16619714a46ef4fc4b93b38205192c",
+      "after_sha256": "41a19e867592bf3d42aeb692bfc38338dd4a5ca6d5de8023bbdf862ba9643852"
+    },
+    {
+      "file": "src/avito_retrieval/submission.py",
+      "before_sha256": "b60a55572c42e7bba5fc1aaf9ada78ab50b57fe7d54b83192dd93d5d8ecfcd93",
+      "after_sha256": "85ac198827f85f5bb1d38b40dc0100b4ed6ad17ba5ecc54699580190bf48c2ec"
+    },
+    {
+      "file": "tests/test_core.py",
+      "before_sha256": "7dd155553cf880db6fda84230ec5ce99dbd38e74df453d6d64a1de2aac86216c",
+      "after_sha256": "a0d615d946175b32e5698eedca7ba2fc9a6dc9f6b8044b7120c2d0d4865452d7"
+    },
+    {
+      "file": "tests/test_freeze.py",
+      "before_sha256": "8371cf8ad07354e7ef43426259651dad35efcc631502d60e63d9725bcf306ded",
+      "after_sha256": "5d6acdac2c4b2e15a7e0bdbeee991eb0f00d41e13be4af2cac8cf08a88019eba"
+    },
+    {
+      "file": "tests/test_geo.py",
+      "before_sha256": "2292943b642a79cb85f5101dfdc7cf0f69c147261f51e757b0bd35130d78dc42",
+      "after_sha256": "2968c99763b246cd7da50748c72ebceaf6c74015fa6443bec09d26e199477ef2"
+    },
+    {
+      "file": "tests/test_history.py",
+      "before_sha256": "8f21aa1ee7e858281206ed08cfe2b54f4b9919e57d0f433cfa29acaafd2d68a8",
+      "after_sha256": "3c1e65c132bd9e4812eb0a07f25deeab4dc2055e4a412c55c1399155da31999e"
+    },
+    {
+      "file": "tests/test_layout.py",
+      "before_sha256": "8588c094783f9072ec6d40764550dafb1039a6294676c42ea349c755674bd61c",
+      "after_sha256": "5d9ba56bd794f78fce1c5d9658f8f776ea7ea6f0a88addd8061aedf259178e0f"
+    },
+    {
+      "file": "tests/test_ranking.py",
+      "before_sha256": "909097f32cea158b31bc025c91a1e6f3e5037ced18bd95b99eddb5fdae363253",
+      "after_sha256": "9c56a068c9d10ddc95d410f8ff50c8138c2d3e8699199da0ac6d749b55f779b5"
+    },
+    {
+      "file": "tests/test_selection.py",
+      "before_sha256": "4cf4818d04d867820b5c38dcd9b22690db52fb5e2bc649e7c9208ef1e69fd4ff",
+      "after_sha256": "4fc0e6cff1eb6fe2286fbe5f06a8fbdc78e5b95de7adb3900afff5bd3ebbe25d"
+    },
+    {
+      "file": "tests/test_submission.py",
+      "before_sha256": "d97d0daf4a13304f176f05b408ccacd02604bdd66989880a1e7ad82fd2538a02",
+      "after_sha256": "9f88fe0793d603397540ff3202302bcca440b108dba5e8cc37f1319ca88564de"
+    }
+  ],
+  "tests_passed": 27,
+  "legacy_source_guard_passed": true,
+  "restored_model_source_guard_passed": true,
+  "prediction_recomputed_from_verified_features": true,
+  "answer_byte_identical": true
+}

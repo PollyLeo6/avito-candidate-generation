@@ -8,7 +8,11 @@ from avito_improved.selection import top_indices
 
 
 class SelectionTests(unittest.TestCase):
+    """Проверяем заполнение топ-50 при пересечении двух выдач."""
+
     def test_overlap_is_skipped_without_losing_places(self):
+        """Повторы пропускаются, а свободные места заполняются дальше по списку."""
+        # Выдачи частично совпадают, но у старой модели другой порядок.
         predictions = np.arange(80, 0, -1, dtype=float)
         old_scores = np.roll(predictions, 20)
         original = np.ones(80, dtype=bool)
@@ -16,6 +20,7 @@ class SelectionTests(unittest.TestCase):
         self.assertEqual(result[:40].tolist(), list(range(40)))
         self.assertEqual(len(result), 50)
         self.assertEqual(len(set(result)), 50)
+        # Если старых кандидатов нет, недостающие места даёт новая модель.
         without_old = top_indices(predictions, old_scores, ~original, new_head=40)
         self.assertEqual(without_old.tolist(), list(range(50)))
 

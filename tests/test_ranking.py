@@ -15,13 +15,19 @@ from avito_ranker.prepare import assign_fold, strict_group
 
 
 class RankingTests(unittest.TestCase):
+    """Проверяем разбиение, отбор примеров и полный знаменатель Recall."""
+
     def test_word_order_and_inflections_stay_together(self):
+        """Перестановка слов и окончания не разделяют одну группу запросов."""
         self.assertEqual(strict_group("Ремонт квартир!"), strict_group("квартиры ремонт"))
 
     def test_previously_seen_group_cannot_be_holdout_or_train(self):
+        """Просмотренные при разработке группы остаются только в dev."""
         self.assertEqual(assign_fold("example", {"example"}), "dev")
 
     def test_missing_positive_is_in_metric_denominator(self):
+        """Не найденное поиском объявление всё равно учитывается в Recall."""
+        # Для первого запроса известны два положительных, найдено только одно.
         candidates = pl.DataFrame({"query_number": [0, 0, 1], "doc_id": [1, 2, 3], "label": [1, 0, 0]})
         summary = pl.DataFrame({"query_number": [0, 1], "positives": [2, 1]})
         result = per_query_recall(candidates, [1.0, 0.0, 2.0], summary)
@@ -29,6 +35,7 @@ class RankingTests(unittest.TestCase):
         self.assertEqual(result["recall_50"].mean(), 0.25)
 
     def test_training_sampling_keeps_positives_without_adding_them(self):
+        """Отбор сохраняет найденные положительные и не создаёт дубликаты."""
         pool = np.arange(10)
         labels = np.array([0, 1, 0, 0, 0, 0, 0, 0, 1, 0])
         matrix = np.column_stack([np.arange(10) / 10, np.ones(10)])
@@ -38,10 +45,12 @@ class RankingTests(unittest.TestCase):
         self.assertEqual(len(set(selected)), len(selected))
 
     def test_rank_features_respect_document_numbers(self):
+        """Обратные ранги сопоставляются по doc_id, а не по позиции в массиве."""
         values = rank_values(np.array([2, 5, 8]), np.array([8, 2]))
         np.testing.assert_array_equal(values, [0.5, 0, 1])
 
     def test_holdout_is_closed_until_model_is_frozen(self):
+        """Оценка на holdout требует заранее сохранённого снимка эксперимента."""
         with tempfile.TemporaryDirectory() as directory:
             with self.assertRaisesRegex(RuntimeError, "freeze"):
                 check_frozen({"results_dir": Path(directory)})

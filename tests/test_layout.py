@@ -10,7 +10,10 @@ from avito_ranker.freeze import fingerprint
 
 
 class LayoutTests(unittest.TestCase):
+    """Проверяем переносимость путей и контроль изменений исходного кода."""
+
     def test_config_resolves_paths_from_configs_directory(self):
+        """Относительные пути считаются от файла настроек, а не текущей папки."""
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory).resolve()
             path = root / "configs/ranking.toml"
@@ -23,7 +26,9 @@ class LayoutTests(unittest.TestCase):
                 self.assertEqual(config[name + "_dir"], root / name)
 
     def test_fingerprint_detects_changes_in_src(self):
+        """Правка модуля меняет снимок даже при неизменных параметрах модели."""
         with tempfile.TemporaryDirectory() as directory:
+            # Собираем минимальную структуру проекта для проверки отпечатков.
             root = Path(directory).resolve()
             results = root / "results"
             results.mkdir()
@@ -38,6 +43,7 @@ class LayoutTests(unittest.TestCase):
             source.write_text("value = 1\n", encoding="utf-8")
             config = {"project_dir": root, "config_path": root / "configs/ranking.toml",
                       "results_dir": results, "threads": 2}
+            # Настоящее обучение здесь не нужно: меняется только исходный файл.
             with patch("avito_ranker.freeze.model_function_hash", return_value="model"):
                 before = fingerprint(config)
                 source.write_text("value = 2\n", encoding="utf-8")

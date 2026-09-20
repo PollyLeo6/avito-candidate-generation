@@ -10,6 +10,7 @@ from .common import file_hash, query_columns, save_json, text_fields
 
 
 def check_ids(values, pattern, unique=True):
+    """Проверяет формат ID, отсутствие пропусков и, если нужно, повторов."""
     if values.null_count() or not values.str.contains(pattern).all():
         raise ValueError(f"Неверный формат {values.name}")
     if unique and values.n_unique() != len(values):
@@ -17,6 +18,8 @@ def check_ids(values, pattern, unique=True):
 
 
 def inspect_data(data_dir, results_dir):
+    """Проверяет три исходных Parquet и сохраняет их хеши вместе с окружением."""
+    # Число строк и обязательные поля берём из условия тестового задания.
     item_columns = ["item_id", "item_microcat_id", "item_category_id", "item_location_id"]
     specifications = {
         "train.parquet": (497673, query_columns + item_columns + list(text_fields.values())),
@@ -25,6 +28,7 @@ def inspect_data(data_dir, results_dir):
     }
     summary = {}
     for name, (expected_rows, required) in specifications.items():
+        # Сначала проверяем схему и размер, не читая тяжёлые текстовые колонки.
         path = data_dir / name
         if not path.is_file():
             raise FileNotFoundError(f"Не найден {path}. Проверьте data_dir в config.toml")
@@ -33,10 +37,12 @@ def inspect_data(data_dir, results_dir):
             raise ValueError(f"{name}: отсутствуют колонки {sorted(missing)}")
         if parquet.metadata.num_rows != expected_rows:
             raise ValueError(f"{name}: число строк отличается от условия задания")
+        # В train один item_id может участвовать в нескольких положительных парах.
         id_column = "query_id" if "queries" in name else "item_id"
         ids = pl.read_parquet(path, columns=[id_column])[id_column]
         pattern = r"^.{16}$" if id_column == "query_id" else r"^[0-9a-f]{16}$"
         check_ids(ids, pattern, unique=name != "train.parquet")
+        # Хеши фиксируют конкретный набор данных для повторного запуска.
         summary[name] = {
             "rows": len(ids),
             "unique_ids": ids.n_unique(),
@@ -45,6 +51,7 @@ def inspect_data(data_dir, results_dir):
             "schema": {field.name: str(field.type) for field in parquet.schema_arrow},
         }
     save_json(results_dir / "input_check.json", summary)
+    # Сохраняем версии библиотек базового поиска для разбора различий окружения.
     dependencies = ["numpy", "scipy", "polars", "pyarrow", "bm25s", "snowballstemmer"]
     save_json(
         results_dir / "environment.json",

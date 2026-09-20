@@ -7823,19 +7823,24 @@ a.anchor-link {
 <span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
 
+<span class="c1"># Ограничиваем число потоков для работы на CPU с небольшим объёмом памяти.</span>
 <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">"POLARS_MAX_THREADS"</span><span class="p">:</span> <span class="s2">"2"</span><span class="p">,</span> <span class="s2">"OPENBLAS_NUM_THREADS"</span><span class="p">:</span> <span class="s2">"2"</span><span class="p">,</span> <span class="s2">"OMP_NUM_THREADS"</span><span class="p">:</span> <span class="s2">"2"</span><span class="p">})</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">avito_ranker.config</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_config</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">avito_improved.run</span><span class="w"> </span><span class="kn">import</span> <span class="n">run_stage</span>
 
+<span class="c1"># Пути работают при запуске из корня репозитория и из папки notebooks.</span>
 <span class="n">project_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span>
 <span class="k">if</span> <span class="n">project_dir</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">"notebooks"</span><span class="p">:</span>
+    <span class="c1"># Пути работают при запуске из корня репозитория и из папки notebooks.</span>
     <span class="n">project_dir</span> <span class="o">=</span> <span class="n">project_dir</span><span class="o">.</span><span class="n">parent</span>
+<span class="c1"># Оба ноутбука используют одни настройки и одни модули расчёта.</span>
 <span class="n">config_path</span> <span class="o">=</span> <span class="n">project_dir</span> <span class="o">/</span> <span class="s2">"configs/improved.toml"</span>
 <span class="n">config</span> <span class="o">=</span> <span class="n">load_config</span><span class="p">(</span><span class="n">config_path</span><span class="p">)</span>
 <span class="n">work</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s2">"work_dir"</span><span class="p">]</span> <span class="o">/</span> <span class="s2">"quality"</span>
 <span class="n">saved</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s2">"results_dir"</span><span class="p">]</span>
 <span class="n">started</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+<span class="c1"># Сначала запускаем тесты; при ошибке выполнение остановится.</span>
 <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="n">sys</span><span class="o">.</span><span class="n">executable</span><span class="p">,</span> <span class="s2">"-m"</span><span class="p">,</span> <span class="s2">"unittest"</span><span class="p">,</span> <span class="s2">"discover"</span><span class="p">,</span> <span class="s2">"-s"</span><span class="p">,</span> <span class="s2">"tests"</span><span class="p">,</span> <span class="s2">"-v"</span><span class="p">],</span>
                <span class="n">cwd</span><span class="o">=</span><span class="n">project_dir</span><span class="p">,</span> <span class="n">check</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
@@ -7862,7 +7867,9 @@ a.anchor-link {
 <div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">run_stage</span><span class="p">(</span><span class="s2">"prepare"</span><span class="p">,</span> <span class="n">config_path</span><span class="p">)</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Готовим разбиение, корпус и историю только по обучающим группам.</span>
+<span class="n">run_stage</span><span class="p">(</span><span class="s2">"prepare"</span><span class="p">,</span> <span class="n">config_path</span><span class="p">)</span>
+<span class="c1"># Загружаем готовую модель и сверяем код, данные и историю со снимком.</span>
 <span class="n">run_stage</span><span class="p">(</span><span class="s2">"restore"</span><span class="p">,</span> <span class="n">config_path</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -7888,7 +7895,8 @@ a.anchor-link {
 <div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">run_stage</span><span class="p">(</span><span class="s2">"benchmark_indices"</span><span class="p">,</span> <span class="n">config_path</span><span class="p">)</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Индексируем только объявления, допустимые в итоговом ответе.</span>
+<span class="n">run_stage</span><span class="p">(</span><span class="s2">"benchmark_indices"</span><span class="p">,</span> <span class="n">config_path</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -7913,7 +7921,8 @@ a.anchor-link {
 <div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">run_stage</span><span class="p">(</span><span class="s2">"benchmark_features"</span><span class="p">,</span> <span class="n">config_path</span><span class="p">)</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Повторяем поиск и расчёт признаков для всех запросов benchmark.</span>
+<span class="n">run_stage</span><span class="p">(</span><span class="s2">"benchmark_features"</span><span class="p">,</span> <span class="n">config_path</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -7938,7 +7947,8 @@ a.anchor-link {
 <div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">run_stage</span><span class="p">(</span><span class="s2">"predict"</span><span class="p">,</span> <span class="n">config_path</span><span class="p">)</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Применяем сохранённую модель и записываем проверенный CSV.</span>
+<span class="n">run_stage</span><span class="p">(</span><span class="s2">"predict"</span><span class="p">,</span> <span class="n">config_path</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -7965,12 +7975,15 @@ a.anchor-link {
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">avito_retrieval.submission</span><span class="w"> </span><span class="kn">import</span> <span class="n">validate_answer</span>
 
+<span class="c1"># Проверяем формат, полный список запросов и допустимость всех item_id.</span>
 <span class="n">computed</span> <span class="o">=</span> <span class="n">work</span> <span class="o">/</span> <span class="s2">"answer.csv"</span>
 <span class="n">reference</span> <span class="o">=</span> <span class="n">project_dir</span> <span class="o">/</span> <span class="s2">"answer.csv"</span>
 <span class="n">report</span> <span class="o">=</span> <span class="n">validate_answer</span><span class="p">(</span><span class="n">computed</span><span class="p">,</span> <span class="n">config</span><span class="p">[</span><span class="s2">"data_dir"</span><span class="p">]</span> <span class="o">/</span> <span class="s2">"benchmark_queries.parquet"</span><span class="p">,</span>
                          <span class="n">config</span><span class="p">[</span><span class="s2">"data_dir"</span><span class="p">]</span> <span class="o">/</span> <span class="s2">"benchmark_items.parquet"</span><span class="p">)</span>
+<span class="c1"># Требуем точного совпадения файлов, включая порядок и переводы строк.</span>
 <span class="k">if</span> <span class="n">computed</span><span class="o">.</span><span class="n">read_bytes</span><span class="p">()</span> <span class="o">!=</span> <span class="n">reference</span><span class="o">.</span><span class="n">read_bytes</span><span class="p">():</span>
     <span class="k">raise</span> <span class="ne">AssertionError</span><span class="p">(</span><span class="s2">"Новый answer.csv отличается от приложенного"</span><span class="p">)</span>
+<span class="c1"># Успешный отчёт записывается только после всех проверок.</span>
 <span class="n">report</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">"status"</span><span class="p">:</span> <span class="s2">"passed"</span><span class="p">,</span> <span class="s2">"answer_identical"</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
                <span class="s2">"seconds"</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span> <span class="o">-</span> <span class="n">started</span><span class="p">,</span> <span class="mi">2</span><span class="p">)})</span>
 <span class="p">(</span><span class="n">work</span> <span class="o">/</span> <span class="s2">"check_report.json"</span><span class="p">)</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">report</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">),</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">)</span>

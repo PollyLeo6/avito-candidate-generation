@@ -7823,19 +7823,24 @@ a.anchor-link {
 <span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
 
+<span class="c1"># Ограничиваем число потоков для работы на CPU с небольшим объёмом памяти.</span>
 <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">"POLARS_MAX_THREADS"</span><span class="p">:</span> <span class="s2">"2"</span><span class="p">,</span> <span class="s2">"OPENBLAS_NUM_THREADS"</span><span class="p">:</span> <span class="s2">"2"</span><span class="p">,</span> <span class="s2">"OMP_NUM_THREADS"</span><span class="p">:</span> <span class="s2">"2"</span><span class="p">})</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">avito_ranker.config</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_config</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">avito_improved.run</span><span class="w"> </span><span class="kn">import</span> <span class="n">run_stage</span>
 
+<span class="c1"># Пути работают при запуске из корня репозитория и из папки notebooks.</span>
 <span class="n">project_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span>
 <span class="k">if</span> <span class="n">project_dir</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">"notebooks"</span><span class="p">:</span>
+    <span class="c1"># Пути работают при запуске из корня репозитория и из папки notebooks.</span>
     <span class="n">project_dir</span> <span class="o">=</span> <span class="n">project_dir</span><span class="o">.</span><span class="n">parent</span>
+<span class="c1"># Оба ноутбука используют одни настройки и одни модули расчёта.</span>
 <span class="n">config_path</span> <span class="o">=</span> <span class="n">project_dir</span> <span class="o">/</span> <span class="s2">"configs/improved.toml"</span>
 <span class="n">config</span> <span class="o">=</span> <span class="n">load_config</span><span class="p">(</span><span class="n">config_path</span><span class="p">)</span>
 <span class="n">work</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s2">"work_dir"</span><span class="p">]</span> <span class="o">/</span> <span class="s2">"quality"</span>
 <span class="n">saved</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s2">"results_dir"</span><span class="p">]</span>
 
+<span class="c1"># False показывает сохранённые результаты; True повторяет весь расчёт.</span>
 <span class="n">rebuild</span> <span class="o">=</span> <span class="kc">False</span>
 <span class="p">{</span><span class="s2">"rebuild"</span><span class="p">:</span> <span class="n">rebuild</span><span class="p">,</span> <span class="s2">"config"</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">config_path</span><span class="o">.</span><span class="n">name</span><span class="p">)}</span>
 </pre></div>
@@ -7874,7 +7879,8 @@ a.anchor-link {
 <div class="jp-InputPrompt jp-InputArea-prompt">In [2]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="n">sys</span><span class="o">.</span><span class="n">executable</span><span class="p">,</span> <span class="s2">"-m"</span><span class="p">,</span> <span class="s2">"unittest"</span><span class="p">,</span> <span class="s2">"discover"</span><span class="p">,</span> <span class="s2">"-s"</span><span class="p">,</span> <span class="s2">"tests"</span><span class="p">,</span> <span class="s2">"-v"</span><span class="p">],</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Сначала запускаем тесты; при ошибке выполнение остановится.</span>
+<span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="n">sys</span><span class="o">.</span><span class="n">executable</span><span class="p">,</span> <span class="s2">"-m"</span><span class="p">,</span> <span class="s2">"unittest"</span><span class="p">,</span> <span class="s2">"discover"</span><span class="p">,</span> <span class="s2">"-s"</span><span class="p">,</span> <span class="s2">"tests"</span><span class="p">,</span> <span class="s2">"-v"</span><span class="p">],</span>
                <span class="n">cwd</span><span class="o">=</span><span class="n">project_dir</span><span class="p">,</span> <span class="n">check</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -7914,6 +7920,7 @@ a.anchor-link {
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="k">if</span> <span class="n">rebuild</span><span class="p">:</span>
+    <span class="c1"># Готовим разбиение, корпус и историю только по обучающим группам.</span>
     <span class="n">run_stage</span><span class="p">(</span><span class="s2">"prepare"</span><span class="p">,</span> <span class="n">config_path</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -7940,6 +7947,7 @@ a.anchor-link {
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="k">if</span> <span class="n">rebuild</span><span class="p">:</span>
+    <span class="c1"># Строим поисковые индексы для локальной оценки.</span>
     <span class="n">run_stage</span><span class="p">(</span><span class="s2">"validation_indices"</span><span class="p">,</span> <span class="n">config_path</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -7967,7 +7975,9 @@ a.anchor-link {
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="k">if</span> <span class="n">rebuild</span><span class="p">:</span>
+    <span class="c1"># Находим обучающих кандидатов и считаем признаки для модели.</span>
     <span class="n">run_stage</span><span class="p">(</span><span class="s2">"train_features"</span><span class="p">,</span> <span class="n">config_path</span><span class="p">)</span>
+    <span class="c1"># Проверяем метки и отсутствие проверочных групп в обучении.</span>
     <span class="n">run_stage</span><span class="p">(</span><span class="s2">"audit"</span><span class="p">,</span> <span class="n">config_path</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -7994,6 +8004,7 @@ a.anchor-link {
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="k">if</span> <span class="n">rebuild</span><span class="p">:</span>
+    <span class="c1"># Считаем признаки dev для выбора модели и её параметров.</span>
     <span class="n">run_stage</span><span class="p">(</span><span class="s2">"dev_features"</span><span class="p">,</span> <span class="n">config_path</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -8020,6 +8031,7 @@ a.anchor-link {
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="k">if</span> <span class="n">rebuild</span><span class="p">:</span>
+    <span class="c1"># Обучаем модели на train и выбираем число деревьев по dev.</span>
     <span class="n">run_stage</span><span class="p">(</span><span class="s2">"train"</span><span class="p">,</span> <span class="n">config_path</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -8046,8 +8058,11 @@ a.anchor-link {
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="k">if</span> <span class="n">rebuild</span><span class="p">:</span>
+    <span class="c1"># Проверяем на dev дополнительные кандидаты в радиусе 50 км.</span>
     <span class="n">run_stage</span><span class="p">(</span><span class="s2">"dev_expanded_features"</span><span class="p">,</span> <span class="n">config_path</span><span class="p">)</span>
+    <span class="c1"># Выбираем долю каждой модели в итоговой выдаче по метрике dev.</span>
     <span class="n">run_stage</span><span class="p">(</span><span class="s2">"select"</span><span class="p">,</span> <span class="n">config_path</span><span class="p">)</span>
+<span class="c1"># В режиме просмотра читаем опубликованные параметры выбранной модели.</span>
 <span class="n">selection_path</span> <span class="o">=</span> <span class="n">work</span> <span class="o">/</span> <span class="s2">"selected.json"</span> <span class="k">if</span> <span class="n">rebuild</span> <span class="k">else</span> <span class="n">saved</span> <span class="o">/</span> <span class="s2">"selected.json"</span>
 <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">selection_path</span><span class="o">.</span><span class="n">read_text</span><span class="p">(</span><span class="s2">"utf-8"</span><span class="p">))</span>
 </pre></div>
@@ -8114,6 +8129,7 @@ a.anchor-link {
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="k">if</span> <span class="n">rebuild</span><span class="p">:</span>
+    <span class="c1"># Фиксируем код и модель до оценки на новом holdout.</span>
     <span class="n">run_stage</span><span class="p">(</span><span class="s2">"freeze"</span><span class="p">,</span> <span class="n">config_path</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -8140,8 +8156,11 @@ a.anchor-link {
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="k">if</span> <span class="n">rebuild</span><span class="p">:</span>
+    <span class="c1"># Считаем признаки ранее отложенных запросов holdout.</span>
     <span class="n">run_stage</span><span class="p">(</span><span class="s2">"fresh_features"</span><span class="p">,</span> <span class="n">config_path</span><span class="p">)</span>
+    <span class="c1"># Оцениваем выбранный вариант без дальнейшего подбора по holdout.</span>
     <span class="n">run_stage</span><span class="p">(</span><span class="s2">"evaluate"</span><span class="p">,</span> <span class="n">config_path</span><span class="p">)</span>
+<span class="c1"># Показываем метрику holdout и сравнение с исходным методом.</span>
 <span class="n">metrics_path</span> <span class="o">=</span> <span class="n">work</span> <span class="o">/</span> <span class="s2">"fresh_metrics.json"</span> <span class="k">if</span> <span class="n">rebuild</span> <span class="k">else</span> <span class="n">saved</span> <span class="o">/</span> <span class="s2">"fresh_metrics.json"</span>
 <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">metrics_path</span><span class="o">.</span><span class="n">read_text</span><span class="p">(</span><span class="s2">"utf-8"</span><span class="p">))</span>
 </pre></div>
@@ -8189,7 +8208,9 @@ a.anchor-link {
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="k">if</span> <span class="n">rebuild</span><span class="p">:</span>
+    <span class="c1"># Индексируем только объявления, допустимые в итоговом ответе.</span>
     <span class="n">run_stage</span><span class="p">(</span><span class="s2">"benchmark_indices"</span><span class="p">,</span> <span class="n">config_path</span><span class="p">)</span>
+    <span class="c1"># Повторяем поиск и расчёт признаков для всех запросов benchmark.</span>
     <span class="n">run_stage</span><span class="p">(</span><span class="s2">"benchmark_features"</span><span class="p">,</span> <span class="n">config_path</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -8216,6 +8237,7 @@ a.anchor-link {
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="k">if</span> <span class="n">rebuild</span><span class="p">:</span>
+    <span class="c1"># Применяем сохранённую модель и записываем проверенный CSV.</span>
     <span class="n">run_stage</span><span class="p">(</span><span class="s2">"predict"</span><span class="p">,</span> <span class="n">config_path</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -8244,7 +8266,9 @@ a.anchor-link {
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">shutil</span>
 
 <span class="k">if</span> <span class="n">rebuild</span><span class="p">:</span>
+    <span class="c1"># Сохраняем модель, параметры и отчёты вместе с ответом.</span>
     <span class="n">run_stage</span><span class="p">(</span><span class="s2">"export"</span><span class="p">,</span> <span class="n">config_path</span><span class="p">)</span>
+    <span class="c1"># Копируем рассчитанный ответ в корень репозитория.</span>
     <span class="n">shutil</span><span class="o">.</span><span class="n">copyfile</span><span class="p">(</span><span class="n">saved</span> <span class="o">/</span> <span class="s2">"answer.csv"</span><span class="p">,</span> <span class="n">project_dir</span> <span class="o">/</span> <span class="s2">"answer.csv"</span><span class="p">)</span>
 <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">((</span><span class="n">saved</span> <span class="o">/</span> <span class="s2">"submission_check.json"</span><span class="p">)</span><span class="o">.</span><span class="n">read_text</span><span class="p">(</span><span class="s2">"utf-8"</span><span class="p">))</span>
 </pre></div>

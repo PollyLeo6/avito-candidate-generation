@@ -12,6 +12,8 @@ from .common import bm25s, file_hash, log, save_json, text_fields, tokenize
 
 
 def build(validation, out, field, stemming=True):
+    """Создаёт BM25-индекс одного поля в порядке doc_id из манифеста."""
+    # Манифест задаёт одинаковый порядок объявлений для всех индексов.
     validation = Path(validation)
     out = Path(out)
     started = time.time()
@@ -20,6 +22,7 @@ def build(validation, out, field, stemming=True):
     n = corpus.height
     vocab = {}
     tokens_by_doc = [None] * n
+    # Читаем тексты порциями, а в памяти оставляем числовые ID токенов.
     for batch in pq.ParquetFile(validation / "corpus.parquet").iter_batches(
         batch_size=2048, columns=["item_id", text_fields[field]], use_threads=False
     ):
@@ -32,6 +35,7 @@ def build(validation, out, field, stemming=True):
                     vocab[token] = idx
                 ids.append(idx)
             tokens_by_doc[id_to_row[row["item_id"]]] = array("I", ids)
+    # Не строим индекс, пока не собраны тексты всех ID из манифеста.
     if any(x is None for x in tokens_by_doc):
         raise ValueError("Для части объявлений не найден текст")
     log(
@@ -50,6 +54,7 @@ def build(validation, out, field, stemming=True):
     retriever = bm25s.BM25(k1=1.5, b=0.75, method="lucene", idf_method="lucene", backend="numpy")
     retriever.index((tokens_by_doc, vocab), show_progress=False)
     retriever.save(str(out))
+    # Параметры и хеши позволяют связать сохранённый индекс с исходным корпусом.
     meta = {
         "field": field,
         "stemming": stemming,
