@@ -7802,9 +7802,10 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h1 id="Candidate-generation-%D0%B4%D0%BB%D1%8F-%D0%BF%D0%BE%D0%B8%D1%81%D0%BA%D0%B0-%D1%83%D1%81%D0%BB%D1%83%D0%B3-%D0%90%D0%B2%D0%B8%D1%82%D0%BE">Candidate generation для поиска услуг Авито<a class="anchor-link" href="#Candidate-generation-%D0%B4%D0%BB%D1%8F-%D0%BF%D0%BE%D0%B8%D1%81%D0%BA%D0%B0-%D1%83%D1%81%D0%BB%D1%83%D0%B3-%D0%90%D0%B2%D0%B8%D1%82%D0%BE">¶</a></h1><p>Решение объединяет BM25, поиск по обучающим запросам и CatBoostRanker.
-Настройки находятся в <code>configs/improved.toml</code>, реализация этапов в <code>src/avito_improved/</code>.</p>
-<p>При <code>rebuild = False</code> показываются сохранённые результаты. Для полного расчёта положите три Parquet в <code>data/</code>, установите <code>rebuild = True</code> и выполните все ячейки.</p>
+<h1 id="Candidate-generation-%D0%B4%D0%BB%D1%8F-%D0%BF%D0%BE%D0%B8%D1%81%D0%BA%D0%B0-%D1%83%D1%81%D0%BB%D1%83%D0%B3-%D0%90%D0%B2%D0%B8%D1%82%D0%BE">Candidate generation для поиска услуг Авито<a class="anchor-link" href="#Candidate-generation-%D0%B4%D0%BB%D1%8F-%D0%BF%D0%BE%D0%B8%D1%81%D0%BA%D0%B0-%D1%83%D1%81%D0%BB%D1%83%D0%B3-%D0%90%D0%B2%D0%B8%D1%82%D0%BE">¶</a></h1><p>Решение объединяет BM25, историю обучающих запросов, географию и CatBoostRanker. Этапы реализованы в <code>src/avito_improved/</code>; <a href="../docs/pipeline.md">схема расчёта</a> связывает их с файлами и модулями.
+<code>rebuild = False</code> показывает сохранённые результаты и запускает тесты кода. Поиск и обучение при этом не повторяются. Для полного расчёта положите три Parquet в <code>data/</code>, выберите ядро <strong>Avito ranking</strong>, задайте <code>rebuild = True</code> и выполните все ячейки.
+<code>config_path</code> задаёт <code>configs/improved.toml</code>: там меняются пути к данным и рабочим папкам. <code>run_stage</code> использует отдельный процесс через <code>subprocess</code>, чтобы освобождать память между этапами и сохранять полный вывод в <code>results/improved/logs/</code>.
+Полный запуск обучает текущую модель с 38 признаками. Файл <code>results/ranker.cbm</code> остаётся фиксированной зависимостью: исходная модель выбирает сложные отрицательные примеры и дополняет итоговую выдачу. Она здесь заново не обучается.</p>
 </div>
 </div>
 </div>
@@ -7867,7 +7868,8 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="1.-%D0%9F%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B8-%D0%BA%D0%BE%D0%B4%D0%B0">1. Проверки кода<a class="anchor-link" href="#1.-%D0%9F%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B8-%D0%BA%D0%BE%D0%B4%D0%B0">¶</a></h2>
+<h2 id="1.-%D0%9F%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B8-%D0%BA%D0%BE%D0%B4%D0%B0">1. Проверки кода<a class="anchor-link" href="#1.-%D0%9F%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B8-%D0%BA%D0%BE%D0%B4%D0%B0">¶</a></h2><p>Запускаются тесты метрики, группировки запросов, признаков, защиты holdout и формата CSV из <code>tests/</code>. Они выполняются при обоих значениях <code>rebuild</code>.
+Ожидаемый итог: 27 тестов и <code>OK</code>. При ошибке ячейка останавливается, результаты поиска или обучения ещё не пересчитываются.</p>
 </div>
 </div>
 </div>
@@ -7906,8 +7908,9 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="2.-%D0%94%D0%B0%D0%BD%D0%BD%D1%8B%D0%B5-%D0%B8-%D1%80%D0%B0%D0%B7%D0%B1%D0%B8%D0%B5%D0%BD%D0%B8%D0%B5">2. Данные и разбиение<a class="anchor-link" href="#2.-%D0%94%D0%B0%D0%BD%D0%BD%D1%8B%D0%B5-%D0%B8-%D1%80%D0%B0%D0%B7%D0%B1%D0%B8%D0%B5%D0%BD%D0%B8%D0%B5">¶</a></h2><p>Группы нормализованных запросов не пересекаются между train и dev. История строится только на train.
-Из ранее не использовавшихся holdout-групп заранее выбираются 1 000 запросов для итоговой оценки. Их метки не участвуют в поиске или выборе модели.</p>
+<h2 id="2.-%D0%94%D0%B0%D0%BD%D0%BD%D1%8B%D0%B5-%D0%B8-%D1%80%D0%B0%D0%B7%D0%B1%D0%B8%D0%B5%D0%BD%D0%B8%D0%B5">2. Данные и разбиение<a class="anchor-link" href="#2.-%D0%94%D0%B0%D0%BD%D0%BD%D1%8B%D0%B5-%D0%B8-%D1%80%D0%B0%D0%B7%D0%B1%D0%B8%D0%B5%D0%BD%D0%B8%D0%B5">¶</a></h2><p>Из трёх Parquet создаются запросы, положительные пары и корпуса в <code>work/validation/</code> и <code>work/benchmark/</code>. Группы одинаковых нормализованных токенов целиком относятся к train, dev или holdout; история использует только train.
+Для итоговой оценки заранее откладываются 1 000 ранее не проверявшихся запросов. Группы старых 2 000 holdout-запросов исключаются; <code>holdout_queries = 2000</code> в конфиге относится к этой старой выборке.
+Проверить разбиение можно в <code>results/improved/split_audit.json</code>, резерв новой выборки - в <code>work/quality/fresh_reservation.json</code>. Пересечения групп должны отсутствовать.</p>
 </div>
 </div>
 </div>
@@ -7934,7 +7937,9 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="3.-%D0%98%D0%BD%D0%B4%D0%B5%D0%BA%D1%81%D1%8B-%D0%BB%D0%BE%D0%BA%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%B3%D0%BE-%D0%BA%D0%BE%D1%80%D0%BF%D1%83%D1%81%D0%B0">3. Индексы локального корпуса<a class="anchor-link" href="#3.-%D0%98%D0%BD%D0%B4%D0%B5%D0%BA%D1%81%D1%8B-%D0%BB%D0%BE%D0%BA%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%B3%D0%BE-%D0%BA%D0%BE%D1%80%D0%BF%D1%83%D1%81%D0%B0">¶</a></h2><p>Корпус содержит все доступные объявления из train и benchmark. Он выбирается независимо от положительных меток.</p>
+<h2 id="3.-%D0%98%D0%BD%D0%B4%D0%B5%D0%BA%D1%81%D1%8B-%D0%BB%D0%BE%D0%BA%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%B3%D0%BE-%D0%BA%D0%BE%D1%80%D0%BF%D1%83%D1%81%D0%B0">3. Индексы локального корпуса<a class="anchor-link" href="#3.-%D0%98%D0%BD%D0%B4%D0%B5%D0%BA%D1%81%D1%8B-%D0%BB%D0%BE%D0%BA%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%B3%D0%BE-%D0%BA%D0%BE%D1%80%D0%BF%D1%83%D1%81%D0%B0">¶</a></h2><p>Для обучения и локальной оценки используются все 515 895 уникальных объявлений из train и benchmark. Положительные метки не определяют состав корпуса.
+По заголовкам, описаниям и параметрам строятся три BM25-индекса в <code>work/validation_indices/</code>. Следующий этап начинается после успешного завершения каждого индекса.
+Это более широкий корпус, чем 189 212 объявлений, допустимых в финальном CSV.</p>
 </div>
 </div>
 </div>
@@ -7961,8 +7966,9 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="4.-%D0%9E%D0%B1%D1%83%D1%87%D0%B0%D1%8E%D1%89%D0%B8%D0%B5-%D0%BF%D0%B0%D1%80%D1%8B">4. Обучающие пары<a class="anchor-link" href="#4.-%D0%9E%D0%B1%D1%83%D1%87%D0%B0%D1%8E%D1%89%D0%B8%D0%B5-%D0%BF%D0%B0%D1%80%D1%8B">¶</a></h2><p>Для каждого запроса ищутся кандидаты, затем добавляются метки из train. В истории исключается вся группа самого обучающего запроса.
-Исходная модель <code>results/ranker.cbm</code> помогает выбрать сложные отрицательные примеры; этот фиксированный файл входит в репозиторий.</p>
+<h2 id="4.-%D0%9E%D0%B1%D1%83%D1%87%D0%B0%D1%8E%D1%89%D0%B8%D0%B5-%D0%BF%D0%B0%D1%80%D1%8B">4. Обучающие пары<a class="anchor-link" href="#4.-%D0%9E%D0%B1%D1%83%D1%87%D0%B0%D1%8E%D1%89%D0%B8%D0%B5-%D0%BF%D0%B0%D1%80%D1%8B">¶</a></h2><p>Поиск кандидатов и расчёт признаков выполняются до добавления меток. Из истории исключается вся группа текущего train-запроса; все найденные положительные примеры сохраняются.
+Отрицательные примеры выбираются частично по оценке фиксированной <code>results/ranker.cbm</code>, частично случайно. Пропущенные поиском положительные объявления принудительно не добавляются.
+Результат: <code>work/quality/train.parquet</code> и <code>leakage_audit.json</code> в той же папке. Аудит должен подтвердить отсутствие неверных меток, пересечений с dev/holdout и ID в признаках.</p>
 </div>
 </div>
 </div>
@@ -7991,7 +7997,9 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="5.-%D0%9F%D1%80%D0%B8%D0%B7%D0%BD%D0%B0%D0%BA%D0%B8-dev">5. Признаки dev<a class="anchor-link" href="#5.-%D0%9F%D1%80%D0%B8%D0%B7%D0%BD%D0%B0%D0%BA%D0%B8-dev">¶</a></h2><p>Положительные объявления, не попавшие в пул кандидатов, остаются в знаменателе Recall@50.</p>
+<h2 id="5.-%D0%9F%D1%80%D0%B8%D0%B7%D0%BD%D0%B0%D0%BA%D0%B8-dev">5. Признаки dev<a class="anchor-link" href="#5.-%D0%9F%D1%80%D0%B8%D0%B7%D0%BD%D0%B0%D0%BA%D0%B8-dev">¶</a></h2><p>Для 2 000 dev-запросов строится полный пул кандидатов без отбора отрицательных примеров. Эти данные нужны для выбора модели; обучающая история групп dev не содержит.
+Результат: <code>work/quality/dev.parquet</code>, <code>dev_queries.parquet</code> и <code>dev_candidates.json</code>. Число запросов в сводке должно быть 2 000.
+Все известные положительные объявления остаются в знаменателе Recall@50, включая те, которые поиск не нашёл.</p>
 </div>
 </div>
 </div>
@@ -8018,7 +8026,9 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="6.-%D0%9E%D0%B1%D1%83%D1%87%D0%B5%D0%BD%D0%B8%D0%B5">6. Обучение<a class="anchor-link" href="#6.-%D0%9E%D0%B1%D1%83%D1%87%D0%B5%D0%BD%D0%B8%D0%B5">¶</a></h2><p>Сравниваются PairLogit и QuerySoftMax. Для каждой модели проверяются от 20 до 400 деревьев с шагом 20. Выбор делается по среднему Recall@50 на dev.</p>
+<h2 id="6.-%D0%9E%D0%B1%D1%83%D1%87%D0%B5%D0%BD%D0%B8%D0%B5">6. Обучение<a class="anchor-link" href="#6.-%D0%9E%D0%B1%D1%83%D1%87%D0%B5%D0%BD%D0%B8%D0%B5">¶</a></h2><p>На <code>train.parquet</code> обучаются CatBoostRanker с PairLogit и QuerySoftMax. На dev проверяются префиксы от 20 до 400 деревьев с шагом 20; выбирается наибольший средний Recall@50 по запросам.
+Результат: <code>work/quality/ranker.cbm</code>, <code>selected.json</code> и <code>selection_curve.json</code>. Последний файл показывает все проверенные варианты; holdout здесь не читается.
+В приложенном расчёте выбран PairLogit с 80 деревьями. Этот этап сравнивает модели до выбора способа объединения выдач.</p>
 </div>
 </div>
 </div>
@@ -8045,7 +8055,9 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="7.-%D0%94%D0%BE%D0%BF%D0%BE%D0%BB%D0%BD%D0%B8%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D1%8B%D0%B5-%D0%BA%D0%B0%D0%BD%D0%B4%D0%B8%D0%B4%D0%B0%D1%82%D1%8B-%D0%B8-%D0%BE%D0%B1%D1%8A%D0%B5%D0%B4%D0%B8%D0%BD%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B2%D1%8B%D0%B4%D0%B0%D1%87">7. Дополнительные кандидаты и объединение выдач<a class="anchor-link" href="#7.-%D0%94%D0%BE%D0%BF%D0%BE%D0%BB%D0%BD%D0%B8%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D1%8B%D0%B5-%D0%BA%D0%B0%D0%BD%D0%B4%D0%B8%D0%B4%D0%B0%D1%82%D1%8B-%D0%B8-%D0%BE%D0%B1%D1%8A%D0%B5%D0%B4%D0%B8%D0%BD%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B2%D1%8B%D0%B4%D0%B0%D1%87">¶</a></h2><p>На dev сравниваются поиск без расширения и добавление BM25-кандидатов в радиусе 50 км. Также проверяется дополнение топа новой модели объявлениями исходной выдачи. В ответе остаются 50 разных ID.</p>
+<h2 id="7.-%D0%94%D0%BE%D0%BF%D0%BE%D0%BB%D0%BD%D0%B8%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D1%8B%D0%B5-%D0%BA%D0%B0%D0%BD%D0%B4%D0%B8%D0%B4%D0%B0%D1%82%D1%8B-%D0%B8-%D0%BE%D0%B1%D1%8A%D0%B5%D0%B4%D0%B8%D0%BD%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B2%D1%8B%D0%B4%D0%B0%D1%87">7. Дополнительные кандидаты и объединение выдач<a class="anchor-link" href="#7.-%D0%94%D0%BE%D0%BF%D0%BE%D0%BB%D0%BD%D0%B8%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D1%8B%D0%B5-%D0%BA%D0%B0%D0%BD%D0%B4%D0%B8%D0%B4%D0%B0%D1%82%D1%8B-%D0%B8-%D0%BE%D0%B1%D1%8A%D0%B5%D0%B4%D0%B8%D0%BD%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B2%D1%8B%D0%B4%D0%B0%D1%87">¶</a></h2><p>На dev повторяется поиск с добавлением BM25-кандидатов в пределах 50 км от центра локации. Затем сравниваются обе версии пула и варианты дополнения новой выдачи исходной моделью.
+Результат: <code>work/quality/dev_expanded.parquet</code>; выбранный вариант и все сравнения записываются в <code>work/quality/selected.json</code> и показываются ниже.
+В сохранённом решении включено расширение по расстоянию: первые 40 объявлений новой модели дополняются до 50 уникальных ID.</p>
 </div>
 </div>
 </div>
@@ -8116,7 +8128,8 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="8.-%D0%A4%D0%B8%D0%BA%D1%81%D0%B0%D1%86%D0%B8%D1%8F">8. Фиксация<a class="anchor-link" href="#8.-%D0%A4%D0%B8%D0%BA%D1%81%D0%B0%D1%86%D0%B8%D1%8F">¶</a></h2><p>До открытия нового holdout сохраняются контрольные суммы модели, кода и обучающей истории.</p>
+<h2 id="8.-%D0%A4%D0%B8%D0%BA%D1%81%D0%B0%D1%86%D0%B8%D1%8F">8. Фиксация<a class="anchor-link" href="#8.-%D0%A4%D0%B8%D0%BA%D1%81%D0%B0%D1%86%D0%B8%D1%8F">¶</a></h2><p>После выбора по dev сохраняются контрольные суммы кода, модели, исходных данных и истории в <code>work/quality/frozen.json</code>.
+Это граница между подбором и итоговой оценкой. Следующий этап сверяет снимок и останавливается, если зафиксированный эксперимент изменился.</p>
 </div>
 </div>
 </div>
@@ -8143,7 +8156,9 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="9.-%D0%98%D1%82%D0%BE%D0%B3%D0%BE%D0%B2%D0%B0%D1%8F-%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0">9. Итоговая проверка<a class="anchor-link" href="#9.-%D0%98%D1%82%D0%BE%D0%B3%D0%BE%D0%B2%D0%B0%D1%8F-%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0">¶</a></h2><p>Выбранное решение и исходная модель сравниваются на одних 1 000 запросах. После этой оценки параметры не подбираются.</p>
+<h2 id="9.-%D0%98%D1%82%D0%BE%D0%B3%D0%BE%D0%B2%D0%B0%D1%8F-%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0">9. Итоговая проверка<a class="anchor-link" href="#9.-%D0%98%D1%82%D0%BE%D0%B3%D0%BE%D0%B2%D0%B0%D1%8F-%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0">¶</a></h2><p>Для отложенных 1 000 запросов рассчитываются признаки и сравниваются BM25, исходная модель и выбранное решение на одном корпусе. После просмотра этой оценки параметры не подбираются.
+Результат: <code>work/quality/fresh_metrics.json</code> и <code>fresh_per_query.parquet</code>. В отчёте ниже показаны средний Recall@50, прирост и его bootstrap-интервал.
+Успешное выполнение означает, что снимок совпал и метрика рассчитана. Значение качества оценивается отдельно, оно не является проверкой формата CSV.</p>
 </div>
 </div>
 </div>
@@ -8195,7 +8210,8 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="10.-%D0%9F%D0%BE%D0%B8%D1%81%D0%BA-%D0%B2-benchmark">10. Поиск в benchmark<a class="anchor-link" href="#10.-%D0%9F%D0%BE%D0%B8%D1%81%D0%BA-%D0%B2-benchmark">¶</a></h2>
+<h2 id="10.-%D0%9F%D0%BE%D0%B8%D1%81%D0%BA-%D0%B2-benchmark">10. Поиск в benchmark<a class="anchor-link" href="#10.-%D0%9F%D0%BE%D0%B8%D1%81%D0%BA-%D0%B2-benchmark">¶</a></h2><p>Для отправки строятся новые индексы только по 189 212 объявлениям benchmark. Выбранные на dev настройки поиска применяются к его 2 452 запросам, без скрытой разметки.
+Результат: <code>work/benchmark_indices/</code>, <code>work/quality/benchmark.parquet</code> и <code>benchmark_candidates.json</code>. В сводке должно быть 2 452 запроса.</p>
 </div>
 </div>
 </div>
@@ -8224,7 +8240,9 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="11.-%D0%A4%D0%BE%D1%80%D0%BC%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5-CSV">11. Формирование CSV<a class="anchor-link" href="#11.-%D0%A4%D0%BE%D1%80%D0%BC%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5-CSV">¶</a></h2>
+<h2 id="11.-%D0%A4%D0%BE%D1%80%D0%BC%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5-CSV">11. Формирование CSV<a class="anchor-link" href="#11.-%D0%A4%D0%BE%D1%80%D0%BC%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5-CSV">¶</a></h2><p>Выбранная модель и сохранённое объединение выдач формируют <code>work/quality/answer.csv</code>. Внутренние doc_id заменяются исходными item_id из benchmark.
+Файл проверяется по требованиям задания; отчёт сохраняется в <code>work/quality/submission_check.json</code>. Ожидаются <code>valid: true</code>, 2 452 строки и по 50 уникальных item_id.
+CSV содержит только <code>query_id</code> и <code>answer</code>, сохраняется в UTF-8 с окончаниями строк CRLF.</p>
 </div>
 </div>
 </div>
@@ -8251,7 +8269,8 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="12.-%D0%A1%D0%BE%D1%85%D1%80%D0%B0%D0%BD%D0%B5%D0%BD%D0%B8%D0%B5-%D1%80%D0%B5%D0%B7%D1%83%D0%BB%D1%8C%D1%82%D0%B0%D1%82%D0%BE%D0%B2">12. Сохранение результатов<a class="anchor-link" href="#12.-%D0%A1%D0%BE%D1%85%D1%80%D0%B0%D0%BD%D0%B5%D0%BD%D0%B8%D0%B5-%D1%80%D0%B5%D0%B7%D1%83%D0%BB%D1%8C%D1%82%D0%B0%D1%82%D0%BE%D0%B2">¶</a></h2><p><code>answer.csv</code> содержит только <code>query_id</code> и <code>answer</code>. В каждой строке 50 уникальных идентификаторов из benchmark. Код проверки доступен в <code>src/avito_retrieval/submission.py</code>.</p>
+<h2 id="12.-%D0%A1%D0%BE%D1%85%D1%80%D0%B0%D0%BD%D0%B5%D0%BD%D0%B8%D0%B5-%D1%80%D0%B5%D0%B7%D1%83%D0%BB%D1%8C%D1%82%D0%B0%D1%82%D0%BE%D0%B2">12. Сохранение результатов<a class="anchor-link" href="#12.-%D0%A1%D0%BE%D1%85%D1%80%D0%B0%D0%BD%D0%B5%D0%BD%D0%B8%D0%B5-%D1%80%D0%B5%D0%B7%D1%83%D0%BB%D1%8C%D1%82%D0%B0%D1%82%D0%BE%D0%B2">¶</a></h2><p>Модель, параметры, метрики и проверки копируются из <code>work/quality/</code> в <code>results/improved/</code>, а проверенный CSV - в <code>answer.csv</code> в корне проекта. При <code>rebuild = True</code> эти результаты перезаписываются.
+Ниже показывается <code>results/improved/submission_check.json</code>: проверьте <code>valid</code>, число строк и SHA256. Сохранённые артефакты затем используются в <a href="../notebooks/check.ipynb">быстрой проверке</a>.</p>
 </div>
 </div>
 </div>
@@ -8300,7 +8319,7 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>Обучение и вычисления выполняются локально, без внешних API. Использованные библиотеки и команды установки перечислены в <a href="../README.md">README</a>.</p>
+<p>Расчёты выполняются локально, без внешних API. Установка и библиотеки: <a href="../README.md">README</a>. Что было проверено повторным запуском: <a href="../docs/reproduction.md">воспроизводимость</a>. Примеры промахов и их причины: <a href="../docs/error_analysis.md">анализ ошибок</a>.</p>
 </div>
 </div>
 </div>
