@@ -1,0 +1,22 @@
+{
+  "status": "passed",
+  "seconds": 240.44,
+  "queries": 2452,
+  "items": 189212,
+  "model_retrained": false,
+  "indices_and_features_rebuilt": true,
+  "answer_identical": true,
+  "answer_sha256": "f4ffbb7029d6ad1bb53f97b88bceb76a0a7d2fe51d681a4d905a4c6d23e48cc5",
+  "model_sha256": "bdec464db6daa2cd293ad3a630563d91e03482587a6521a6e65aca8852e18035",
+  "inputs": {
+    "benchmark_items.parquet": "193b3a3961464620cbf8d8797152b7f90cae1826ca749fb7817a210984a09899",
+    "benchmark_queries.parquet": "e49de4fb76f03979a4af96034817767d39ae5de9f94e254fed028243188dda06"
+  },
+  "execution_method": "Jupyter nbclient, all 7 code cells",
+  "python": "3.12.10",
+  "platform": "win32",
+  "train_parquet_present": false,
+  "work_initially_absent": true,
+  "environment_isolated": true,
+  "installation_included_in_timing": false
+}

@@ -7797,116 +7797,36 @@ a.anchor-link {
 <!-- End of mermaid configuration --></head>
 <body class="jp-Notebook" data-jp-theme-light="true" data-jp-theme-name="JupyterLab Light">
 <main>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=098fc925">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=f7111e25">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h1 id="Candidate-generation-%D0%B4%D0%BB%D1%8F-%D0%BF%D0%BE%D0%B8%D1%81%D0%BA%D0%B0-%D1%83%D1%81%D0%BB%D1%83%D0%B3-%D0%90%D0%B2%D0%B8%D1%82%D0%BE">Candidate generation для поиска услуг Авито<a class="anchor-link" href="#Candidate-generation-%D0%B4%D0%BB%D1%8F-%D0%BF%D0%BE%D0%B8%D1%81%D0%BA%D0%B0-%D1%83%D1%81%D0%BB%D1%83%D0%B3-%D0%90%D0%B2%D0%B8%D1%82%D0%BE">¶</a></h1><p>Для каждого запроса нужно вернуть до 50 ID объявлений. BM25 собирает кандидатов,
-а CatBoost выбирает итоговые 50 по тексту и контексту поиска. Всё работает на CPU.</p>
-<p>Для быстрой проверки предсказаний без повторного обучения откройте
-<a href="check.ipynb">check.ipynb</a>. Он заново выполняет поиск и предсказание для всего
-benchmark с сохранённой моделью, затем сравнивает новый CSV с приложенным.</p>
-<p>Перед запуском прочитайте <a href="README.md">README</a>. Ячейки идут сверху вниз.
-В первой ячейке <code>rebuild = False</code> включает просмотр сохранённых отчётов;
-<code>rebuild = True</code> заново выполняет вычисления по исходным Parquet.</p>
-<p>Код этапов разделён на небольшие модули. Например, ячейка
-<code>execute_stage("train", "training.json")</code> при полном запуске вызывает обучение
-из <code>avito_ranker/model.py</code>, затем показывает отчёт <code>results/training.json</code>.
-В режиме просмотра она только показывает уже сохранённый отчёт.</p>
-<table>
-<thead>
-<tr>
-<th>Где смотреть</th>
-<th>Что выполняется</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="avito_ranker/prepare.py">prepare.py</a></td>
-<td>Разбиение запросов и подготовка корпуса</td>
-</tr>
-<tr>
-<td><a href="avito_ranker/candidates.py">candidates.py</a></td>
-<td>Поиск и объединение кандидатов</td>
-</tr>
-<tr>
-<td><a href="avito_ranker/features.py">features.py</a></td>
-<td>Признаки пары «запрос — объявление»</td>
-</tr>
-<tr>
-<td><a href="avito_ranker/dataset.py">dataset.py</a></td>
-<td>Сбор таблиц признаков и обучающих меток</td>
-</tr>
-<tr>
-<td><a href="avito_ranker/model.py">model.py</a></td>
-<td>Обучение, выбор на dev и оценка</td>
-</tr>
-<tr>
-<td><a href="avito_ranker/predict.py">predict.py</a></td>
-<td>Формирование <code>results/answer.csv</code></td>
-</tr>
-</tbody>
-</table>
-<p>Последняя ячейка сохраняет копию ответа в корне репозитория: <code>answer.csv</code>.
-Описание метода — в <a href="docs/approach.md">docs/approach.md</a>, результаты и ошибки —
-в <a href="docs/results.md">docs/results.md</a>.</p>
+<h1 id="%D0%9F%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0-%D1%80%D0%B5%D1%88%D0%B5%D0%BD%D0%B8%D1%8F-%D0%B1%D0%B5%D0%B7-%D0%BF%D0%BE%D0%B2%D1%82%D0%BE%D1%80%D0%BD%D0%BE%D0%B3%D0%BE-%D0%BE%D0%B1%D1%83%D1%87%D0%B5%D0%BD%D0%B8%D1%8F">Проверка решения без повторного обучения<a class="anchor-link" href="#%D0%9F%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0-%D1%80%D0%B5%D1%88%D0%B5%D0%BD%D0%B8%D1%8F-%D0%B1%D0%B5%D0%B7-%D0%BF%D0%BE%D0%B2%D1%82%D0%BE%D1%80%D0%BD%D0%BE%D0%B3%D0%BE-%D0%BE%D0%B1%D1%83%D1%87%D0%B5%D0%BD%D0%B8%D1%8F">¶</a></h1><p>Этот notebook заново строит поиск по всем объявлениям benchmark, рассчитывает
+признаки и получает предсказания для всех запросов с сохранённой моделью.
+Готовые индексы, признаки и ответы в расчёте не используются.</p>
+<p>Нужны только <code>data/benchmark_items.parquet</code> и <code>data/benchmark_queries.parquet</code>.
+Запустите все ячейки сверху вниз. Рабочие файлы попадут в <code>work/check/</code>.
+Параметры поиска остаются такими же, как в полном эксперименте.</p>
+<p>Обучение и измерение Recall доступны отдельно в <code>solution.ipynb</code>.
+Здесь проверяется воспроизведение предсказаний, а не повторное обучение модели.</p>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=c5b51162">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=7cc2921f">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="%D0%A0%D0%B5%D0%B7%D1%83%D0%BB%D1%8C%D1%82%D0%B0%D1%82-%D0%B2%D1%8B%D0%BF%D0%BE%D0%BB%D0%BD%D0%B5%D0%BD%D0%BD%D0%BE%D0%B3%D0%BE-%D1%8D%D0%BA%D1%81%D0%BF%D0%B5%D1%80%D0%B8%D0%BC%D0%B5%D0%BD%D1%82%D0%B0">Результат выполненного эксперимента<a class="anchor-link" href="#%D0%A0%D0%B5%D0%B7%D1%83%D0%BB%D1%8C%D1%82%D0%B0%D1%82-%D0%B2%D1%8B%D0%BF%D0%BE%D0%BB%D0%BD%D0%B5%D0%BD%D0%BD%D0%BE%D0%B3%D0%BE-%D1%8D%D0%BA%D1%81%D0%BF%D0%B5%D1%80%D0%B8%D0%BC%D0%B5%D0%BD%D1%82%D0%B0">¶</a></h2><p>Сравнение на одинаковом корпусе из 515 895 объявлений:</p>
-<table>
-<thead>
-<tr>
-<th>Метод</th>
-<th style="text-align:right">Dev Recall@50</th>
-<th style="text-align:right">Holdout Recall@50</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>BM25 + RRF</td>
-<td style="text-align:right">28.96%</td>
-<td style="text-align:right">27.76%</td>
-</tr>
-<tr>
-<td>RRF с бонусом за локацию</td>
-<td style="text-align:right">61.27%</td>
-<td style="text-align:right">58.70%</td>
-</tr>
-<tr>
-<td>CatBoost</td>
-<td style="text-align:right">74.10%</td>
-<td style="text-align:right">72.45%</td>
-</tr>
-</tbody>
-</table>
-<p>Прирост CatBoost к исходному RRF на holdout: <strong>44.69 п.п.</strong>
-Это локальная оценка по известным положительным парам. Закрытый результат Авито неизвестен.
-Holdout уже использован для этой оценки; повтор запуска воспроизводит эксперимент, а не создаёт новый независимый тест.</p>
+<h2 id="1.-%D0%9D%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B8-%D0%B8-%D0%BC%D0%BE%D0%B4%D0%B5%D0%BB%D1%8C">1. Настройки и модель<a class="anchor-link" href="#1.-%D0%9D%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B8-%D0%B8-%D0%BC%D0%BE%D0%B4%D0%B5%D0%BB%D1%8C">¶</a></h2><p>Проверяем сохранённую модель и код. <code>check.toml</code> задаёт отдельные рабочие папки;
+алгоритмические параметры должны совпадать с <code>ranking.toml</code>.</p>
 </div>
 </div>
 </div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=87073cb5">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="1.-%D0%9E%D0%BA%D1%80%D1%83%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5">1. Окружение<a class="anchor-link" href="#1.-%D0%9E%D0%BA%D1%80%D1%83%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5">¶</a></h2><p>В <code>ranking.toml</code> задаются пути к данным и рабочим папкам. Относительные пути считаются от конфигурации. Пакеты устанавливаются по <code>requirements-notebook.txt</code>.</p>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=097e5ff1">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=5f7db025">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7916,29 +7836,29 @@ Holdout уже использован для этой оценки; повтор
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">shutil</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">subprocess</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">avito_ranker.config</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_config</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">avito_ranker.workflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">run_stage</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">avito_ranker.freeze</span><span class="w"> </span><span class="kn">import</span> <span class="n">check_frozen</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">avito_ranker.workflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">run_stage</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">avito_retrieval.common</span><span class="w"> </span><span class="kn">import</span> <span class="n">file_hash</span><span class="p">,</span> <span class="n">save_json</span>
 
-<span class="n">rebuild</span> <span class="o">=</span> <span class="kc">False</span>  <span class="c1"># True — заново выполнить поиск, обучение и проверку.</span>
-<span class="n">config_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">"ranking.toml"</span><span class="p">)</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span>
+<span class="n">started</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+<span class="n">source</span> <span class="o">=</span> <span class="n">load_config</span><span class="p">(</span><span class="s2">"ranking.toml"</span><span class="p">)</span>
+<span class="n">config_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">"check.toml"</span><span class="p">)</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span>
 <span class="n">config</span> <span class="o">=</span> <span class="n">load_config</span><span class="p">(</span><span class="n">config_path</span><span class="p">)</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">show_result</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">((</span><span class="n">config</span><span class="p">[</span><span class="s2">"results_dir"</span><span class="p">]</span> <span class="o">/</span> <span class="n">name</span><span class="p">)</span><span class="o">.</span><span class="n">read_text</span><span class="p">(</span><span class="s2">"utf-8"</span><span class="p">))</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">execute_stage</span><span class="p">(</span><span class="n">stage</span><span class="p">,</span> <span class="n">result</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">rebuild</span><span class="p">:</span>
-        <span class="n">run_stage</span><span class="p">(</span><span class="n">stage</span><span class="p">,</span> <span class="n">config_path</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">show_result</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="k">if</span> <span class="n">result</span> <span class="k">else</span> <span class="sa">f</span><span class="s2">"Лог этапа: results/logs/</span><span class="si">{</span><span class="n">stage</span><span class="si">}</span><span class="s2">"</span>
-
-<span class="k">if</span> <span class="ow">not</span> <span class="n">rebuild</span><span class="p">:</span>
-    <span class="n">check_frozen</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
-<span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="n">sys</span><span class="o">.</span><span class="n">executable</span><span class="p">,</span> <span class="s2">"-m"</span><span class="p">,</span> <span class="s2">"unittest"</span><span class="p">,</span> <span class="s2">"discover"</span><span class="p">,</span> <span class="s2">"-s"</span><span class="p">,</span> <span class="s2">"tests"</span><span class="p">,</span> <span class="s2">"-v"</span><span class="p">],</span> <span class="n">check</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="p">{</span><span class="s2">"rebuild"</span><span class="p">:</span> <span class="n">rebuild</span><span class="p">,</span> <span class="s2">"config"</span><span class="p">:</span> <span class="n">config_path</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s2">"threads"</span><span class="p">:</span> <span class="n">config</span><span class="p">[</span><span class="s2">"threads"</span><span class="p">]}</span>
+<span class="n">path_settings</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"config_path"</span><span class="p">,</span> <span class="s2">"data_dir"</span><span class="p">,</span> <span class="s2">"work_dir"</span><span class="p">,</span> <span class="s2">"results_dir"</span><span class="p">}</span>
+<span class="k">if</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="n">value</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">source</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">path_settings</span><span class="p">}</span> <span class="o">!=</span> <span class="p">{</span>
+    <span class="n">key</span><span class="p">:</span> <span class="n">value</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">config</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">path_settings</span>
+<span class="p">}:</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Параметры check.toml должны совпадать с ranking.toml"</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">config</span><span class="p">[</span><span class="s2">"work_dir"</span><span class="p">]</span> <span class="o">==</span> <span class="n">source</span><span class="p">[</span><span class="s2">"work_dir"</span><span class="p">]</span> <span class="ow">or</span> <span class="n">config</span><span class="p">[</span><span class="s2">"results_dir"</span><span class="p">]</span> <span class="o">==</span> <span class="n">source</span><span class="p">[</span><span class="s2">"results_dir"</span><span class="p">]:</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Для проверки нужны отдельные рабочие папки"</span><span class="p">)</span>
+<span class="n">check_frozen</span><span class="p">(</span><span class="n">source</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Код, модель и параметры проверены"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -7955,26 +7875,27 @@ Holdout уже использован для этой оценки; повтор
 </pre>
 </div>
 </div>
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[1]:</div>
-<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
-<pre>{'rebuild': False, 'config': 'ranking.toml', 'threads': 2}</pre>
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>Код, модель и параметры проверены
+</pre>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=49edf55f">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=d2b4c4e5">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="2.-%D0%94%D0%B0%D0%BD%D0%BD%D1%8B%D0%B5-%D0%B8-%D1%80%D0%B0%D0%B7%D0%B1%D0%B8%D0%B5%D0%BD%D0%B8%D0%B5">2. Данные и разбиение<a class="anchor-link" href="#2.-%D0%94%D0%B0%D0%BD%D0%BD%D1%8B%D0%B5-%D0%B8-%D1%80%D0%B0%D0%B7%D0%B1%D0%B8%D0%B5%D0%BD%D0%B8%D0%B5">¶</a></h2><p>В одной группе остаются перестановки слов и формы с одинаковыми основами. Группы train, dev и holdout не пересекаются. Ранее просмотренные группы могут попасть только в dev. Корпус включает все уникальные объявления и не зависит от положительных меток.</p>
+<h2 id="2.-%D0%A2%D0%B5%D1%81%D1%82%D1%8B">2. Тесты<a class="anchor-link" href="#2.-%D0%A2%D0%B5%D1%81%D1%82%D1%8B">¶</a></h2><p>Проверки метрики, разбиения, кандидатов и формата CSV не требуют обучения.</p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=5d7b171f">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=ef354b87">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7982,465 +7903,11 @@ Holdout уже использован для этой оценки; повтор
 <div class="jp-InputPrompt jp-InputArea-prompt">In [2]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">execute_stage</span><span class="p">(</span><span class="s2">"prepare"</span><span class="p">,</span> <span class="s2">"split_audit.json"</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[2]:</div>
-<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
-<pre>{'corpus_items': 515895,
- 'corpus_rule': 'all unique items; benchmark features take precedence on duplicates',
- 'strict_group': 'sorted unique Snowball tokens; punctuation/case/word order ignored',
- 'groups_disjoint': True,
- 'holdout_previously_seen_groups': 0,
- 'query_selection_uses_labels': False,
- 'corpus_selection_uses_labels': False,
- 'query_counts': {'train': 8000, 'dev': 2000, 'holdout': 2000},
- 'all_group_counts': [{'fold': 'dev', 'len': 11217},
-  {'fold': 'holdout', 'len': 6349},
-  {'fold': 'train', 'len': 50737}],
- 'sources': {'train.parquet': 'e150ab7a5c98769f643b95ee3a02dc0f664b647facd69a7d280ec6d48ca554a7',
-  'benchmark_queries.parquet': 'e49de4fb76f03979a4af96034817767d39ae5de9f94e254fed028243188dda06',
-  'benchmark_items.parquet': '193b3a3961464620cbf8d8797152b7f90cae1826ca749fb7817a210984a09899'},
- 'split_hashes': {'dev_queries.parquet': 'b94c60a86416012ed359d2245698cda036b61377a9f36207d69b1147e87b9cf1',
-  'holdout_queries.parquet': '670bd3408683e3e2de83a31242226a479f993313d1e550c462e5d7859ef6e656',
-  'train_queries.parquet': '5d38da52d3ab88af7f5378ff9497a27714d5d1d0e3851d9d91b5ca3260be339d'},
- 'limitations': ['observed positives only',
-  'semantic paraphrases can cross groups',
-  '515895-item local corpus is larger than benchmark; scores are not comparable to v1']}</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=d0b1e21c">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="3.-%D0%9F%D0%BE%D0%B8%D1%81%D0%BA%D0%BE%D0%B2%D1%8B%D0%B5-%D0%B8%D0%BD%D0%B4%D0%B5%D0%BA%D1%81%D1%8B">3. Поисковые индексы<a class="anchor-link" href="#3.-%D0%9F%D0%BE%D0%B8%D1%81%D0%BA%D0%BE%D0%B2%D1%8B%D0%B5-%D0%B8%D0%BD%D0%B4%D0%B5%D0%BA%D1%81%D1%8B">¶</a></h2><p>Строим отдельный BM25 по заголовку, описанию и параметрам. Нормализация: NFKC, нижний регистр, <code>ё → е</code>, токены из букв и цифр, русский Snowball. BM25 использует только тексты корпуса.</p>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=0b7d18d2">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [3]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">execute_stage</span><span class="p">(</span><span class="s2">"validation_indices"</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[3]:</div>
-<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
-<pre>'Лог этапа: results/logs/validation_indices'</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=f1401e6f">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="4.-%D0%9E%D0%B1%D1%83%D1%87%D0%B0%D1%8E%D1%89%D0%B8%D0%B5-%D0%BA%D0%B0%D0%BD%D0%B4%D0%B8%D0%B4%D0%B0%D1%82%D1%8B">4. Обучающие кандидаты<a class="anchor-link" href="#4.-%D0%9E%D0%B1%D1%83%D1%87%D0%B0%D1%8E%D1%89%D0%B8%D0%B5-%D0%BA%D0%B0%D0%BD%D0%B4%D0%B8%D0%B4%D0%B0%D1%82%D1%8B">¶</a></h2><p>Из каждого поля берём до 300 общих кандидатов и до 150 из локации запроса. По train размечаем найденные пары и выбираем сложные и случайные неотмеченные кандидаты. Положительные объявления искусственно в пул не добавляются.</p>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=a6e07a26">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [4]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">execute_stage</span><span class="p">(</span><span class="s2">"train_features"</span><span class="p">,</span> <span class="s2">"train_candidates.json"</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[4]:</div>
-<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
-<pre>{'fold': 'train',
- 'queries': 8000,
- 'rows': 848569,
- 'features': ['title_score',
-  'title_relative',
-  'title_rr',
-  'title_local_rr',
-  'description_score',
-  'description_relative',
-  'description_rr',
-  'description_local_rr',
-  'params_score',
-  'params_relative',
-  'params_rr',
-  'params_local_rr',
-  'filter_score',
-  'filter_relative',
-  'rrf',
-  'same_location',
-  'same_category',
-  'delivery',
-  'query_words',
-  'filter_words',
-  'title_length',
-  'title_coverage',
-  'title_jaccard',
-  'params_length',
-  'params_coverage',
-  'filter_coverage',
-  'item_price',
-  'item_rating',
-  'item_rating_reviews_count',
-  'item_is_phone_hidden',
-  'item_is_message_forbidden'],
- 'seconds': 653.0138493000122,
- 'feature_file_sha256': 'f27555b4b0d2d9e572a0bece149740552bb4ea8b22089866590ade687cebcfd1',
- 'baseline_recall_50': 0.28680574633699635,
- 'pool_recall': 0.8764604166666666,
- 'queries_without_positive_in_pool': 958}</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=964b2056">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="4.1.-%D0%9F%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0-%D0%BE%D0%B1%D1%83%D1%87%D0%B0%D1%8E%D1%89%D0%B8%D1%85-%D0%BC%D0%B5%D1%82%D0%BE%D0%BA">4.1. Проверка обучающих меток<a class="anchor-link" href="#4.1.-%D0%9F%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0-%D0%BE%D0%B1%D1%83%D1%87%D0%B0%D1%8E%D1%89%D0%B8%D1%85-%D0%BC%D0%B5%D1%82%D0%BE%D0%BA">¶</a></h2><p>Независимо соединяем сохранённые кандидаты со строковыми ID исходных train-пар и проверяем каждую метку. Снова проверяем непересечение групп и отсутствие ID среди признаков, не читая положительные пары dev или holdout.</p>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=cfac4ece">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [5]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">execute_stage</span><span class="p">(</span><span class="s2">"audit_training"</span><span class="p">,</span> <span class="s2">"leakage_audit.json"</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[5]:</div>
-<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
-<pre>{'groups_disjoint': True,
- 'independently_checked_training_rows': 848569,
- 'wrong_training_labels': 0,
- 'training_queries': 7042,
- 'ids_and_labels_excluded_from_features': True,
- 'checked_without_reading_dev_or_holdout_positive_pairs': True}</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=43d912bf">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="5.-%D0%9E%D0%B1%D1%83%D1%87%D0%B5%D0%BD%D0%B8%D0%B5-%D0%BE%D1%82%D0%B1%D0%BE%D1%80%D0%B0">5. Обучение отбора<a class="anchor-link" href="#5.-%D0%9E%D0%B1%D1%83%D1%87%D0%B5%D0%BD%D0%B8%D0%B5-%D0%BE%D1%82%D0%B1%D0%BE%D1%80%D0%B0">¶</a></h2><p>CatBoostRanker учится на сравнении кандидатов одного запроса. Используются только train-пары. Идентификаторы запросов и объявлений не являются признаками.</p>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=6276c13d">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [6]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">execute_stage</span><span class="p">(</span><span class="s2">"train"</span><span class="p">,</span> <span class="s2">"training.json"</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[6]:</div>
-<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
-<pre>{'rows': 848569,
- 'queries': 7042,
- 'positives': 7455,
- 'features': ['title_score',
-  'title_relative',
-  'title_rr',
-  'title_local_rr',
-  'description_score',
-  'description_relative',
-  'description_rr',
-  'description_local_rr',
-  'params_score',
-  'params_relative',
-  'params_rr',
-  'params_local_rr',
-  'filter_score',
-  'filter_relative',
-  'rrf',
-  'same_location',
-  'same_category',
-  'delivery',
-  'query_words',
-  'filter_words',
-  'title_length',
-  'title_coverage',
-  'title_jaccard',
-  'params_length',
-  'params_coverage',
-  'filter_coverage',
-  'item_price',
-  'item_rating',
-  'item_rating_reviews_count',
-  'item_is_phone_hidden',
-  'item_is_message_forbidden'],
- 'parameters': {'nan_mode': 'Min',
-  'eval_metric': 'PairLogit:max_pairs=128',
-  'iterations': 700,
-  'sampling_frequency': 'PerTree',
-  'leaf_estimation_method': 'Newton',
-  'random_score_type': 'NormalWithModelSizeDecrease',
-  'grow_policy': 'SymmetricTree',
-  'penalties_coefficient': 1,
-  'boosting_type': 'Plain',
-  'model_shrink_mode': 'Constant',
-  'feature_border_type': 'GreedyLogSum',
-  'bayesian_matrix_reg': 0.10000000149011612,
-  'eval_fraction': 0,
-  'force_unit_auto_pair_weights': False,
-  'l2_leaf_reg': 8,
-  'random_strength': 1,
-  'rsm': 1,
-  'boost_from_average': False,
-  'model_size_reg': 0.5,
-  'pool_metainfo_options': {'tags': {}},
-  'subsample': 0.800000011920929,
-  'use_best_model': False,
-  'random_seed': 20260920,
-  'depth': 6,
-  'posterior_sampling': False,
-  'border_count': 254,
-  'classes_count': 0,
-  'auto_class_weights': 'None',
-  'sparse_features_conflict_fraction': 0,
-  'leaf_estimation_backtracking': 'AnyImprovement',
-  'best_model_min_trees': 1,
-  'model_shrink_rate': 0,
-  'min_data_in_leaf': 1,
-  'loss_function': 'PairLogit:max_pairs=128',
-  'learning_rate': 0.05999999865889549,
-  'score_function': 'Cosine',
-  'task_type': 'CPU',
-  'leaf_estimation_iterations': 10,
-  'bootstrap_type': 'MVS',
-  'max_leaves': 64},
- 'training_features_sha256': 'f27555b4b0d2d9e572a0bece149740552bb4ea8b22089866590ade687cebcfd1',
- 'no_query_or_item_ids_in_features': True}</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=b9cb85d2">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="6.-%D0%9A%D0%B0%D0%BD%D0%B4%D0%B8%D0%B4%D0%B0%D1%82%D1%8B-dev">6. Кандидаты dev<a class="anchor-link" href="#6.-%D0%9A%D0%B0%D0%BD%D0%B4%D0%B8%D0%B4%D0%B0%D1%82%D1%8B-dev">¶</a></h2><p>Для dev сохраняем весь найденный пул без отбора по меткам. Если положительное объявление не найдено, оно всё равно остаётся в знаменателе Recall.</p>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=49e10bc1">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [7]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">execute_stage</span><span class="p">(</span><span class="s2">"dev_features"</span><span class="p">,</span> <span class="s2">"dev_candidates.json"</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[7]:</div>
-<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
-<pre>{'fold': 'dev',
- 'queries': 2000,
- 'rows': 1875078,
- 'features': ['title_score',
-  'title_relative',
-  'title_rr',
-  'title_local_rr',
-  'description_score',
-  'description_relative',
-  'description_rr',
-  'description_local_rr',
-  'params_score',
-  'params_relative',
-  'params_rr',
-  'params_local_rr',
-  'filter_score',
-  'filter_relative',
-  'rrf',
-  'same_location',
-  'same_category',
-  'delivery',
-  'query_words',
-  'filter_words',
-  'title_length',
-  'title_coverage',
-  'title_jaccard',
-  'params_length',
-  'params_coverage',
-  'filter_coverage',
-  'item_price',
-  'item_rating',
-  'item_rating_reviews_count',
-  'item_is_phone_hidden',
-  'item_is_message_forbidden'],
- 'seconds': 198.33838380000088,
- 'feature_file_sha256': 'd812e75e06d9b2142f5b28c0b56d6be118638cc31149cff5af753f3f42069f5c',
- 'baseline_recall_50': 0.2895833333333333,
- 'pool_recall': 0.8808333333333332,
- 'queries_without_positive_in_pool': 230}</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=a16d79a3">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="7.-%D0%92%D1%8B%D0%B1%D0%BE%D1%80-%D0%BF%D0%BE-dev">7. Выбор по dev<a class="anchor-link" href="#7.-%D0%92%D1%8B%D0%B1%D0%BE%D1%80-%D0%BF%D0%BE-dev">¶</a></h2><p>Сравниваем 10, 20, 30, 50, 80, 100, 150, 200, 300, 400, 500, 600 и 700 деревьев. Ранние точки добавлены по результатам dev, до оценки holdout. Также проверяем RRF с бонусом за локацию 0.01, 0.03 и 0.06. Выбор делается по macro Recall@50.</p>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=baf4030d">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [8]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">execute_stage</span><span class="p">(</span><span class="s2">"select"</span><span class="p">,</span> <span class="s2">"selected.json"</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[8]:</div>
-<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
-<pre>{'method': 'catboost_pairlogit',
- 'trees': 50,
- 'recall_50': 0.7410333333333333,
- 'baseline_recall_50': 0.2895833333333333,
- 'candidates': [{'trees': 10, 'recall_50': 0.7257333333333333},
-  {'trees': 20, 'recall_50': 0.7344833333333334},
-  {'trees': 30, 'recall_50': 0.7387333333333334},
-  {'trees': 50, 'recall_50': 0.7410333333333333},
-  {'trees': 80, 'recall_50': 0.7330333333333333},
-  {'trees': 100, 'recall_50': 0.7287833333333333},
-  {'trees': 150, 'recall_50': 0.7219083333333333},
-  {'trees': 200, 'recall_50': 0.7161583333333333},
-  {'trees': 300, 'recall_50': 0.7069916666666667},
-  {'trees': 400, 'recall_50': 0.7061166666666667},
-  {'trees': 500, 'recall_50': 0.7082416666666667},
-  {'trees': 600, 'recall_50': 0.7012416666666667},
-  {'trees': 700, 'recall_50': 0.6984916666666666}],
- 'selection_metric': 'dev macro Recall@50',
- 'geo_rrf': {'weight': 0.03, 'recall_50': 0.612725},
- 'geo_variants': [{'weight': 0.01, 'recall_50': 0.46475},
-  {'weight': 0.03, 'recall_50': 0.612725},
-  {'weight': 0.06, 'recall_50': 0.6104749999999999}]}</pre>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=48d9a5ea">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [9]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-
-<span class="n">selection</span> <span class="o">=</span> <span class="n">show_result</span><span class="p">(</span><span class="s2">"selected.json"</span><span class="p">)</span>
-<span class="n">points</span> <span class="o">=</span> <span class="n">selection</span><span class="p">[</span><span class="s2">"candidates"</span><span class="p">]</span>
-<span class="n">fig</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
-<span class="n">axis</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">row</span><span class="p">[</span><span class="s2">"trees"</span><span class="p">]</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">points</span><span class="p">],</span>
-          <span class="p">[</span><span class="mi">100</span> <span class="o">*</span> <span class="n">row</span><span class="p">[</span><span class="s2">"recall_50"</span><span class="p">]</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">points</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s2">"o"</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"CatBoost"</span><span class="p">)</span>
-<span class="n">axis</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">100</span> <span class="o">*</span> <span class="n">selection</span><span class="p">[</span><span class="s2">"baseline_recall_50"</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">"gray"</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">"--"</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"BM25 + RRF"</span><span class="p">)</span>
-<span class="n">axis</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">100</span> <span class="o">*</span> <span class="n">selection</span><span class="p">[</span><span class="s2">"geo_rrf"</span><span class="p">][</span><span class="s2">"recall_50"</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">"orange"</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">"--"</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"RRF + location"</span><span class="p">)</span>
-<span class="n">axis</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">selection</span><span class="p">[</span><span class="s2">"trees"</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">"green"</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
-<span class="n">axis</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">"Число деревьев"</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">"Dev Recall@50, %"</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">"Выбор модели только по dev"</span><span class="p">)</span>
-<span class="n">axis</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-<span class="n">axis</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
-<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">sys</span><span class="o">.</span><span class="n">executable</span><span class="p">,</span> <span class="s2">"-m"</span><span class="p">,</span> <span class="s2">"unittest"</span><span class="p">,</span> <span class="s2">"discover"</span><span class="p">,</span> <span class="s2">"-s"</span><span class="p">,</span> <span class="s2">"tests"</span><span class="p">,</span> <span class="s2">"-v"</span><span class="p">],</span>
+    <span class="n">check</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Тесты пройдены"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -8452,491 +7919,49 @@ Holdout уже использован для этой оценки; повтор
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedImage jp-OutputArea-output" tabindex="0">
-<img alt="No description has been provided for this image" class="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAxYAAAGGCAYAAADmRxfNAAAAOnRFWHRTb2Z0d2FyZQBNYXRwbG90bGliIHZlcnNpb24zLjExLjIsIGh0dHBzOi8vbWF0cGxvdGxpYi5vcmcvgI3uAAAAAAlwSFlzAAAPYQAAD2EBqD+naQAAZjdJREFUeJzt3Qd8U1X7wPGnk733XrJBfGXIUBkOEFD/4kBAZQgOVFw4AAV5VfDFAS5Qpqg4EMUFAjJFZcoSUAGRJXuW0UJH/p/nlJsmadImTdomze/rJya593BzcnJ7c56cFWGz2WwCAAAAAH6I9OcfAwAAAACBBQAAAICAoMUCAAAAgN8ILAAAAAD4jcACAAAAgN8ILAAAAAD4jcACAAAAgN8ILAAAAAD4jcACAAAAgN8ILACEpVWrVsljjz0m11xzjTRq1EgqVaokr732Wm5nCwhK77//vlxyySVy+vTp3M4KgCAWndsZAADL2LFj5d1337U/j4iIkDJlykiDBg1k0KBBcumllwaksJ588kl54403pFu3bnLPPfdIlSpVpGzZslKzZk0+DMCNEydOyN9//y3JycmUDwCPCCwABI1jx46Zysv8+fNNJd9ms8m+fftk1KhR0rRpU5k3b55pYfDH5MmTTVChv8Ded999Acs7AADhjsACQNCpWrWq6XahateuLZdffrmUKFFCJkyY4FdgkZKSIs8//7zceeedBBUAAAQYYywABL3ChQtLTEyMJCUlOW0fPHiwXHXVVRn+21tuuUX69etnHm/btk0OHjwozZs3l0cffVTatGljulf16NFDVq5cme7fbt68Wfr27SuXXXaZNGnSRPr06SObNm1ym4f4+Hh55plnTBDUsmVLGTNmjCQmJmb63vTfaxB12223pdv3448/mn16O3r0qM95s3Tu3Nl+HMfblClT0qXdv3+/ydMVV1whDRs2lJtvvlkWLlyYLp12iXF3TL39+uuvTu+vXbt2Tv/2/Pnzpsw0rbtjWx588EGPr2HdNmzY4HOZ+JL3zM4vT+/xl19+kfr168uzzz6b5c/N9TUyKocvvvgiIK9j5f2mm24yY4/081+7dq3HtJmdL9o6WKdOHTl06FC6fztjxgyT961bt3qVLwAhwAYAQWLYsGE2vSz98ccf9m1JSUm2l156yWyfMWOGU/pevXrZKlWqlOExmzZtauvYsaN5/NNPP5njRERE2Nq0aWNbsGCB7eeff7bdeeedtqioKNusWbPs/27JkiW2/Pnz2zp16mQeL1261NalSxdbvnz5bAsXLkyXhx49etgmTJhg++2332zvvvuurUCBArbu3btn+p7132vayMhI27p165z2XXfddbbChQubPB84cMDnvFkaNmxoa9++vW379u3mtnr1anPMV1991Snd5s2bbaVLl7a1atXKNmfOHPNeXnjhBVtMTIxt2rRpTmkTExPNMQYOHGg/7vTp0822H3/80en9VatWzenfjhgxwqTT2+zZsz2Wjb5n69h608/I8fX0lpCQ4HOZ+JL3zM4vd+9x2bJl5nPTz19fK6ufm+trlC9f3um9623+/Pkm35MmTQrI6+jfhH7et912m2358uWmPPQ87N27t3mdEydO+HS+bN261fy7MWPGpHst/Xd6bgLIOwgsAARdYFG1alVbrVq1bDVr1rQVKlTIVLwnTpyYLr2vgcUvv/xijl+2bFnb2bNnndK1bt3abLcqqvXq1TN5cKwYapBjbU9JSbHnQQOVqVOnOh1v/Pjx5rW8qTDqe7j11lttd999t1OlTSvSjzzySLrAwtu8WerUqWO76aab7M+PHDniNrDQil6NGjXSlc2jjz5qK168uNP2+Ph4cwwNEixaCc0ssPjrr79MBfeuu+7KNLBwpeWh54g7vpSJL3n3NbBYtGiRrWDBgub96etnNY/uXsNdXjQIdw0s/HmdunXr2po0aeKU5vTp0yaAcA0svD1f9G9LX9tdvt944w2PeQEQeugKBSDoTJo0yQzU1kHcCxYskP79+8tDDz0kH3/8cbq02rXJ6g6i3T50pqcffvjB7XFjY2PNvXY7KliwoNO+3r17y+HDh2X16tWyc+dO+fPPP6VXr14SHZ02FC0qKkruvvtuM8Bc9zvScRuO7rrrLnM/d+5cr97z008/LZ9//rkcOHDAPB83bpx5L64zVWUlb+fOnZMCBQpk+Po6SH7FihXSvXv3dGWj3VtOnjxppui1JCQkmPv8+fOLL7R7k3aZefjhhyVQfC0TX/Luy/mlXde6du1qusJNnz7dvH5W85hV/ryO7vvrr79M10Cdkc2xK6KeA1k9X+69917zmo7dzLQbnv49ap4A5B0EFgCCdvC23lq3bi1vvfWWXH311TJw4ECJi4tzSqvT0WoQojetrJQsWdKM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6Wmr/aP1M9Cmbp31yZU3aZDq3LlzZsCeO1p2rtMA60w6Oq6oXr16TtMT+poGafQ83bZtmymrKlWqOA3kc6R9oLXbgXbj8TQ9szdp4J7OphIXFyeNGzdOt+/UqVNm1VztPqKzuLjjTRo4066q2idfz1d3A4GVjgfQ63nx4sWlevXqWU6D9LTMtBuZzgDoOhDY6s6qdR2dSlm79rmOi/E2DZz9+eef5l6/IzOiXZv03NbvYk/fC96kySkEFgAAAAD8xuBtAAAAAH4jsAAAAADgNwILAAAAAH4jsAAAAADgNwILAAAAAH4jsAAAAADgNwILAAAAAH4jsACAILV161b59ttv022fO3euxwUNAQDILQQWABCkvvrqKxk4cGC67U888YR88sknuZInAAA8ifa4BwAQErZv3y5///23dOrUyb7tt99+M9u7du0qhQsXtm/fu3evrF+/XsqVKyfNmjWTqKgo+74LFy6YYMbV//3f/0n+/Pntz7W1ZMeOHVKhQgW54oorJDIy89+oZs+eLefPn3fa1qFDBylbtqzTtt27d8uGDRukVKlScvnll0vBggWd3qferrvuOtm4caP8+++/5vXLly+f7vUyO46Wj9L3X7FiRWnZsqW9LKzX6dy5c4bvyZ/XAIC8iMACAIJUmTJl5NixY5KQkOBUsXc1f/58ee+99+yBRVxcnKkUHz582FRwL7nkErHZbPLoo4/K5MmTTWVcjxkdHS1z5syRokWL2v9djx49pGPHjlK8eHE5ffq06XZ14MABU3lPSkqSO+64Q5YuXWoqyRpg6PYffvjB5DUjAwYMkDp16kjVqlVNXmbOnClLliyxBxa67bHHHpOPP/7YHPvo0aPmdb/88ktp3ry5/X2+9NJLUqlSJSlQoICkpKSYiv1nn30mN910k0/HGTp0qCmj5ORkWbdunTnezz//bN637n/nnXc8BhaBeA0AyIsILAAgSGml9KmnnjKV+dtuu01iY2PNdq3wZ+S///2vqehrYGGZMGGCTJkyRVauXCmXXnqp2bZixQqnVgStAKsxY8aYNH/++acJLCzvv/++LFu2zFTmNUDQfFx55ZUybNgwmThxYoZ50iBAA5vu3bubAEUDC0ca8GiQs23bNtMCoF5++WW555575I8//rCnO3TokAwePNjc1AsvvCD333+/acXQiru3x9EWBA1IlJaBptVA55ZbbsnwffiSV39eAwBCEYEFAASpKlWqyNq1a01AMG/ePFM5zyyw0BaK8ePHm1/PHX9xnz59uqn4WkGFatWqldO/1a5QygpgXGkl+a677jJBhSpSpIgMGjTIjPnILLCIj4/PsNVl2rRpJm9a8dYWAb1pFy4NbrQ1QLtdqXz58skjjzxi/3caYLz44ovy008/mZYWb4+jZajvR4OpX3/91bz3evXq2Y9r7dduXtoq06JFC3v+A/UaAJDXEFgAQBDT7kP/+9//nLZlVDnVSn6fPn2kcePGTtv37Nkjd955Z4avdeLECXNfokQJj2MKtOXEUa1atUwXKv23nv6d7teuVyVLlvT42rt27TIV71mzZjlt1xYOK+BRWmnX4MKiFXptndG8+XIcrfR//fXXJljbvHmzPPDAA1K3bl2P+0+ePCmLFy82ZR+o1wCAvIbAAgDyiAULFpg+/NpqoRV5R9qvX8drZEQrzIUKFfI4XqJ06dJy/Phxp236PCYmxj5Ow9O0uap27doe0+i/18Hc2g0rI1rBd6StBbpN8+bLcRy7KekxdNzJqFGj5LnnnvO4/9VXXzWtR4F6DQDIa5huFgDyAB238Pjjj8uIESPslWxH119/vXz++edOv6ifPXtWzp07Z3+ug7DbtGnjcZYnHU9h/QJv+eKLL0yXqoxmO/r++++lQYMGbmdvsujA8xkzZqTr5qUzPznSIEIHj1t0DIjmxxo07e1xHEVERJgB4dYsTp72W8fMjtcAgLyAFgsAyAP++usv083moYcecrv/+eefN+M0NAjo3bu3adH49NNPTcVcg41nnnlGPvroI/nxxx89vob+0q6BhI7d6Natmxn8/c033zhV9F3pbFVjx441lXHr13srMNGuRfXr1zdT3w4fPlwWLVpkAgSdQUqnbl21apXs3LnTjJ+waIuKjhXRsR16nFdeecU81vEoytvjWOMfrG5K3333nRmU7bpfWxp+//13s1/LK5CvAQB5DYEFAISYLl26SJMmTZzGYWj/fp0dSbslKa3s6jYdYK20FUMHgk+dOtWsY6HddHSMgI5Z2Ldvn5mxSLc7jgHQLj96DJ1tSenUsDojlM4OpV2utAVCp1HNaMyHDq6+4YYbzNS22tph0eNq0HH11VebwELHX6xevdpM4aqVdB0ofe2116YbF1K5cmUT3GiFff/+/fLGG2+YQMnizXG0vK666iqTH22d0a5fGmBpq467/Zo/Dbjat28fsNcAgLwowqY/xwAAkA10cPXBgwedFumztGvXzrSCaKXcG7q2hN509iUAQPBhjAUAINvoLFJWK4orHQCd0bgLAEBoocUCABAys17pitavv/56bmcFAOAGgQUAAAAAv9EVCgAAAIDfCCwAAAAA+I3AAgAAAIDfCCwAAAAA+I3AAgAAAIDfCCwAAAAA+I3AAgAAAIDfCCwAAAAA+I3AAgAAAID46/8Bb+abYPOvhaYAAAAASUVORK5CYII="/>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>Тесты пройдены
+</pre>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=e37a1680">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=bd377fc1">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="8.-%D0%9C%D0%B5%D1%82%D1%80%D0%B8%D0%BA%D0%B8-dev">8. Метрики dev<a class="anchor-link" href="#8.-%D0%9C%D0%B5%D1%82%D1%80%D0%B8%D0%BA%D0%B8-dev">¶</a></h2><p>Baseline, простой учёт локации и обучаемая модель оцениваются на одинаковых запросах. Для CatBoost считаем парный bootstrap прироста к baseline.</p>
+<h2 id="3.-%D0%9A%D0%BE%D1%80%D0%BF%D1%83%D1%81-benchmark">3. Корпус benchmark<a class="anchor-link" href="#3.-%D0%9A%D0%BE%D1%80%D0%BF%D1%83%D1%81-benchmark">¶</a></h2><p>Сохраняем объявления в порядке исходных <code>item_id</code>. Используем тот же порядок
+и те же поля, что в полном расчёте. <code>train.parquet</code> для этого запуска не нужен.</p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=07b41f18">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=00585691">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [10]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [3]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">execute_stage</span><span class="p">(</span><span class="s2">"dev_evaluate"</span><span class="p">,</span> <span class="s2">"dev_metrics.json"</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[10]:</div>
-<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
-<pre>{'queries': 2000,
- 'baseline_recall_50': 0.2895833333333333,
- 'ranker_recall_50': 0.7410333333333333,
- 'geo_rrf_recall_50': 0.612725,
- 'selected_method': 'catboost_pairlogit',
- 'selected_recall_50': 0.7410333333333333,
- 'delta': 0.45145,
- 'ranker_ci95': [0.7213981249999999, 0.75915],
- 'delta_ci95': [0.428, 0.4750600000000001],
- 'model_sha256': 'bdec464db6daa2cd293ad3a630563d91e03482587a6521a6e65aca8852e18035'}</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=dd7cdf98">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="9.-%D0%A4%D0%B8%D0%BA%D1%81%D0%B0%D1%86%D0%B8%D1%8F-%D1%8D%D0%BA%D1%81%D0%BF%D0%B5%D1%80%D0%B8%D0%BC%D0%B5%D0%BD%D1%82%D0%B0">9. Фиксация эксперимента<a class="anchor-link" href="#9.-%D0%A4%D0%B8%D0%BA%D1%81%D0%B0%D1%86%D0%B8%D1%8F-%D1%8D%D0%BA%D1%81%D0%BF%D0%B5%D1%80%D0%B8%D0%BC%D0%B5%D0%BD%D1%82%D0%B0">¶</a></h2><p>Сохраняем контрольные суммы модели, кода, данных для обучения и выбранных параметров. После этого изменения не должны направляться результатами holdout.</p>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=cec8d528">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [11]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">execute_stage</span><span class="p">(</span><span class="s2">"freeze"</span><span class="p">,</span> <span class="s2">"frozen_experiment.json"</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[11]:</div>
-<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
-<pre>{'files': {'results/ranker.cbm': 'bdec464db6daa2cd293ad3a630563d91e03482587a6521a6e65aca8852e18035',
-  'results/selected.json': 'a766e1ff61883cef3e2101bce9f5352636b86bf83f4b1948d211f4eaad4c3391',
-  'results/training.json': '153a4c41125974fa9e9009e0743b1df6effdbb74ae9e42b8459b27b46db664d0',
-  'results/split_audit.json': '81008a7d8337017973836a23d7a3c12b0531c85fdbde6bd01a15e4dc39655f1b',
-  'results/input_check.json': '78e52da5ba0ca9f60363c219fb66bb7b8be6c915794eee63a835b54f8c75fe90',
-  'results/leakage_audit.json': '3a42f14fd01d9c82a704186c0126664333d7431fc77eea15df3e85f82843a697',
-  'avito_ranker/__init__.py': 'a8a3c48ab8dd96e3c3d91bafe57a08f9d44392fc31363122fb63dabe5f05b746',
-  'avito_ranker/candidates.py': '2c50ba641b97ed84a835884810fc80f453f1c2adcc79d07b9115a9659d966973',
-  'avito_ranker/config.py': 'af061f4952e75fd0bc0692842ab3e8ee99dc931391e129dd525384d7230cc0b7',
-  'avito_ranker/dataset.py': '8327cc8403a1a98c33d4cd85081346c949dd65994770e5fd8ce6123b3e15e43d',
-  'avito_ranker/features.py': '167ec855fef35197ae41dcf0b860c476811044add573ec0a382f69964e04d06d',
-  'avito_ranker/freeze.py': '3acda8a774affedbdd1b75b05ff3c34af4b31c2f49da3227ed5313c1728f3fd7',
-  'avito_ranker/model.py': 'd165551bab6bbb27f866e8ac3326601465b5b0a8ddc149eda1ec8306fba29cde',
-  'avito_ranker/predict.py': 'f09e39a2612d9942e3658b3fd8630527dd589179423c33ea458d86b153cde842',
-  'avito_ranker/prepare.py': '334f27447af2135305895429d7d535aa22f926c2ad1b51a3930660d7223f0a83',
-  'avito_ranker/stage.py': '81f464a8f843f0b989f8985313ca8509f8069291bbccc55f0ce631f6e53b7127',
-  'avito_ranker/verify.py': '27367bfb003a49eab0454f891fa7b2c2976258c22f155ea2990adcbb092aab99',
-  'avito_ranker/workflow.py': '9cb859c56b5b4caf6121887738fd66456d4540328f34045ff9276e687e7747a5',
-  'avito_retrieval/__init__.py': 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855',
-  'avito_retrieval/build_index.py': '293ed29d2d729bd67aa3ae61794dcb8fb61cca5542c713638939ef863aee2a6d',
-  'avito_retrieval/common.py': 'f4c78c3ea0b7eb8282f1e12b56f2670fd568a9dcc821e9e5a4f421cef5ff5b4f',
-  'avito_retrieval/corpus.py': '153c7e280c7f13d39a1109d2595000cdb02bcf9ee07cdfcab2b88294c14ffd34',
-  'avito_retrieval/data_check.py': '4e58fd6777ec3d277d9eb06a4516260f213e907d16f4e4ea5192d3d0cd536a65',
-  'avito_retrieval/retrieval.py': '6a896eac2d666cfbf8e3ed28cb899ab0b8f1cc324def46d770d1d5a3ca6731ee',
-  'avito_retrieval/split.py': 'de21569b91a79230d177af0c4202d73c8d16619714a46ef4fc4b93b38205192c',
-  'avito_retrieval/submission.py': 'b60a55572c42e7bba5fc1aaf9ada78ab50b57fe7d54b83192dd93d5d8ecfcd93',
-  'parameters': 'fb3960a4df04dceb0066367776030b454816f45467747e2155ece686b95ca91f',
-  'model_function': 'f5094f38b2e660d6915cfe4e5c1f1cbe271d81d2bb5705d2208a02bbeb0c3774'},
- 'selection_uses': 'dev only',
- 'holdout_used_for_training_or_selection': False,
- 'reproduction_of_fixed_experiment': False,
- 'format_version': 2,
- 'original_snapshot': {'path': 'results/frozen_experiment_original.json',
-  'sha256': '709e83a8e39e47cbc40c0fafc83dcdab4295c3ce809af6694f867e869b59c6ab'},
- 'compatibility_change': 'After evaluation, only JSON fingerprint normalization was changed to ignore formatting and line endings. Retrieval, features, training, selection, model and predictions are unchanged.'}</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=dddd555a">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="10.-%D0%97%D0%B0%D0%BA%D1%80%D1%8B%D1%82%D0%B0%D1%8F-%D1%87%D0%B0%D1%81%D1%82%D1%8C:-%D0%BA%D0%B0%D0%BD%D0%B4%D0%B8%D0%B4%D0%B0%D1%82%D1%8B">10. Закрытая часть: кандидаты<a class="anchor-link" href="#10.-%D0%97%D0%B0%D0%BA%D1%80%D1%8B%D1%82%D0%B0%D1%8F-%D1%87%D0%B0%D1%81%D1%82%D1%8C:-%D0%BA%D0%B0%D0%BD%D0%B4%D0%B8%D0%B4%D0%B0%D1%82%D1%8B">¶</a></h2><p>Первый расчёт качества на holdout происходит после фиксации. Поиск и признаки применяются без изменения настроек.</p>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=525767ff">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [12]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">execute_stage</span><span class="p">(</span><span class="s2">"holdout_features"</span><span class="p">,</span> <span class="s2">"holdout_candidates.json"</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[12]:</div>
-<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
-<pre>{'fold': 'holdout',
- 'queries': 2000,
- 'rows': 1875619,
- 'features': ['title_score',
-  'title_relative',
-  'title_rr',
-  'title_local_rr',
-  'description_score',
-  'description_relative',
-  'description_rr',
-  'description_local_rr',
-  'params_score',
-  'params_relative',
-  'params_rr',
-  'params_local_rr',
-  'filter_score',
-  'filter_relative',
-  'rrf',
-  'same_location',
-  'same_category',
-  'delivery',
-  'query_words',
-  'filter_words',
-  'title_length',
-  'title_coverage',
-  'title_jaccard',
-  'params_length',
-  'params_coverage',
-  'filter_coverage',
-  'item_price',
-  'item_rating',
-  'item_rating_reviews_count',
-  'item_is_phone_hidden',
-  'item_is_message_forbidden'],
- 'seconds': 172.62421720003476,
- 'feature_file_sha256': 'fb73cbabbdb3578b36ef11f199e0280f5111dec8264722a37eaedf2ad7d1de10',
- 'baseline_recall_50': 0.277625,
- 'pool_recall': 0.8634166666666667,
- 'queries_without_positive_in_pool': 268}</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=2078a68f">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="11.-%D0%98%D1%82%D0%BE%D0%B3%D0%BE%D0%B2%D0%B0%D1%8F-%D0%BB%D0%BE%D0%BA%D0%B0%D0%BB%D1%8C%D0%BD%D0%B0%D1%8F-%D0%BE%D1%86%D0%B5%D0%BD%D0%BA%D0%B0">11. Итоговая локальная оценка<a class="anchor-link" href="#11.-%D0%98%D1%82%D0%BE%D0%B3%D0%BE%D0%B2%D0%B0%D1%8F-%D0%BB%D0%BE%D0%BA%D0%B0%D0%BB%D1%8C%D0%BD%D0%B0%D1%8F-%D0%BE%D1%86%D0%B5%D0%BD%D0%BA%D0%B0">¶</a></h2><p>Для каждого запроса считаем пересечение топ-50 с известными положительными объявлениями, делим на число всех известных положительных и усредняем по запросам. Сюда входят и полные промахи поиска.</p>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=bda4e054">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [13]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">execute_stage</span><span class="p">(</span><span class="s2">"holdout_evaluate"</span><span class="p">,</span> <span class="s2">"holdout_metrics.json"</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[13]:</div>
-<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
-<pre>{'queries': 2000,
- 'baseline_recall_50': 0.277625,
- 'ranker_recall_50': 0.7245,
- 'geo_rrf_recall_50': 0.5869583333333332,
- 'selected_method': 'catboost_pairlogit',
- 'selected_recall_50': 0.7245,
- 'delta': 0.446875,
- 'ranker_ci95': [0.7033322916666667, 0.7427520833333333],
- 'delta_ci95': [0.423746875, 0.46891875000000005],
- 'model_sha256': 'bdec464db6daa2cd293ad3a630563d91e03482587a6521a6e65aca8852e18035'}</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=3a0d8de4">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="12.-%D0%9A%D0%BE%D1%80%D0%BF%D1%83%D1%81-benchmark">12. Корпус benchmark<a class="anchor-link" href="#12.-%D0%9A%D0%BE%D1%80%D0%BF%D1%83%D1%81-benchmark">¶</a></h2><p>Строим индексы только по 189 212 объявлениям benchmark. Параметры поиска и модель остаются зафиксированными.</p>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=9578ce51">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [14]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">execute_stage</span><span class="p">(</span><span class="s2">"benchmark_indices"</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[14]:</div>
-<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
-<pre>'Лог этапа: results/logs/benchmark_indices'</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=bf3d78b2">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="13.-%D0%9A%D0%B0%D0%BD%D0%B4%D0%B8%D0%B4%D0%B0%D1%82%D1%8B-benchmark">13. Кандидаты benchmark<a class="anchor-link" href="#13.-%D0%9A%D0%B0%D0%BD%D0%B4%D0%B8%D0%B4%D0%B0%D1%82%D1%8B-benchmark">¶</a></h2><p>Применяем тот же поиск и те же признаки к 2 452 запросам benchmark. Никаких тестовых положительных меток здесь нет.</p>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=bd8e3544">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [15]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">execute_stage</span><span class="p">(</span><span class="s2">"benchmark_features"</span><span class="p">,</span> <span class="s2">"benchmark_candidates.json"</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[15]:</div>
-<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
-<pre>{'fold': 'benchmark',
- 'queries': 2452,
- 'rows': 2092376,
- 'features': ['title_score',
-  'title_relative',
-  'title_rr',
-  'title_local_rr',
-  'description_score',
-  'description_relative',
-  'description_rr',
-  'description_local_rr',
-  'params_score',
-  'params_relative',
-  'params_rr',
-  'params_local_rr',
-  'filter_score',
-  'filter_relative',
-  'rrf',
-  'same_location',
-  'same_category',
-  'delivery',
-  'query_words',
-  'filter_words',
-  'title_length',
-  'title_coverage',
-  'title_jaccard',
-  'params_length',
-  'params_coverage',
-  'filter_coverage',
-  'item_price',
-  'item_rating',
-  'item_rating_reviews_count',
-  'item_is_phone_hidden',
-  'item_is_message_forbidden'],
- 'seconds': 64.4486981999944,
- 'feature_file_sha256': '70b30b243258c4d7bd220d2c8214a8d8a8a3f1d0ff8ebf33a874870849b6d13d'}</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=e2624a8b">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="14.-%D0%A4%D0%B0%D0%B9%D0%BB-%D0%BE%D1%82%D0%B2%D0%B5%D1%82%D0%B0">14. Файл ответа<a class="anchor-link" href="#14.-%D0%A4%D0%B0%D0%B9%D0%BB-%D0%BE%D1%82%D0%B2%D0%B5%D1%82%D0%B0">¶</a></h2><p>Выбираем 50 объявлений, возвращаем исходные <code>item_id</code> и записываем только <code>query_id,answer</code>. Проверяем покрытие запросов, формат ID, отсутствие повторов и принадлежность корпусу.</p>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=203296ab">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [16]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">execute_stage</span><span class="p">(</span><span class="s2">"predict"</span><span class="p">,</span> <span class="s2">"submission_check.json"</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[16]:</div>
-<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
-<pre>{'valid': True,
- 'rows': 2452,
- 'min_items': 50,
- 'max_items': 50,
- 'sha256': 'f4ffbb7029d6ad1bb53f97b88bceb76a0a7d2fe51d681a4d905a4c6d23e48cc5',
- 'model_sha256': 'bdec464db6daa2cd293ad3a630563d91e03482587a6521a6e65aca8852e18035'}</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=634d94ca">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="15.-%D0%9D%D0%B5%D0%B7%D0%B0%D0%B2%D0%B8%D1%81%D0%B8%D0%BC%D0%B0%D1%8F-%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0">15. Независимая проверка<a class="anchor-link" href="#15.-%D0%9D%D0%B5%D0%B7%D0%B0%D0%B2%D0%B8%D1%81%D0%B8%D0%BC%D0%B0%D1%8F-%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0">¶</a></h2><p>Пересчитываем Recall по строковым ID сохранённых предсказаний и исходной разметки. Отдельно проверяем CSV и фиксируем версии библиотек.</p>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=de5ecc6f">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [17]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">execute_stage</span><span class="p">(</span><span class="s2">"check"</span><span class="p">,</span> <span class="s2">"verification.json"</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[17]:</div>
-<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
-<pre>{'dev': {'queries': 2000, 'independent_recall_50': 0.7410333333333333},
- 'holdout': {'queries': 2000, 'independent_recall_50': 0.7245},
- 'submission': {'valid': True,
-  'rows': 2452,
-  'min_items': 50,
-  'max_items': 50,
-  'sha256': 'f4ffbb7029d6ad1bb53f97b88bceb76a0a7d2fe51d681a4d905a4c6d23e48cc5'},
- 'environment': {'python': '3.12.10',
-  'packages': {'numpy': '2.3.5',
-   'scipy': '1.16.3',
-   'polars': '1.40.1',
-   'pyarrow': '24.0.0',
-   'bm25s': '0.2.14',
-   'snowballstemmer': '3.0.1',
-   'catboost': '1.2.10'}}}</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=97d17840">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="%D0%A7%D1%82%D0%BE-%D0%BE%D1%82%D0%BF%D1%80%D0%B0%D0%B2%D0%BB%D1%8F%D1%82%D1%8C">Что отправлять<a class="anchor-link" href="#%D0%A7%D1%82%D0%BE-%D0%BE%D1%82%D0%BF%D1%80%D0%B0%D0%B2%D0%BB%D1%8F%D1%82%D1%8C">¶</a></h2><p><code>answer.csv</code> в корне репозитория — предсказания для формы Авито. Последняя ячейка экспортирует его из <code>results/answer.csv</code>. Для проверки решения приложите этот notebook, папки с кодом, <code>ranking.toml</code>, зависимости, README и результаты эксперимента в соответствии с формой сдачи.</p>
-<h2 id="%D0%9E%D0%B3%D1%80%D0%B0%D0%BD%D0%B8%D1%87%D0%B5%D0%BD%D0%B8%D1%8F">Ограничения<a class="anchor-link" href="#%D0%9E%D0%B3%D1%80%D0%B0%D0%BD%D0%B8%D1%87%D0%B5%D0%BD%D0%B8%D1%8F">¶</a></h2><p>Разметка содержит наблюдавшиеся положительные пары, а не все подходящие объявления. Неотмеченные кандидаты могут быть релевантными. Группировка не объединяет все синонимы. Локальный корпус больше benchmark, а распределение выбранных групп не обязано повторять тест. По этим причинам локальная метрика не обещает такой же результат на закрытом тесте.</p>
-<h2 id="%D0%98%D1%81%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D0%BA%D0%B8">Источники<a class="anchor-link" href="#%D0%98%D1%81%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D0%BA%D0%B8">¶</a></h2><p><a href="https://github.com/xhluca/bm25s">BM25S</a>, <a href="https://snowballstem.org/algorithms/russian/stemmer.html">Snowball</a>, <a href="https://cormack.uwaterloo.ca/cormacksigir09-rrf.pdf">RRF</a>, <a href="https://catboost.ai/docs/en/concepts/python-reference_catboostranker">CatBoostRanker</a>.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=3152ebb5">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="16.-%D0%AD%D0%BA%D1%81%D0%BF%D0%BE%D1%80%D1%82-%D0%BE%D1%82%D0%B2%D0%B5%D1%82%D0%B0-%D0%B4%D0%BB%D1%8F-%D1%81%D0%B4%D0%B0%D1%87%D0%B8">16. Экспорт ответа для сдачи<a class="anchor-link" href="#16.-%D0%AD%D0%BA%D1%81%D0%BF%D0%BE%D1%80%D1%82-%D0%BE%D1%82%D0%B2%D0%B5%D1%82%D0%B0-%D0%B4%D0%BB%D1%8F-%D1%81%D0%B4%D0%B0%D1%87%D0%B8">¶</a></h2><p>Предсказания уже проверены на этапе <code>predict</code>. Сохраняем точную копию CSV
-в корне репозитория, чтобы файл для отправки находился рядом с notebook.</p>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=800e834f">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [18]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">shutil</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">polars</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pl</span>
 
-<span class="n">answer_path</span> <span class="o">=</span> <span class="n">config_path</span><span class="o">.</span><span class="n">parent</span> <span class="o">/</span> <span class="s2">"answer.csv"</span>
-<span class="n">shutil</span><span class="o">.</span><span class="n">copyfile</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s2">"results_dir"</span><span class="p">]</span> <span class="o">/</span> <span class="s2">"answer.csv"</span><span class="p">,</span> <span class="n">answer_path</span><span class="p">)</span>
-<span class="k">assert</span> <span class="n">answer_path</span><span class="o">.</span><span class="n">read_bytes</span><span class="p">()</span> <span class="o">==</span> <span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s2">"results_dir"</span><span class="p">]</span> <span class="o">/</span> <span class="s2">"answer.csv"</span><span class="p">)</span><span class="o">.</span><span class="n">read_bytes</span><span class="p">()</span>
-<span class="p">{</span><span class="s2">"answer"</span><span class="p">:</span> <span class="n">answer_path</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s2">"rows"</span><span class="p">:</span> <span class="n">show_result</span><span class="p">(</span><span class="s2">"submission_check.json"</span><span class="p">)[</span><span class="s2">"rows"</span><span class="p">]}</span>
+<span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"benchmark_items.parquet"</span><span class="p">,</span> <span class="s2">"benchmark_queries.parquet"</span><span class="p">]:</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s2">"data_dir"</span><span class="p">]</span> <span class="o">/</span> <span class="n">name</span><span class="p">)</span><span class="o">.</span><span class="n">is_file</span><span class="p">():</span>
+        <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Поместите </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> в </span><span class="si">{</span><span class="n">config</span><span class="p">[</span><span class="s1">'data_dir'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="n">corpus</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s2">"work_dir"</span><span class="p">]</span> <span class="o">/</span> <span class="s2">"benchmark"</span>
+<span class="n">corpus</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">config</span><span class="p">[</span><span class="s2">"results_dir"</span><span class="p">]</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">item_columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"item_id"</span><span class="p">,</span> <span class="s2">"item_location_id"</span><span class="p">,</span> <span class="s2">"item_category_id"</span><span class="p">,</span> <span class="s2">"item_microcat_id"</span><span class="p">]</span>
+<span class="n">items</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s2">"data_dir"</span><span class="p">]</span> <span class="o">/</span> <span class="s2">"benchmark_items.parquet"</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">item_columns</span><span class="p">)</span>
+<span class="n">items</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="s2">"item_id"</span><span class="p">)</span><span class="o">.</span><span class="n">with_row_index</span><span class="p">(</span><span class="s2">"doc_id"</span><span class="p">)</span><span class="o">.</span><span class="n">write_parquet</span><span class="p">(</span><span class="n">corpus</span> <span class="o">/</span> <span class="s2">"corpus_manifest.parquet"</span><span class="p">)</span>
+<span class="n">shutil</span><span class="o">.</span><span class="n">copyfile</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s2">"data_dir"</span><span class="p">]</span> <span class="o">/</span> <span class="s2">"benchmark_items.parquet"</span><span class="p">,</span> <span class="n">corpus</span> <span class="o">/</span> <span class="s2">"corpus.parquet"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"ranker.cbm"</span><span class="p">,</span> <span class="s2">"selected.json"</span><span class="p">]:</span>
+    <span class="n">shutil</span><span class="o">.</span><span class="n">copyfile</span><span class="p">(</span><span class="n">source</span><span class="p">[</span><span class="s2">"results_dir"</span><span class="p">]</span> <span class="o">/</span> <span class="n">name</span><span class="p">,</span> <span class="n">config</span><span class="p">[</span><span class="s2">"results_dir"</span><span class="p">]</span> <span class="o">/</span> <span class="n">name</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Объявлений в корпусе: </span><span class="si">{</span><span class="n">items</span><span class="o">.</span><span class="n">height</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -8946,10 +7971,300 @@ Holdout уже использован для этой оценки; повтор
 <div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[18]:</div>
-<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
-<pre>{'answer': 'answer.csv', 'rows': 2452}</pre>
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>Объявлений в корпусе: 189,212
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=6e9c81cc">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="4.-%D0%9F%D0%BE%D0%B8%D1%81%D0%BA%D0%BE%D0%B2%D1%8B%D0%B5-%D0%B8%D0%BD%D0%B4%D0%B5%D0%BA%D1%81%D1%8B">4. Поисковые индексы<a class="anchor-link" href="#4.-%D0%9F%D0%BE%D0%B8%D1%81%D0%BA%D0%BE%D0%B2%D1%8B%D0%B5-%D0%B8%D0%BD%D0%B4%D0%B5%D0%BA%D1%81%D1%8B">¶</a></h2><p><code>run_stage</code> вызывает код этапа из <code>avito_ranker</code>. Три BM25-индекса строятся
+заново по заголовкам, описаниям и параметрам. Логи сохраняются в <code>work/check/results/logs/</code>.
+Этапы выполняются последовательно в отдельных процессах, чтобы освобождать память.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=8a4d473a">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [4]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">run_stage</span><span class="p">(</span><span class="s2">"benchmark_indices"</span><span class="p">,</span> <span class="n">config_path</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>Начат этап: benchmark_index_title
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>resource module not available on Windows
+Tokenized title stemming True vocab 26204 tokens 869708 seconds 4.5
+INDEX DONE {"field": "title", "stemming": true, "documents": 189212, "vocabulary": 26205, "tokens": 869708, "nnz": 851848, "seconds": 8.537108421325684, "k1": 1.5, "b": 0.75, "method": "lucene", "corpus_manifest_sha256": "b124e81efa4cfa951bfe8390f371098ea9808621105e016d26bffcddc9fb3822", "corpus_sha256": "193b3a3961464620cbf8d8797152b7f90cae1826ca749fb7817a210984a09899", "normalization": "NFKC lower ё→е; Unicode alphanumeric tokens; no stopword removal"}
+
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>Начат этап: benchmark_index_params
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>resource module not available on Windows
+Tokenized params stemming True vocab 78736 tokens 27714318 seconds 50.8
+INDEX DONE {"field": "params", "stemming": true, "documents": 189212, "vocabulary": 78737, "tokens": 27714318, "nnz": 11675448, "seconds": 60.65440344810486, "k1": 1.5, "b": 0.75, "method": "lucene", "corpus_manifest_sha256": "b124e81efa4cfa951bfe8390f371098ea9808621105e016d26bffcddc9fb3822", "corpus_sha256": "193b3a3961464620cbf8d8797152b7f90cae1826ca749fb7817a210984a09899", "normalization": "NFKC lower ё→е; Unicode alphanumeric tokens; no stopword removal"}
+
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>Начат этап: benchmark_index_description
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>resource module not available on Windows
+Tokenized description stemming True vocab 375961 tokens 34746547 seconds 74.8
+INDEX DONE {"field": "description", "stemming": true, "documents": 189212, "vocabulary": 375962, "tokens": 34746547, "nnz": 20899938, "seconds": 91.31647181510925, "k1": 1.5, "b": 0.75, "method": "lucene", "corpus_manifest_sha256": "b124e81efa4cfa951bfe8390f371098ea9808621105e016d26bffcddc9fb3822", "corpus_sha256": "193b3a3961464620cbf8d8797152b7f90cae1826ca749fb7817a210984a09899", "normalization": "NFKC lower ё→е; Unicode alphanumeric tokens; no stopword removal"}
+
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>Этап завершён: benchmark_indices 164.86 с
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=af8a8992">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="5.-%D0%9A%D0%B0%D0%BD%D0%B4%D0%B8%D0%B4%D0%B0%D1%82%D1%8B-%D0%B8-%D0%BF%D1%80%D0%B8%D0%B7%D0%BD%D0%B0%D0%BA%D0%B8">5. Кандидаты и признаки<a class="anchor-link" href="#5.-%D0%9A%D0%B0%D0%BD%D0%B4%D0%B8%D0%B4%D0%B0%D1%82%D1%8B-%D0%B8-%D0%BF%D1%80%D0%B8%D0%B7%D0%BD%D0%B0%D0%BA%D0%B8">¶</a></h2><p>Для каждого запроса выполняем тот же поиск и рассчитываем те же 31 признак,
+которые использовались при подготовке отправленного ответа.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=b9c5f8b8">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [5]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">run_stage</span><span class="p">(</span><span class="s2">"benchmark_features"</span><span class="p">,</span> <span class="n">config_path</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>Начат этап: benchmark_features
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>resource module not available on Windows
+benchmark: 200/2452, 5 s
+benchmark: 400/2452, 10 s
+benchmark: 600/2452, 15 s
+benchmark: 800/2452, 20 s
+benchmark: 1000/2452, 25 s
+benchmark: 1200/2452, 30 s
+benchmark: 1400/2452, 34 s
+benchmark: 1600/2452, 40 s
+benchmark: 1800/2452, 45 s
+benchmark: 2000/2452, 50 s
+benchmark: 2200/2452, 56 s
+benchmark: 2400/2452, 62 s
+{"fold": "benchmark", "queries": 2452, "rows": 2092376, "features": ["title_score", "title_relative", "title_rr", "title_local_rr", "description_score", "description_relative", "description_rr", "description_local_rr", "params_score", "params_relative", "params_rr", "params_local_rr", "filter_score", "filter_relative", "rrf", "same_location", "same_category", "delivery", "query_words", "filter_words", "title_length", "title_coverage", "title_jaccard", "params_length", "params_coverage", "filter_coverage", "item_price", "item_rating", "item_rating_reviews_count", "item_is_phone_hidden", "item_is_message_forbidden"], "seconds": 63.62128099997062, "feature_file_sha256": "70b30b243258c4d7bd220d2c8214a8d8a8a3f1d0ff8ebf33a874870849b6d13d"}
+
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>Этап завершён: benchmark_features 68.84 с
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=bba5e3cd">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="6.-%D0%9F%D1%80%D0%B5%D0%B4%D1%81%D0%BA%D0%B0%D0%B7%D0%B0%D0%BD%D0%B8%D1%8F">6. Предсказания<a class="anchor-link" href="#6.-%D0%9F%D1%80%D0%B5%D0%B4%D1%81%D0%BA%D0%B0%D0%B7%D0%B0%D0%BD%D0%B8%D1%8F">¶</a></h2><p>Загружаем сохранённый CatBoost, выбираем 50 объявлений на запрос и проверяем
+CSV по исходным запросам и корпусу. Новый ответ находится в <code>work/check/results/answer.csv</code>.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=af3ccc5a">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [6]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">run_stage</span><span class="p">(</span><span class="s2">"predict"</span><span class="p">,</span> <span class="n">config_path</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>Начат этап: predict
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>resource module not available on Windows
+{'valid': True, 'rows': 2452, 'min_items': 50, 'max_items': 50, 'sha256': 'f4ffbb7029d6ad1bb53f97b88bceb76a0a7d2fe51d681a4d905a4c6d23e48cc5', 'model_sha256': 'bdec464db6daa2cd293ad3a630563d91e03482587a6521a6e65aca8852e18035'}
+
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>Этап завершён: predict 3.88 с
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=65dc1f4c">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="7.-%D0%A1%D1%80%D0%B0%D0%B2%D0%BD%D0%B5%D0%BD%D0%B8%D0%B5-%D1%81-%D0%BF%D1%80%D0%B8%D0%BB%D0%BE%D0%B6%D0%B5%D0%BD%D0%BD%D1%8B%D0%BC-%D0%BE%D1%82%D0%B2%D0%B5%D1%82%D0%BE%D0%BC">7. Сравнение с приложенным ответом<a class="anchor-link" href="#7.-%D0%A1%D1%80%D0%B0%D0%B2%D0%BD%D0%B5%D0%BD%D0%B8%D0%B5-%D1%81-%D0%BF%D1%80%D0%B8%D0%BB%D0%BE%D0%B6%D0%B5%D0%BD%D0%BD%D1%8B%D0%BC-%D0%BE%D1%82%D0%B2%D0%B5%D1%82%D0%BE%D0%BC">¶</a></h2><p>Только после получения новых предсказаний сравниваем CSV с ответом в корне
+репозитория. Одинаковые SHA-256 означают побайтовое совпадение файлов.
+Если ответы отличаются, ячейка завершится с ошибкой.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=a3417bf5">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [7]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">answer_path</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s2">"results_dir"</span><span class="p">]</span> <span class="o">/</span> <span class="s2">"answer.csv"</span>
+<span class="n">reference_path</span> <span class="o">=</span> <span class="n">source</span><span class="p">[</span><span class="s2">"config_path"</span><span class="p">]</span><span class="o">.</span><span class="n">parent</span> <span class="o">/</span> <span class="s2">"answer.csv"</span>
+<span class="n">answer_hash</span> <span class="o">=</span> <span class="n">file_hash</span><span class="p">(</span><span class="n">answer_path</span><span class="p">)</span>
+<span class="n">reference_hash</span> <span class="o">=</span> <span class="n">file_hash</span><span class="p">(</span><span class="n">reference_path</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">answer_hash</span> <span class="o">!=</span> <span class="n">reference_hash</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Новый answer.csv отличается от приложенного ответа"</span><span class="p">)</span>
+
+<span class="n">submission</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">((</span><span class="n">config</span><span class="p">[</span><span class="s2">"results_dir"</span><span class="p">]</span> <span class="o">/</span> <span class="s2">"submission_check.json"</span><span class="p">)</span><span class="o">.</span><span class="n">read_text</span><span class="p">(</span><span class="s2">"utf-8"</span><span class="p">))</span>
+<span class="n">report</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"passed"</span><span class="p">,</span>
+    <span class="s2">"seconds"</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span> <span class="o">-</span> <span class="n">started</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+    <span class="s2">"queries"</span><span class="p">:</span> <span class="n">submission</span><span class="p">[</span><span class="s2">"rows"</span><span class="p">],</span>
+    <span class="s2">"items"</span><span class="p">:</span> <span class="n">items</span><span class="o">.</span><span class="n">height</span><span class="p">,</span>
+    <span class="s2">"model_retrained"</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="s2">"indices_and_features_rebuilt"</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s2">"answer_identical"</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s2">"answer_sha256"</span><span class="p">:</span> <span class="n">answer_hash</span><span class="p">,</span>
+    <span class="s2">"model_sha256"</span><span class="p">:</span> <span class="n">file_hash</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s2">"results_dir"</span><span class="p">]</span> <span class="o">/</span> <span class="s2">"ranker.cbm"</span><span class="p">),</span>
+    <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span><span class="n">name</span><span class="p">:</span> <span class="n">file_hash</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s2">"data_dir"</span><span class="p">]</span> <span class="o">/</span> <span class="n">name</span><span class="p">)</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span>
+               <span class="p">[</span><span class="s2">"benchmark_items.parquet"</span><span class="p">,</span> <span class="s2">"benchmark_queries.parquet"</span><span class="p">]},</span>
+<span class="p">}</span>
+<span class="n">save_json</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s2">"results_dir"</span><span class="p">]</span> <span class="o">/</span> <span class="s2">"check_report.json"</span><span class="p">,</span> <span class="n">report</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">report</span><span class="p">,</span> <span class="n">ensure_ascii</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>{
+  "status": "passed",
+  "seconds": 240.44,
+  "queries": 2452,
+  "items": 189212,
+  "model_retrained": false,
+  "indices_and_features_rebuilt": true,
+  "answer_identical": true,
+  "answer_sha256": "f4ffbb7029d6ad1bb53f97b88bceb76a0a7d2fe51d681a4d905a4c6d23e48cc5",
+  "model_sha256": "bdec464db6daa2cd293ad3a630563d91e03482587a6521a6e65aca8852e18035",
+  "inputs": {
+    "benchmark_items.parquet": "193b3a3961464620cbf8d8797152b7f90cae1826ca749fb7817a210984a09899",
+    "benchmark_queries.parquet": "e49de4fb76f03979a4af96034817767d39ae5de9f94e254fed028243188dda06"
+  }
+}
+</pre>
 </div>
 </div>
 </div>
