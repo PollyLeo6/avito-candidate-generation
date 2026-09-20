@@ -4,6 +4,7 @@ data/*
 work/
 *.parquet
 !results/*.parquet
+!results/**/*.parquet
 
 # Локальное окружение и кэши.
 .venv/
