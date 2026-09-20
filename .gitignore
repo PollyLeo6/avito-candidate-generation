@@ -26,3 +26,8 @@ Thumbs.db
 *.partial.*
 *.tmp
 *.zip
+
+# Служебные файлы установленного пакета.
+*.egg-info/
+build/
+dist/

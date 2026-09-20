@@ -1,0 +1,21 @@
+{
+  "status": "passed",
+  "python": "3.12.10",
+  "platform": "win32",
+  "fresh_environment": true,
+  "installation": "pip install -r requirements/notebook.txt",
+  "installed_package_from_verification_src": true,
+  "quick_notebook_cells": 7,
+  "full_notebook_view_cells": 18,
+  "tests_passed": 22,
+  "benchmark_items": 189212,
+  "benchmark_queries": 2452,
+  "quick_seconds": 304.34,
+  "quick_started_without_work_or_train": true,
+  "answer_identical": true,
+  "answer_sha256": "f4ffbb7029d6ad1bb53f97b88bceb76a0a7d2fe51d681a4d905a4c6d23e48cc5",
+  "full_preparation_repeated": true,
+  "split_audit_identical": true,
+  "model_and_algorithm_unchanged": true,
+  "full_training_repeated_after_move": false
+}

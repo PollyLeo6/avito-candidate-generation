@@ -1,0 +1,13 @@
+[build-system]
+requires = ["setuptools==84.0.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "avito-candidate-generation"
+version = "0.1.0"
+description = "BM25 and CatBoost candidate generation for service search"
+requires-python = ">=3.12,<3.13"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["avito_ranker*", "avito_retrieval*"]

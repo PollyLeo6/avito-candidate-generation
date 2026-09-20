@@ -1,6 +1,6 @@
-data_dir = "data"
-work_dir = "work"
-results_dir = "results"
+data_dir = "../data"
+work_dir = "../work"
+results_dir = "../results"
 threads = 2
 train_queries = 8000
 dev_queries = 2000

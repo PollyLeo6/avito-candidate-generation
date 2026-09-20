@@ -9,7 +9,7 @@ import time
 from .config import load_config
 
 
-def run_stage(stage, config_path="ranking.toml"):
+def run_stage(stage, config_path="configs/ranking.toml"):
     config = load_config(config_path)
     logs = config["results_dir"] / "logs"
     logs.mkdir(parents=True, exist_ok=True)
@@ -35,7 +35,7 @@ def run_stage(stage, config_path="ranking.toml"):
         print("Начат этап:", label, flush=True)
         path = logs / (label + ".log")
         with path.open("w", encoding="utf-8") as stream:
-            result = subprocess.run(command, cwd=config["config_path"].parent,
+            result = subprocess.run(command, cwd=config["project_dir"],
                                     env=environment, stdout=stream, stderr=subprocess.STDOUT)
         print(path.read_text("utf-8")[-2500:], flush=True)
         if result.returncode:

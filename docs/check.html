@@ -2,7 +2,7 @@
 
 <html lang="en">
 <head>
-<base href="../"><meta charset="utf-8"/>
+<base href="../notebooks/"><meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Notebook</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <style type="text/css">
@@ -7821,8 +7821,8 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="1.-%D0%9D%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B8-%D0%B8-%D0%BC%D0%BE%D0%B4%D0%B5%D0%BB%D1%8C">1. Настройки и модель<a class="anchor-link" href="#1.-%D0%9D%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B8-%D0%B8-%D0%BC%D0%BE%D0%B4%D0%B5%D0%BB%D1%8C">¶</a></h2><p>Проверяем сохранённую модель и код. <code>check.toml</code> задаёт отдельные рабочие папки;
-алгоритмические параметры должны совпадать с <code>ranking.toml</code>.</p>
+<h2 id="1.-%D0%9D%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B8-%D0%B8-%D0%BC%D0%BE%D0%B4%D0%B5%D0%BB%D1%8C">1. Настройки и модель<a class="anchor-link" href="#1.-%D0%9D%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B8-%D0%B8-%D0%BC%D0%BE%D0%B4%D0%B5%D0%BB%D1%8C">¶</a></h2><p>Проверяем сохранённую модель и код. <code>configs/check.toml</code> задаёт отдельные рабочие папки;
+алгоритмические параметры должны совпадать с <code>configs/ranking.toml</code>.</p>
 </div>
 </div>
 </div>
@@ -7847,10 +7847,13 @@ a.anchor-link {
 <span class="kn">from</span><span class="w"> </span><span class="nn">avito_retrieval.common</span><span class="w"> </span><span class="kn">import</span> <span class="n">file_hash</span><span class="p">,</span> <span class="n">save_json</span>
 
 <span class="n">started</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
-<span class="n">source</span> <span class="o">=</span> <span class="n">load_config</span><span class="p">(</span><span class="s2">"ranking.toml"</span><span class="p">)</span>
-<span class="n">config_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">"check.toml"</span><span class="p">)</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span>
+<span class="n">project_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span>
+<span class="k">if</span> <span class="n">project_dir</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">"notebooks"</span><span class="p">:</span>
+    <span class="n">project_dir</span> <span class="o">=</span> <span class="n">project_dir</span><span class="o">.</span><span class="n">parent</span>
+<span class="n">source</span> <span class="o">=</span> <span class="n">load_config</span><span class="p">(</span><span class="n">project_dir</span> <span class="o">/</span> <span class="s2">"configs/ranking.toml"</span><span class="p">)</span>
+<span class="n">config_path</span> <span class="o">=</span> <span class="n">project_dir</span> <span class="o">/</span> <span class="s2">"configs/check.toml"</span>
 <span class="n">config</span> <span class="o">=</span> <span class="n">load_config</span><span class="p">(</span><span class="n">config_path</span><span class="p">)</span>
-<span class="n">path_settings</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"config_path"</span><span class="p">,</span> <span class="s2">"data_dir"</span><span class="p">,</span> <span class="s2">"work_dir"</span><span class="p">,</span> <span class="s2">"results_dir"</span><span class="p">}</span>
+<span class="n">path_settings</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"config_path"</span><span class="p">,</span> <span class="s2">"project_dir"</span><span class="p">,</span> <span class="s2">"data_dir"</span><span class="p">,</span> <span class="s2">"work_dir"</span><span class="p">,</span> <span class="s2">"results_dir"</span><span class="p">}</span>
 <span class="k">if</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="n">value</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">source</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">path_settings</span><span class="p">}</span> <span class="o">!=</span> <span class="p">{</span>
     <span class="n">key</span><span class="p">:</span> <span class="n">value</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">config</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">path_settings</span>
 <span class="p">}:</span>
@@ -7905,7 +7908,7 @@ a.anchor-link {
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
     <span class="p">[</span><span class="n">sys</span><span class="o">.</span><span class="n">executable</span><span class="p">,</span> <span class="s2">"-m"</span><span class="p">,</span> <span class="s2">"unittest"</span><span class="p">,</span> <span class="s2">"discover"</span><span class="p">,</span> <span class="s2">"-s"</span><span class="p">,</span> <span class="s2">"tests"</span><span class="p">,</span> <span class="s2">"-v"</span><span class="p">],</span>
-    <span class="n">check</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">check</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cwd</span><span class="o">=</span><span class="n">source</span><span class="p">[</span><span class="s2">"project_dir"</span><span class="p">],</span>
 <span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"Тесты пройдены"</span><span class="p">)</span>
 </pre></div>
@@ -8022,8 +8025,8 @@ a.anchor-link {
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
 <pre>resource module not available on Windows
-Tokenized title stemming True vocab 26204 tokens 869708 seconds 4.5
-INDEX DONE {"field": "title", "stemming": true, "documents": 189212, "vocabulary": 26205, "tokens": 869708, "nnz": 851848, "seconds": 8.537108421325684, "k1": 1.5, "b": 0.75, "method": "lucene", "corpus_manifest_sha256": "b124e81efa4cfa951bfe8390f371098ea9808621105e016d26bffcddc9fb3822", "corpus_sha256": "193b3a3961464620cbf8d8797152b7f90cae1826ca749fb7817a210984a09899", "normalization": "NFKC lower ё→е; Unicode alphanumeric tokens; no stopword removal"}
+Tokenized title stemming True vocab 26204 tokens 869708 seconds 4.9
+INDEX DONE {"field": "title", "stemming": true, "documents": 189212, "vocabulary": 26205, "tokens": 869708, "nnz": 851848, "seconds": 9.574296236038208, "k1": 1.5, "b": 0.75, "method": "lucene", "corpus_manifest_sha256": "b124e81efa4cfa951bfe8390f371098ea9808621105e016d26bffcddc9fb3822", "corpus_sha256": "193b3a3961464620cbf8d8797152b7f90cae1826ca749fb7817a210984a09899", "normalization": "NFKC lower ё→е; Unicode alphanumeric tokens; no stopword removal"}
 
 </pre>
 </div>
@@ -8039,8 +8042,8 @@ INDEX DONE {"field": "title", "stemming": true, "documents": 189212, "vocabulary
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
 <pre>resource module not available on Windows
-Tokenized params stemming True vocab 78736 tokens 27714318 seconds 50.8
-INDEX DONE {"field": "params", "stemming": true, "documents": 189212, "vocabulary": 78737, "tokens": 27714318, "nnz": 11675448, "seconds": 60.65440344810486, "k1": 1.5, "b": 0.75, "method": "lucene", "corpus_manifest_sha256": "b124e81efa4cfa951bfe8390f371098ea9808621105e016d26bffcddc9fb3822", "corpus_sha256": "193b3a3961464620cbf8d8797152b7f90cae1826ca749fb7817a210984a09899", "normalization": "NFKC lower ё→е; Unicode alphanumeric tokens; no stopword removal"}
+Tokenized params stemming True vocab 78736 tokens 27714318 seconds 63.3
+INDEX DONE {"field": "params", "stemming": true, "documents": 189212, "vocabulary": 78737, "tokens": 27714318, "nnz": 11675448, "seconds": 77.89963984489441, "k1": 1.5, "b": 0.75, "method": "lucene", "corpus_manifest_sha256": "b124e81efa4cfa951bfe8390f371098ea9808621105e016d26bffcddc9fb3822", "corpus_sha256": "193b3a3961464620cbf8d8797152b7f90cae1826ca749fb7817a210984a09899", "normalization": "NFKC lower ё→е; Unicode alphanumeric tokens; no stopword removal"}
 
 </pre>
 </div>
@@ -8056,8 +8059,8 @@ INDEX DONE {"field": "params", "stemming": true, "documents": 189212, "vocabular
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
 <pre>resource module not available on Windows
-Tokenized description stemming True vocab 375961 tokens 34746547 seconds 74.8
-INDEX DONE {"field": "description", "stemming": true, "documents": 189212, "vocabulary": 375962, "tokens": 34746547, "nnz": 20899938, "seconds": 91.31647181510925, "k1": 1.5, "b": 0.75, "method": "lucene", "corpus_manifest_sha256": "b124e81efa4cfa951bfe8390f371098ea9808621105e016d26bffcddc9fb3822", "corpus_sha256": "193b3a3961464620cbf8d8797152b7f90cae1826ca749fb7817a210984a09899", "normalization": "NFKC lower ё→е; Unicode alphanumeric tokens; no stopword removal"}
+Tokenized description stemming True vocab 375961 tokens 34746547 seconds 105.4
+INDEX DONE {"field": "description", "stemming": true, "documents": 189212, "vocabulary": 375962, "tokens": 34746547, "nnz": 20899938, "seconds": 127.16986799240112, "k1": 1.5, "b": 0.75, "method": "lucene", "corpus_manifest_sha256": "b124e81efa4cfa951bfe8390f371098ea9808621105e016d26bffcddc9fb3822", "corpus_sha256": "193b3a3961464620cbf8d8797152b7f90cae1826ca749fb7817a210984a09899", "normalization": "NFKC lower ё→е; Unicode alphanumeric tokens; no stopword removal"}
 
 </pre>
 </div>
@@ -8065,7 +8068,7 @@ INDEX DONE {"field": "description", "stemming": true, "documents": 189212, "voca
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>Этап завершён: benchmark_indices 164.86 с
+<pre>Этап завершён: benchmark_indices 220.46 с
 </pre>
 </div>
 </div>
@@ -8112,19 +8115,19 @@ INDEX DONE {"field": "description", "stemming": true, "documents": 189212, "voca
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
 <pre>resource module not available on Windows
-benchmark: 200/2452, 5 s
-benchmark: 400/2452, 10 s
-benchmark: 600/2452, 15 s
-benchmark: 800/2452, 20 s
-benchmark: 1000/2452, 25 s
-benchmark: 1200/2452, 30 s
-benchmark: 1400/2452, 34 s
-benchmark: 1600/2452, 40 s
-benchmark: 1800/2452, 45 s
-benchmark: 2000/2452, 50 s
-benchmark: 2200/2452, 56 s
-benchmark: 2400/2452, 62 s
-{"fold": "benchmark", "queries": 2452, "rows": 2092376, "features": ["title_score", "title_relative", "title_rr", "title_local_rr", "description_score", "description_relative", "description_rr", "description_local_rr", "params_score", "params_relative", "params_rr", "params_local_rr", "filter_score", "filter_relative", "rrf", "same_location", "same_category", "delivery", "query_words", "filter_words", "title_length", "title_coverage", "title_jaccard", "params_length", "params_coverage", "filter_coverage", "item_price", "item_rating", "item_rating_reviews_count", "item_is_phone_hidden", "item_is_message_forbidden"], "seconds": 63.62128099997062, "feature_file_sha256": "70b30b243258c4d7bd220d2c8214a8d8a8a3f1d0ff8ebf33a874870849b6d13d"}
+benchmark: 200/2452, 6 s
+benchmark: 400/2452, 15 s
+benchmark: 600/2452, 21 s
+benchmark: 800/2452, 28 s
+benchmark: 1000/2452, 33 s
+benchmark: 1200/2452, 39 s
+benchmark: 1400/2452, 44 s
+benchmark: 1600/2452, 49 s
+benchmark: 1800/2452, 54 s
+benchmark: 2000/2452, 59 s
+benchmark: 2200/2452, 64 s
+benchmark: 2400/2452, 69 s
+{"fold": "benchmark", "queries": 2452, "rows": 2092376, "features": ["title_score", "title_relative", "title_rr", "title_local_rr", "description_score", "description_relative", "description_rr", "description_local_rr", "params_score", "params_relative", "params_rr", "params_local_rr", "filter_score", "filter_relative", "rrf", "same_location", "same_category", "delivery", "query_words", "filter_words", "title_length", "title_coverage", "title_jaccard", "params_length", "params_coverage", "filter_coverage", "item_price", "item_rating", "item_rating_reviews_count", "item_is_phone_hidden", "item_is_message_forbidden"], "seconds": 70.71209819999058, "feature_file_sha256": "70b30b243258c4d7bd220d2c8214a8d8a8a3f1d0ff8ebf33a874870849b6d13d"}
 
 </pre>
 </div>
@@ -8132,7 +8135,7 @@ benchmark: 2400/2452, 62 s
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>Этап завершён: benchmark_features 68.84 с
+<pre>Этап завершён: benchmark_features 76.82 с
 </pre>
 </div>
 </div>
@@ -8187,7 +8190,7 @@ CSV по исходным запросам и корпусу. Новый отв�
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>Этап завершён: predict 3.88 с
+<pre>Этап завершён: predict 3.43 с
 </pre>
 </div>
 </div>
@@ -8215,7 +8218,7 @@ CSV по исходным запросам и корпусу. Новый отв�
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">answer_path</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s2">"results_dir"</span><span class="p">]</span> <span class="o">/</span> <span class="s2">"answer.csv"</span>
-<span class="n">reference_path</span> <span class="o">=</span> <span class="n">source</span><span class="p">[</span><span class="s2">"config_path"</span><span class="p">]</span><span class="o">.</span><span class="n">parent</span> <span class="o">/</span> <span class="s2">"answer.csv"</span>
+<span class="n">reference_path</span> <span class="o">=</span> <span class="n">source</span><span class="p">[</span><span class="s2">"project_dir"</span><span class="p">]</span> <span class="o">/</span> <span class="s2">"answer.csv"</span>
 <span class="n">answer_hash</span> <span class="o">=</span> <span class="n">file_hash</span><span class="p">(</span><span class="n">answer_path</span><span class="p">)</span>
 <span class="n">reference_hash</span> <span class="o">=</span> <span class="n">file_hash</span><span class="p">(</span><span class="n">reference_path</span><span class="p">)</span>
 <span class="k">if</span> <span class="n">answer_hash</span> <span class="o">!=</span> <span class="n">reference_hash</span><span class="p">:</span>
@@ -8251,7 +8254,7 @@ CSV по исходным запросам и корпусу. Новый отв�
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
 <pre>{
   "status": "passed",
-  "seconds": 240.44,
+  "seconds": 304.34,
   "queries": 2452,
   "items": 189212,
   "model_retrained": false,

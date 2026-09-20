@@ -4,10 +4,11 @@ from pathlib import Path
 import tomllib
 
 
-def load_config(path="ranking.toml"):
+def load_config(path="configs/ranking.toml"):
     path = Path(path).resolve()
     config = tomllib.loads(path.read_text("utf-8"))
     config["config_path"] = path
+    config["project_dir"] = path.parent.parent if path.parent.name == "configs" else path.parent
     for name in ["data_dir", "work_dir", "results_dir"]:
         config[name] = (path.parent / config[name]).resolve()
     return config

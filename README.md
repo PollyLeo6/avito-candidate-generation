@@ -1,37 +1,64 @@
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/assets/avito-dark.svg">
+    <img src="docs/assets/avito.svg" alt="Авито" width="180">
+  </picture>
+</p>
+
 # Candidate generation для поиска услуг Авито
 
 Для каждого поискового запроса решение выбирает 50 объявлений из заданного корпуса.
 BM25 находит кандидатов, CatBoostRanker выбирает итоговую выдачу.
 Ответ для 2 452 запросов сохранён в `answer.csv`.
 
+<p align="center">
+  <a href="notebooks/check.ipynb">Быстрая проверка</a> ·
+  <a href="notebooks/solution.ipynb">Полный запуск</a> ·
+  <a href="answer.csv">Готовый answer.csv</a>
+</p>
+
 ## Состав репозитория
 
-| Файл или папка | Назначение |
-| --- | --- |
-| `check.ipynb` | Проверка предсказаний с готовой моделью, около 4 минут |
-| `solution.ipynb` | Полный цикл с обучением и оценкой, около 44 минут |
-| `avito_retrieval/` | Обработка текста, BM25 и проверка CSV |
-| `avito_ranker/` | Кандидаты, признаки, обучение и предсказания |
-| `check.toml`, `ranking.toml` | Настройки быстрой проверки и полного запуска |
-| `results/` | Обученная модель, метрики и отчёты |
-| `tests/` | 20 автоматических тестов |
-| `docs/` | Описание метода, разбор ошибок и проверка воспроизводимости |
-| `data/` | Папка для исходных Parquet, сами данные в репозиторий не включены |
+```text
+avito-candidate-generation/
+├── notebooks/
+│   ├── check.ipynb          проверка с готовой моделью, около 5 минут
+│   └── solution.ipynb       полный цикл с обучением, около 44 минут
+├── src/
+│   ├── avito_retrieval/     обработка текста, BM25 и проверка CSV
+│   └── avito_ranker/        кандидаты, признаки, обучение и предсказания
+├── configs/                пути и параметры запуска
+├── requirements/           зафиксированные зависимости
+├── results/                модели, метрики и отчёты эксперимента
+├── tests/                  22 автоматических теста
+├── docs/                   описание метода, разбор ошибок и графика README
+├── data/                   папка для исходных Parquet, данные не включены
+├── pyproject.toml          установка модулей из src как Python-пакета
+├── answer.csv              готовый файл для отправки
+└── README.md
+```
 
-Оба ноутбука используют общие модули поиска и предсказания. `solution.ipynb`
+Папка `work/` создаётся при запуске и хранит промежуточные файлы.
+
+<details>
+<summary><b>Модули, которые вызывают оба ноутбука</b></summary>
+
+Оба ноутбука используют общий код поиска и предсказания. `notebooks/solution.ipynb`
 дополнительно запускает подготовку разбиения, обучение и оценку модели.
 
-| Скрипт или модуль | Назначение |
+| Модуль | Назначение |
 | --- | --- |
-| `avito_ranker/workflow.py`, `stage.py` | Запуск этапов из notebook в отдельных процессах и сохранение логов |
-| `avito_ranker/config.py` | Чтение путей и параметров из TOML |
-| `avito_retrieval/common.py`, `build_index.py` | Обработка текста и построение BM25-индексов |
-| `avito_ranker/candidates.py` | Поиск и объединение кандидатов |
-| `avito_ranker/features.py`, `dataset.py` | Расчёт признаков и сбор таблиц для модели |
-| `avito_ranker/predict.py`, `avito_retrieval/submission.py` | Формирование топ-50 и проверка итогового CSV |
-| `avito_ranker/prepare.py` | Подготовка корпуса и разбиение запросов для полного эксперимента |
-| `avito_ranker/model.py` | Обучение CatBoost, выбор по dev и расчёт метрик; чтение признаков для предсказаний |
-| `avito_ranker/freeze.py`, `verify.py` | Контроль целостности эксперимента, проверка меток и пересчёт метрик |
+| `src/avito_ranker/workflow.py`, `stage.py` | Запуск этапов в отдельных процессах и сохранение логов |
+| `src/avito_ranker/config.py` | Чтение путей и параметров из TOML |
+| `src/avito_retrieval/common.py`, `build_index.py` | Обработка текста и построение BM25-индексов |
+| `src/avito_ranker/candidates.py` | Поиск и объединение кандидатов |
+| `src/avito_ranker/features.py`, `dataset.py` | Признаки и таблицы для модели |
+| `src/avito_ranker/model.py` | Обучение, выбор по dev и оценка; чтение признаков |
+| `src/avito_ranker/predict.py`, `src/avito_retrieval/submission.py` | Формирование топ-50 и проверка CSV |
+| `src/avito_ranker/prepare.py` | Корпус и разбиение запросов для полного эксперимента |
+| `src/avito_ranker/freeze.py`, `verify.py` | Контроль целостности, проверка меток и метрик |
+
+</details>
 
 ## Как устроено решение
 
@@ -70,7 +97,7 @@ BM25 находит кандидатов, CatBoostRanker выбирает ито
 
 **Что проверяется:** поиск и признаки пересчитываются с нуля для всего benchmark,
 сохранённая модель формирует новый CSV, затем он сравнивается с приложенным ответом.
-Также запускаются 20 тестов. Обучение в эту проверку не входит.
+Также запускаются 22 теста. Обучение в эту проверку не входит.
 
 **Шаг 1.** Установить Python 3.12.10, распаковать репозиторий и положить в `data/`:
 
@@ -85,20 +112,21 @@ benchmark_items.parquet
 
 ```powershell
 python -m venv .venv
-.\.venv\Scripts\python.exe -m pip install -r requirements-notebook.txt
+.\.venv\Scripts\python.exe -m pip install -r requirements/notebook.txt
 .\.venv\Scripts\python.exe -m ipykernel install --sys-prefix --name avito-ranking --display-name "Avito ranking"
-.\.venv\Scripts\python.exe -m jupyterlab check.ipynb
+.\.venv\Scripts\python.exe -m jupyterlab notebooks/check.ipynb
 ```
 
 **Linux / macOS:**
 
 ```bash
 python3.12 -m venv .venv
-.venv/bin/python -m pip install -r requirements-notebook.txt
+.venv/bin/python -m pip install -r requirements/notebook.txt
 .venv/bin/python -m ipykernel install --sys-prefix --name avito-ranking --display-name "Avito ranking"
-.venv/bin/python -m jupyterlab check.ipynb
+.venv/bin/python -m jupyterlab notebooks/check.ipynb
 ```
 
+Команда установки также подключает код из `src/` к окружению Python.
 Установка выполняется один раз. Для повторного запуска достаточно последней команды.
 
 **Шаг 3.** В Jupyter выбрать ядро **Avito ranking** и нажать **Run → Run All Cells**.
@@ -118,24 +146,32 @@ python3.12 -m venv .venv
 
 1. Подготовить окружение по инструкции выше. В `data/` должны находиться все три
    исходных файла: `train.parquet`, `benchmark_queries.parquet`, `benchmark_items.parquet`.
-2. В открытом Jupyter выбрать `solution.ipynb` и ядро **Avito ranking**.
+2. В открытом Jupyter выбрать `notebooks/solution.ipynb` и ядро **Avito ranking**.
 3. В первой кодовой ячейке установить `rebuild = True`.
 4. Нажать **Run → Run All Cells**. Готовый `answer.csv` появится в корне репозитория.
 
 При `rebuild = False` ноутбук показывает сохранённые результаты без повторного обучения.
 Полный запуск перезаписывает отчёты эксперимента. Если данные находятся в другой папке,
-изменить `data_dir` в `ranking.toml`; для быстрой проверки - в `check.toml`.
+изменить `data_dir` в `configs/ranking.toml`; для быстрой проверки - в `configs/check.toml`.
 
-Проверенное время без установки зависимостей: **4 минуты для проверки, 44 минуты для полного расчёта**.
+Проверенное время без установки зависимостей: **около 5 минут для проверки, 44 минуты для полного расчёта**.
 Замеры выполнены на Windows с 8 ГБ RAM и двумя CPU-потоками. GPU не требуется;
 для рабочих файлов нужно несколько ГБ свободного места. Linux и macOS отдельно не проверялись.
 
 ## Использованные библиотеки и подходы
 
-[BM25S](https://github.com/xhluca/bm25s),
-[Snowball](https://snowballstem.org/),
-[RRF](https://cormack.uwaterloo.ca/cormacksigir09-rrf.pdf),
-[CatBoostRanker](https://catboost.ai/docs/en/concepts/python-reference_catboostranker),
-NumPy, SciPy, Polars, PyArrow, JupyterLab, ipykernel и Matplotlib.
-Версии зафиксированы в `requirements-lock.txt` и `requirements-notebook.txt`.
+| Библиотека | Роль в решении |
+| --- | --- |
+| <img src="docs/assets/catboost.png" height="26" alt="CatBoost"> [CatBoost](https://catboost.ai/) | Обучение модели ранжирования |
+| <img src="docs/assets/numpy.svg" width="24" alt="NumPy"> [NumPy](https://numpy.org/) | Численные признаки и массивы |
+| <img src="docs/assets/scipy.svg" width="24" alt="SciPy"> [SciPy](https://scipy.org/) | Работа с разреженными матрицами |
+| <img src="docs/assets/polars.svg" width="24" alt="Polars"> [Polars](https://pola.rs/) | Подготовка и обработка таблиц |
+| <img src="docs/assets/apachearrow.svg" width="24" alt="Apache Arrow"> [PyArrow](https://arrow.apache.org/docs/python/) | Чтение и запись Parquet |
+| <img src="docs/assets/jupyter.svg" width="24" alt="Jupyter"> [JupyterLab](https://jupyter.org/) и ipykernel | Пошаговый запуск и просмотр результатов |
+| <img src="docs/assets/matplotlib.svg" height="24" alt="Matplotlib"> [Matplotlib](https://matplotlib.org/) | Графики качества |
+| <img src="docs/assets/python.svg" width="24" alt="Python"> [BM25S](https://github.com/xhluca/bm25s) и [snowballstemmer](https://snowballstem.org/) | Поиск кандидатов и русский стемминг |
+
+Для объединения выдач используется [Reciprocal Rank Fusion](https://cormack.uwaterloo.ca/cormacksigir09-rrf.pdf).
+Версии библиотек зафиксированы в `requirements/lock.txt` и `requirements/notebook.txt`.
 Вычисления выполняются локально, без внешних API.
+Источники логотипов: [docs/assets/README.md](docs/assets/README.md).

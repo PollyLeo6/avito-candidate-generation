@@ -8,7 +8,7 @@ from .config import load_config
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("stage")
-    parser.add_argument("--config", default="ranking.toml")
+    parser.add_argument("--config", default="configs/ranking.toml")
     parser.add_argument("--field")
     args = parser.parse_args()
     config = load_config(args.config)

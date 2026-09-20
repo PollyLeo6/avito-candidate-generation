@@ -32,16 +32,16 @@ def model_function_hash(config):
 
 
 def fingerprint(config):
-    root = config["config_path"].parent
+    root = config["project_dir"]
     files = [config["results_dir"] / "ranker.cbm",
              config["results_dir"] / "selected.json", config["results_dir"] / "training.json",
              config["results_dir"] / "split_audit.json", config["results_dir"] / "input_check.json",
              config["results_dir"] / "leakage_audit.json"]
-    files += sorted((root / "avito_ranker").glob("*.py"))
-    files += sorted((root / "avito_retrieval").glob("*.py"))
+    files += sorted((root / "src/avito_ranker").glob("*.py"))
+    files += sorted((root / "src/avito_retrieval").glob("*.py"))
     hashes = {path.relative_to(root).as_posix(): artifact_hash(path) for path in files}
     parameters = {key: value for key, value in config.items()
-                  if key not in {"config_path", "data_dir", "work_dir", "results_dir"}}
+                  if key not in {"config_path", "project_dir", "data_dir", "work_dir", "results_dir"}}
     hashes["parameters"] = hashlib.sha256(json.dumps(parameters, sort_keys=True).encode()).hexdigest()
     hashes["model_function"] = model_function_hash(config)
     return hashes
@@ -55,10 +55,10 @@ def freeze(config):
     if path.exists():
         record = json.loads(path.read_text("utf-8"))
         previous = record["files"]
-        provenance = {key: record[key] for key in ["original_snapshot", "compatibility_change"]
+        provenance = {key: record[key] for key in ["original_snapshot", "compatibility_change", "layout_change"]
                       if key in record}
         changed = {name for name in previous.keys() | current.keys() if previous.get(name) != current.get(name)}
-        model_key = (config["results_dir"] / "ranker.cbm").relative_to(config["config_path"].parent).as_posix()
+        model_key = (config["results_dir"] / "ranker.cbm").relative_to(config["project_dir"]).as_posix()
         # CatBoost пишет в файл время обучения и случайный GUID модели.
         # Сами деревья и границы признаков при таком повторе обязаны совпасть.
         if changed - {model_key}:

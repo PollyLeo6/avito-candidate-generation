@@ -1,3 +1,4 @@
+-e .
 numpy==2.3.5
 scipy==1.16.3
 polars==1.40.1
