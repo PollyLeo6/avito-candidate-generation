@@ -8,6 +8,15 @@ import tempfile
 from avito_retrieval.common import file_hash, save_json
 
 
+def artifact_hash(path):
+    if path.suffix != ".json":
+        return file_hash(path)
+    # Windows и Linux могут записать одинаковый JSON с разными переводами строк.
+    content = json.loads(path.read_text("utf-8"))
+    canonical = json.dumps(content, sort_keys=True, ensure_ascii=False, separators=(",", ":"))
+    return hashlib.sha256(canonical.encode("utf-8")).hexdigest()
+
+
 def model_function_hash(config):
     from catboost import CatBoostRanker
     model = CatBoostRanker().load_model(str(config["results_dir"] / "ranker.cbm"))
@@ -30,7 +39,7 @@ def fingerprint(config):
              config["results_dir"] / "leakage_audit.json"]
     files += sorted((root / "avito_ranker").glob("*.py"))
     files += sorted((root / "avito_retrieval").glob("*.py"))
-    hashes = {path.relative_to(root).as_posix(): file_hash(path) for path in files}
+    hashes = {path.relative_to(root).as_posix(): artifact_hash(path) for path in files}
     parameters = {key: value for key, value in config.items()
                   if key not in {"config_path", "data_dir", "work_dir", "results_dir"}}
     hashes["parameters"] = hashlib.sha256(json.dumps(parameters, sort_keys=True).encode()).hexdigest()
@@ -42,8 +51,12 @@ def freeze(config):
     path = config["results_dir"] / "frozen_experiment.json"
     current = fingerprint(config)
     reproduced = False
+    provenance = {}
     if path.exists():
-        previous = json.loads(path.read_text("utf-8"))["files"]
+        record = json.loads(path.read_text("utf-8"))
+        previous = record["files"]
+        provenance = {key: record[key] for key in ["original_snapshot", "compatibility_change"]
+                      if key in record}
         changed = {name for name in previous.keys() | current.keys() if previous.get(name) != current.get(name)}
         model_key = (config["results_dir"] / "ranker.cbm").relative_to(config["config_path"].parent).as_posix()
         # CatBoost пишет в файл время обучения и случайный GUID модели.
@@ -51,9 +64,9 @@ def freeze(config):
         if changed - {model_key}:
             raise RuntimeError("Эксперимент уже зафиксирован. Новый подбор требует отдельной оценки.")
         reproduced = bool(changed)
-    save_json(path, {"files": current, "selection_uses": "dev only",
+    save_json(path, {"format_version": 2, "files": current, "selection_uses": "dev only",
                      "holdout_used_for_training_or_selection": False,
-                     "reproduction_of_fixed_experiment": reproduced})
+                     "reproduction_of_fixed_experiment": reproduced, **provenance})
     print("Модель и код зафиксированы перед holdout", flush=True)
 
 

@@ -1,17 +1,17 @@
 {
   "files": {
     "results/ranker.cbm": "bdec464db6daa2cd293ad3a630563d91e03482587a6521a6e65aca8852e18035",
-    "results/selected.json": "a766e1ff61883cef3e2101bce9f5352636b86bf83f4b1948d211f4eaad4c3391",
-    "results/training.json": "153a4c41125974fa9e9009e0743b1df6effdbb74ae9e42b8459b27b46db664d0",
-    "results/split_audit.json": "81008a7d8337017973836a23d7a3c12b0531c85fdbde6bd01a15e4dc39655f1b",
-    "results/input_check.json": "78e52da5ba0ca9f60363c219fb66bb7b8be6c915794eee63a835b54f8c75fe90",
-    "results/leakage_audit.json": "3a42f14fd01d9c82a704186c0126664333d7431fc77eea15df3e85f82843a697",
+    "results/selected.json": "3395d9990edf817d9a4b29058f5a14014d7bed9cd62d3d6138431a13c6cfe44d",
+    "results/training.json": "44867aad8697ec6f7153f25cb62aee703a87c6068f720913143e9a1d51ec95da",
+    "results/split_audit.json": "146e592c4a135920114c997845d30e70833dddd4e9c2dcd4e36b53f321364347",
+    "results/input_check.json": "7fdb041d16d93699b9a671a1cdaeaa0f50e8f08d531d63b5f7778d2af7e9f958",
+    "results/leakage_audit.json": "eae980d0422c69e333595255e2d14ae1079191f915875aa09dbe4ef5ca09fd81",
     "avito_ranker/__init__.py": "a8a3c48ab8dd96e3c3d91bafe57a08f9d44392fc31363122fb63dabe5f05b746",
     "avito_ranker/candidates.py": "2c50ba641b97ed84a835884810fc80f453f1c2adcc79d07b9115a9659d966973",
     "avito_ranker/config.py": "af061f4952e75fd0bc0692842ab3e8ee99dc931391e129dd525384d7230cc0b7",
     "avito_ranker/dataset.py": "8327cc8403a1a98c33d4cd85081346c949dd65994770e5fd8ce6123b3e15e43d",
     "avito_ranker/features.py": "167ec855fef35197ae41dcf0b860c476811044add573ec0a382f69964e04d06d",
-    "avito_ranker/freeze.py": "3acda8a774affedbdd1b75b05ff3c34af4b31c2f49da3227ed5313c1728f3fd7",
+    "avito_ranker/freeze.py": "1c581e730ada6416e1a680032ab7fa091dc2474e14b66578a1fdd29238215ec4",
     "avito_ranker/model.py": "d165551bab6bbb27f866e8ac3326601465b5b0a8ddc149eda1ec8306fba29cde",
     "avito_ranker/predict.py": "f09e39a2612d9942e3658b3fd8630527dd589179423c33ea458d86b153cde842",
     "avito_ranker/prepare.py": "334f27447af2135305895429d7d535aa22f926c2ad1b51a3930660d7223f0a83",
@@ -31,11 +31,5 @@
   },
   "selection_uses": "dev only",
   "holdout_used_for_training_or_selection": false,
-  "reproduction_of_fixed_experiment": false,
-  "format_version": 2,
-  "original_snapshot": {
-    "path": "results/frozen_experiment_original.json",
-    "sha256": "709e83a8e39e47cbc40c0fafc83dcdab4295c3ce809af6694f867e869b59c6ab"
-  },
-  "compatibility_change": "After evaluation, only JSON fingerprint normalization was changed to ignore formatting and line endings. Retrieval, features, training, selection, model and predictions are unchanged."
+  "reproduction_of_fixed_experiment": false
 }

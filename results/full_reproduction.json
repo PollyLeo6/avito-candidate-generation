@@ -1,0 +1,155 @@
+{
+  "tested_source_commit": "d0783ca70d7b8b6a51edf7f47245d4f6caf80ece",
+  "environment": {
+    "python": "3.12.10",
+    "platform": "Windows-10-10.0.19045-SP0",
+    "packages": {
+      "numpy": "2.3.5",
+      "scipy": "1.16.3",
+      "polars": "1.40.1",
+      "pyarrow": "24.0.0",
+      "bm25s": "0.2.14",
+      "snowballstemmer": "3.0.1"
+    }
+  },
+  "packages": {
+    "numpy": "2.3.5",
+    "scipy": "1.16.3",
+    "polars": "1.40.1",
+    "pyarrow": "24.0.0",
+    "bm25s": "0.2.14",
+    "snowballstemmer": "3.0.1",
+    "catboost": "1.2.10",
+    "matplotlib": "3.11.2"
+  },
+  "environment_isolated": true,
+  "work_dir_initially_absent": true,
+  "all_indices_rebuilt": true,
+  "training_repeated_from_scratch": true,
+  "all_notebook_code_cells_completed": 18,
+  "full_run_execution_method": "all notebook code cells, sequential Python execution without Jupyter UI",
+  "jupyter_view_mode_check": {
+    "mode": "view",
+    "code_cells_completed": 18,
+    "all_jupyter_imports_inside_isolated_environment": true,
+    "kernel_uses_isolated_python": true,
+    "original_data_not_required": true
+  },
+  "query_split_identical": true,
+  "json_guard_portability_check": {
+    "json_files_reformatted_to_lf": 5,
+    "same_content_accepted": true,
+    "changed_parameters_rejected": true,
+    "tests_passed": 20,
+    "rebuilt_model_accepted": true,
+    "rebuilt_json_reports_with_lf_accepted": true
+  },
+  "full_700_tree_model_comparison": {
+    "all_700_trees_and_model_function_identical": true,
+    "training_report_identical": true,
+    "function_hashes": {
+      "original": "0542750a21b52e2ce6a37092d8942b2b0a8d006b04664e2af31ec2736d7c6002",
+      "rebuilt": "0542750a21b52e2ce6a37092d8942b2b0a8d006b04664e2af31ec2736d7c6002"
+    }
+  },
+  "training_features_identical": true,
+  "model_function_identical": true,
+  "model_binary_identical": false,
+  "dev_and_holdout_metrics_identical": true,
+  "answer_identical": true,
+  "answer_sha256": "f4ffbb7029d6ad1bb53f97b88bceb76a0a7d2fe51d681a4d905a4c6d23e48cc5",
+  "seconds": 2609.16,
+  "cells": [
+    {
+      "cell": 1,
+      "stage": null,
+      "seconds": 1.82
+    },
+    {
+      "cell": 2,
+      "stage": "prepare",
+      "seconds": 71.42
+    },
+    {
+      "cell": 3,
+      "stage": "validation_indices",
+      "seconds": 568.5
+    },
+    {
+      "cell": 4,
+      "stage": "train_features",
+      "seconds": 605.04
+    },
+    {
+      "cell": 5,
+      "stage": "audit_training",
+      "seconds": 1.65
+    },
+    {
+      "cell": 6,
+      "stage": "train",
+      "seconds": 755.16
+    },
+    {
+      "cell": 7,
+      "stage": "dev_features",
+      "seconds": 172.12
+    },
+    {
+      "cell": 8,
+      "stage": "select",
+      "seconds": 10.41
+    },
+    {
+      "cell": 9,
+      "stage": null,
+      "seconds": 1.88
+    },
+    {
+      "cell": 10,
+      "stage": "dev_evaluate",
+      "seconds": 2.77
+    },
+    {
+      "cell": 11,
+      "stage": "freeze",
+      "seconds": 1.4
+    },
+    {
+      "cell": 12,
+      "stage": "holdout_features",
+      "seconds": 170.02
+    },
+    {
+      "cell": 13,
+      "stage": "holdout_evaluate",
+      "seconds": 4.04
+    },
+    {
+      "cell": 14,
+      "stage": "benchmark_indices",
+      "seconds": 168.92
+    },
+    {
+      "cell": 15,
+      "stage": "benchmark_features",
+      "seconds": 68.91
+    },
+    {
+      "cell": 16,
+      "stage": "predict",
+      "seconds": 2.89
+    },
+    {
+      "cell": 17,
+      "stage": "check",
+      "seconds": 2.13
+    },
+    {
+      "cell": 18,
+      "stage": null,
+      "seconds": 0.01
+    }
+  ],
+  "limits": "Verified on this Windows CPU machine with Python 3.12.10 and pinned packages; other operating systems were not executed"
+}
