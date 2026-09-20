@@ -1,0 +1,16 @@
+{
+  "validation_indices": 519.84,
+  "train_features": 671.27,
+  "audit_training": 3.1,
+  "train": 22649.47,
+  "dev_features": 234.77,
+  "select": 14.57,
+  "dev_evaluate": 4.82,
+  "freeze": 2.95,
+  "holdout_features": 200.44,
+  "holdout_evaluate": 5.6,
+  "benchmark_indices": 176.72,
+  "benchmark_features": 70.54,
+  "predict": 3.51,
+  "check": 3.1
+}

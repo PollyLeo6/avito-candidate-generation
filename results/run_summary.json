@@ -1,0 +1,85 @@
+{
+  "corpus_items": 515895,
+  "dev": {
+    "queries": 2000,
+    "baseline_recall_50": 0.2895833333333333,
+    "ranker_recall_50": 0.7410333333333333,
+    "geo_rrf_recall_50": 0.612725,
+    "selected_method": "catboost_pairlogit",
+    "selected_recall_50": 0.7410333333333333,
+    "delta": 0.45145,
+    "ranker_ci95": [
+      0.7213981249999999,
+      0.75915
+    ],
+    "delta_ci95": [
+      0.428,
+      0.4750600000000001
+    ],
+    "model_sha256": "bdec464db6daa2cd293ad3a630563d91e03482587a6521a6e65aca8852e18035"
+  },
+  "holdout": {
+    "queries": 2000,
+    "baseline_recall_50": 0.277625,
+    "ranker_recall_50": 0.7245,
+    "geo_rrf_recall_50": 0.5869583333333332,
+    "selected_method": "catboost_pairlogit",
+    "selected_recall_50": 0.7245,
+    "delta": 0.446875,
+    "ranker_ci95": [
+      0.7033322916666667,
+      0.7427520833333333
+    ],
+    "delta_ci95": [
+      0.423746875,
+      0.46891875000000005
+    ],
+    "model_sha256": "bdec464db6daa2cd293ad3a630563d91e03482587a6521a6e65aca8852e18035"
+  },
+  "selected": "catboost_pairlogit",
+  "trees": 50,
+  "train_queries_with_positive_in_pool": 7042,
+  "train_pairs": 848569,
+  "submission": {
+    "valid": true,
+    "rows": 2452,
+    "min_items": 50,
+    "max_items": 50,
+    "sha256": "f4ffbb7029d6ad1bb53f97b88bceb76a0a7d2fe51d681a4d905a4c6d23e48cc5"
+  },
+  "measured_stage_seconds": {
+    "validation_indices": 519.84,
+    "train_features": 671.27,
+    "audit_training": 3.1,
+    "train": 22649.47,
+    "dev_features": 234.77,
+    "select": 14.57,
+    "dev_evaluate": 4.82,
+    "freeze": 2.95,
+    "holdout_features": 200.44,
+    "holdout_evaluate": 5.6,
+    "benchmark_indices": 176.72,
+    "benchmark_features": 70.54,
+    "predict": 3.51,
+    "check": 3.1
+  },
+  "clean_environment": {
+    "isolated_environment": true,
+    "all_packages_inside_environment": true,
+    "packages": {
+      "numpy": "2.3.5",
+      "scipy": "1.16.3",
+      "polars": "1.40.1",
+      "pyarrow": "24.0.0",
+      "bm25s": "0.2.14",
+      "snowballstemmer": "3.0.1",
+      "catboost": "1.2.10"
+    },
+    "tests_passed": 17,
+    "full_retrieval_and_inference_identical": true,
+    "feature_file_identical": true,
+    "answer_sha256": "f4ffbb7029d6ad1bb53f97b88bceb76a0a7d2fe51d681a4d905a4c6d23e48cc5",
+    "seconds": 111.95669020002242,
+    "scope": "fresh package environment; existing frozen indices and model; full benchmark candidate generation and scoring"
+  }
+}

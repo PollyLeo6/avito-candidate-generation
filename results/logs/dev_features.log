@@ -1,0 +1,12 @@
+resource module not available on Windows
+dev: 200/2000, 20 s
+dev: 400/2000, 39 s
+dev: 600/2000, 61 s
+dev: 800/2000, 82 s
+dev: 1000/2000, 103 s
+dev: 1200/2000, 123 s
+dev: 1400/2000, 142 s
+dev: 1600/2000, 160 s
+dev: 1800/2000, 179 s
+dev: 2000/2000, 198 s
+{"fold": "dev", "queries": 2000, "rows": 1875078, "features": ["title_score", "title_relative", "title_rr", "title_local_rr", "description_score", "description_relative", "description_rr", "description_local_rr", "params_score", "params_relative", "params_rr", "params_local_rr", "filter_score", "filter_relative", "rrf", "same_location", "same_category", "delivery", "query_words", "filter_words", "title_length", "title_coverage", "title_jaccard", "params_length", "params_coverage", "filter_coverage", "item_price", "item_rating", "item_rating_reviews_count", "item_is_phone_hidden", "item_is_message_forbidden"], "seconds": 198.33838380000088, "feature_file_sha256": "d812e75e06d9b2142f5b28c0b56d6be118638cc31149cff5af753f3f42069f5c", "baseline_recall_50": 0.2895833333333333, "pool_recall": 0.8808333333333332, "queries_without_positive_in_pool": 230}

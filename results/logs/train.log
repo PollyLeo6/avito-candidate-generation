@@ -1,0 +1,9 @@
+resource module not available on Windows
+0:	learn: 0.6131200	total: 1.31s	remaining: 15m 16s
+100:	learn: 0.1830113	total: 2m 30s	remaining: 14m 51s
+200:	learn: 0.1652640	total: 6m 7s	remaining: 15m 13s
+300:	learn: 0.1498669	total: 9m 38s	remaining: 12m 46s
+400:	learn: 0.1364292	total: 13m 12s	remaining: 9m 50s
+500:	learn: 0.1256194	total: 16m 17s	remaining: 6m 28s
+600:	learn: 0.1166137	total: 18m 37s	remaining: 3m 4s
+699:	learn: 0.1086292	total: 21m 11s	remaining: 0us

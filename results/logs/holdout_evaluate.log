@@ -1,0 +1,2 @@
+resource module not available on Windows
+{'queries': 2000, 'baseline_recall_50': 0.277625, 'ranker_recall_50': 0.7245, 'geo_rrf_recall_50': 0.5869583333333332, 'selected_method': 'catboost_pairlogit', 'selected_recall_50': 0.7245, 'delta': 0.446875, 'ranker_ci95': [0.7033322916666667, 0.7427520833333333], 'delta_ci95': [0.423746875, 0.46891875000000005], 'model_sha256': 'bdec464db6daa2cd293ad3a630563d91e03482587a6521a6e65aca8852e18035'}

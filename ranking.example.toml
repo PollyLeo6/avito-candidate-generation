@@ -1,0 +1,15 @@
+data_dir = "data"
+work_dir = "work"
+results_dir = "results"
+threads = 2
+train_queries = 8000
+dev_queries = 2000
+holdout_queries = 2000
+global_depth = 300
+local_depth = 150
+train_negatives = 120
+iterations = 700
+depth = 6
+learning_rate = 0.06
+seed = 20260920
+

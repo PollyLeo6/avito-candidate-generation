@@ -1,0 +1,8 @@
+{
+  "groups_disjoint": true,
+  "independently_checked_training_rows": 848569,
+  "wrong_training_labels": 0,
+  "training_queries": 7042,
+  "ids_and_labels_excluded_from_features": true,
+  "checked_without_reading_dev_or_holdout_positive_pairs": true
+}

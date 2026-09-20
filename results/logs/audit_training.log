@@ -1,0 +1,2 @@
+resource module not available on Windows
+{'groups_disjoint': True, 'independently_checked_training_rows': 848569, 'wrong_training_labels': 0, 'training_queries': 7042, 'ids_and_labels_excluded_from_features': True, 'checked_without_reading_dev_or_holdout_positive_pairs': True}

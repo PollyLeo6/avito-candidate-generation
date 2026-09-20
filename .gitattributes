@@ -1,0 +1,5 @@
+# Сохраняем исходные байты файлов для проверки SHA-256 при переносе.
+* -text
+*.cbm binary
+*.parquet binary
+*.png binary

@@ -1,0 +1,28 @@
+# Исходные таблицы и промежуточные расчёты.
+data/*
+!data/README.md
+work/
+*.parquet
+!results/*.parquet
+
+# Локальное окружение и кэши.
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+catboost_info/
+
+# Локальные настройки и временные файлы.
+.env
+.env.*
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.partial.*
+*.tmp
+*.zip

@@ -1,0 +1,12 @@
+resource module not available on Windows
+holdout: 200/2000, 21 s
+holdout: 400/2000, 40 s
+holdout: 600/2000, 60 s
+holdout: 800/2000, 77 s
+holdout: 1000/2000, 95 s
+holdout: 1200/2000, 111 s
+holdout: 1400/2000, 126 s
+holdout: 1600/2000, 141 s
+holdout: 1800/2000, 157 s
+holdout: 2000/2000, 173 s
+{"fold": "holdout", "queries": 2000, "rows": 1875619, "features": ["title_score", "title_relative", "title_rr", "title_local_rr", "description_score", "description_relative", "description_rr", "description_local_rr", "params_score", "params_relative", "params_rr", "params_local_rr", "filter_score", "filter_relative", "rrf", "same_location", "same_category", "delivery", "query_words", "filter_words", "title_length", "title_coverage", "title_jaccard", "params_length", "params_coverage", "filter_coverage", "item_price", "item_rating", "item_rating_reviews_count", "item_is_phone_hidden", "item_is_message_forbidden"], "seconds": 172.62421720003476, "feature_file_sha256": "fb73cbabbdb3578b36ef11f199e0280f5111dec8264722a37eaedf2ad7d1de10", "baseline_recall_50": 0.277625, "pool_recall": 0.8634166666666667, "queries_without_positive_in_pool": 268}

@@ -1,0 +1,19 @@
+{
+  "isolated_environment": true,
+  "all_packages_inside_environment": true,
+  "packages": {
+    "numpy": "2.3.5",
+    "scipy": "1.16.3",
+    "polars": "1.40.1",
+    "pyarrow": "24.0.0",
+    "bm25s": "0.2.14",
+    "snowballstemmer": "3.0.1",
+    "catboost": "1.2.10"
+  },
+  "tests_passed": 17,
+  "full_retrieval_and_inference_identical": true,
+  "feature_file_identical": true,
+  "answer_sha256": "f4ffbb7029d6ad1bb53f97b88bceb76a0a7d2fe51d681a4d905a4c6d23e48cc5",
+  "seconds": 111.95669020002242,
+  "scope": "fresh package environment; existing frozen indices and model; full benchmark candidate generation and scoring"
+}

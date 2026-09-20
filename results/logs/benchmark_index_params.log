@@ -1,0 +1,3 @@
+resource module not available on Windows
+Tokenized params stemming True vocab 78736 tokens 27714318 seconds 47.2
+INDEX DONE {"field": "params", "stemming": true, "documents": 189212, "vocabulary": 78737, "tokens": 27714318, "nnz": 11675448, "seconds": 58.043601989746094, "k1": 1.5, "b": 0.75, "method": "lucene", "corpus_manifest_sha256": "b124e81efa4cfa951bfe8390f371098ea9808621105e016d26bffcddc9fb3822", "corpus_sha256": "193b3a3961464620cbf8d8797152b7f90cae1826ca749fb7817a210984a09899", "normalization": "NFKC lower ё→е; Unicode alphanumeric tokens; no stopword removal"}

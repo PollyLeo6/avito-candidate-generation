@@ -1,0 +1,22 @@
+{
+  "utf8": true,
+  "delimiter": ",",
+  "columns": [
+    "query_id",
+    "answer"
+  ],
+  "data_rows": 2452,
+  "query_ids_match_benchmark_exactly_case_sensitive": true,
+  "query_ids_unique": true,
+  "query_id_length": 16,
+  "min_items_per_query": 50,
+  "max_items_per_query": 50,
+  "item_ids_unique_within_each_query": true,
+  "item_ids_are_16_lowercase_hex_characters": true,
+  "all_item_ids_exist_in_benchmark": true,
+  "no_additional_or_index_columns": true,
+  "answer_sha256": "f4ffbb7029d6ad1bb53f97b88bceb76a0a7d2fe51d681a4d905a4c6d23e48cc5",
+  "known_benchmark_id_literals_in_source": [],
+  "uppercase_assigned_variable_names_in_source": [],
+  "scope": "CSV independently checked against original Parquet; static source checks are limited to literals and variable names"
+}

@@ -1,0 +1,29 @@
+{
+  "dev": {
+    "queries": 2000,
+    "independent_recall_50": 0.7410333333333333
+  },
+  "holdout": {
+    "queries": 2000,
+    "independent_recall_50": 0.7245
+  },
+  "submission": {
+    "valid": true,
+    "rows": 2452,
+    "min_items": 50,
+    "max_items": 50,
+    "sha256": "f4ffbb7029d6ad1bb53f97b88bceb76a0a7d2fe51d681a4d905a4c6d23e48cc5"
+  },
+  "environment": {
+    "python": "3.12.10",
+    "packages": {
+      "numpy": "2.3.5",
+      "scipy": "1.16.3",
+      "polars": "1.40.1",
+      "pyarrow": "24.0.0",
+      "bm25s": "0.2.14",
+      "snowballstemmer": "3.0.1",
+      "catboost": "1.2.10"
+    }
+  }
+}

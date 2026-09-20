@@ -1,0 +1,14 @@
+resource module not available on Windows
+benchmark: 200/2452, 5 s
+benchmark: 400/2452, 11 s
+benchmark: 600/2452, 16 s
+benchmark: 800/2452, 21 s
+benchmark: 1000/2452, 26 s
+benchmark: 1200/2452, 31 s
+benchmark: 1400/2452, 36 s
+benchmark: 1600/2452, 42 s
+benchmark: 1800/2452, 47 s
+benchmark: 2000/2452, 52 s
+benchmark: 2200/2452, 58 s
+benchmark: 2400/2452, 63 s
+{"fold": "benchmark", "queries": 2452, "rows": 2092376, "features": ["title_score", "title_relative", "title_rr", "title_local_rr", "description_score", "description_relative", "description_rr", "description_local_rr", "params_score", "params_relative", "params_rr", "params_local_rr", "filter_score", "filter_relative", "rrf", "same_location", "same_category", "delivery", "query_words", "filter_words", "title_length", "title_coverage", "title_jaccard", "params_length", "params_coverage", "filter_coverage", "item_price", "item_rating", "item_rating_reviews_count", "item_is_phone_hidden", "item_is_message_forbidden"], "seconds": 64.4486981999944, "feature_file_sha256": "70b30b243258c4d7bd220d2c8214a8d8a8a3f1d0ff8ebf33a874870849b6d13d"}

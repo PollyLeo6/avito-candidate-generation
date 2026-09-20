@@ -1,0 +1,43 @@
+{
+  "corpus_items": 515895,
+  "corpus_rule": "all unique items; benchmark features take precedence on duplicates",
+  "strict_group": "sorted unique Snowball tokens; punctuation/case/word order ignored",
+  "groups_disjoint": true,
+  "holdout_previously_seen_groups": 0,
+  "query_selection_uses_labels": false,
+  "corpus_selection_uses_labels": false,
+  "query_counts": {
+    "train": 8000,
+    "dev": 2000,
+    "holdout": 2000
+  },
+  "all_group_counts": [
+    {
+      "fold": "dev",
+      "len": 11217
+    },
+    {
+      "fold": "holdout",
+      "len": 6349
+    },
+    {
+      "fold": "train",
+      "len": 50737
+    }
+  ],
+  "sources": {
+    "train.parquet": "e150ab7a5c98769f643b95ee3a02dc0f664b647facd69a7d280ec6d48ca554a7",
+    "benchmark_queries.parquet": "e49de4fb76f03979a4af96034817767d39ae5de9f94e254fed028243188dda06",
+    "benchmark_items.parquet": "193b3a3961464620cbf8d8797152b7f90cae1826ca749fb7817a210984a09899"
+  },
+  "split_hashes": {
+    "dev_queries.parquet": "b94c60a86416012ed359d2245698cda036b61377a9f36207d69b1147e87b9cf1",
+    "holdout_queries.parquet": "670bd3408683e3e2de83a31242226a479f993313d1e550c462e5d7859ef6e656",
+    "train_queries.parquet": "5d38da52d3ab88af7f5378ff9497a27714d5d1d0e3851d9d91b5ca3260be339d"
+  },
+  "limitations": [
+    "observed positives only",
+    "semantic paraphrases can cross groups",
+    "515895-item local corpus is larger than benchmark; scores are not comparable to v1"
+  ]
+}
